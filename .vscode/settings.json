@@ -7,11 +7,32 @@
     "source.fixAll.eslint": true,
     "source.fixAll.stylelint": true
   },
-  "css.validate": false,
-  "scss.validate": false,
-  "stylelint.validate": ["css", "scss", ".module.scss"],
-  "stylelint.enable": true,
-  "javascript.format.enable": false,
-  "eslint.alwaysShowStatus": true,
-  "files.autoSave": "onFocusChange"
+  "gitmoji.onlyUseAdditionalEmojis": true,
+  "gitmoji.additionalEmojis": [
+    {
+      "emoji": "🐣",
+      "code": ":ADD:",
+      "description": "ADD: 기능 및 코드 추가"
+    },
+    {
+      "emoji": "🐥",
+      "code": ":MODIFY:",
+      "description": "MODIFY:  기능 및 코드 수정"
+    },
+    {
+      "emoji": "🍳",
+      "code": ":FIX:",
+      "description": "FIX: 기능 및 코드 오류 수정"
+    },
+    {
+      "emoji": "🐓",
+      "code": ":REFACTOR:",
+      "description": "REFACTOR: 코드 리팩토링"
+    },
+    {
+      "emoji": "🐾",
+      "code": ":wip:",
+      "description": "WIP: 수정 중"
+    }
+  ]
 }
