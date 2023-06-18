@@ -12,7 +12,7 @@ const Nav = () => {
             <S.NavTopWrap>
               <S.LoginBtn>LOGIN</S.LoginBtn>
               <S.NavTokenImg
-                onClick={() => navigate('/mytoken')}
+                onClick={() => navigate('/token')}
                 src="./images/common/kulture-token.png"
                 alt="Token"
               />
@@ -29,7 +29,7 @@ const Nav = () => {
         <ul>
           <li>
             <S.NavTitleWrap>
-              <S.NavTitle to="/event">EVENT</S.NavTitle>
+              <S.NavTitle to="/list">EVENT</S.NavTitle>
               <S.NavTitle to="/wishlist">WISHLIST</S.NavTitle>
               <S.NavSearch src="./images/common/Search.png" alt="Search" />
             </S.NavTitleWrap>

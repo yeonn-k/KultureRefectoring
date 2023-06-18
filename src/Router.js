@@ -5,8 +5,10 @@ import Footer from './components/Footer/Footer.jsx';
 import EventList from './pages/EventList/EventList.jsx';
 import EventDetail from './pages/EventDetail/EventDetail.jsx';
 import Wishlist from './pages/Wishlist/Wishlist.jsx';
-import MyPage from './pages/MyPage/MyPage.jsx';
+import MyDashboard from './pages/MyDashboard/MyDashboard.jsx';
+import MyAccount from './pages/MyAccount/MyAccount.jsx';
 import MyToken from './pages/MyToken/MyToken.jsx';
+import MyAuction from './pages/MyAuction/MyAuction.jsx';
 import Home from './pages/Home/Home.jsx';
 
 const Router = () => {
@@ -18,8 +20,10 @@ const Router = () => {
         <Route path="/list" element={<EventList />} />
         <Route path="/event" element={<EventDetail />} />
         <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/mypage" element={<MyPage />} />
+        <Route path="/dashboard" element={<MyDashboard />} />
+        <Route path="/account" element={<MyAccount />} />
         <Route path="/token" element={<MyToken />} />
+        <Route path="/auction" element={<MyAuction />} />
       </Routes>
       <Footer />
     </BrowserRouter>
