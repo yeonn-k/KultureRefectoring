@@ -2,10 +2,9 @@ import styled from 'styled-components';
 
 export const S = {
   EventCard: styled.div`
-    display: inline-block;
     width: 404px;
     height: 305px;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
   `,
 
   EventImage: styled.div`
@@ -22,12 +21,42 @@ export const S = {
     font-size: 22px;
     font-weight: 700;
     line-height: 26px;
+    margin-bottom: 5px;
   `,
 
   EventDescription: styled.p`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-size: 16px;
     font-weight: 400;
     line-height: 21px;
+    margin-bottom: 5px;
+  `,
+
+  EventTime: styled.p`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21px;
+    margin-bottom: 5px;
+    color: ${props => props.theme.kultureGreen};
+  `,
+
+  EventIcon: styled.img`
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+  `,
+
+  Check: styled.img`
+    position: absolute;
+    width: 26px;
+    height: 23px;
+    top: 13px;
+    right: 50px;
   `,
 
   Heart: styled.img`
