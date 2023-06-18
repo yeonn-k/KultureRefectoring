@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "title": "서울 재즈 페스티벌",
+    "description": "jul 28, 2023 서울 송파구 올림픽공원",
+    "image": "/images/EventList/event1.jpg",
+    "token": 100
+  },
+  {
+    "id": 2,
+    "title": "서울 재즈 페스티벌",
+    "description": "jul 28, 2023 서울 송파구 올림픽공원",
+    "image": "/images/EventList/event2.jpg",
+    "token": 100
+  },
+  {
+    "id": 3,
+    "title": "서울 재즈 페스티벌",
+    "description": "jul 28, 2023 서울 송파구 올림픽공원",
+    "image": "/images/EventList/event3.jpg",
+    "token": 100
+  },
+  {
+    "id": 4,
+    "title": "서울 재즈 페스티벌",
+    "description": "jul 28, 2023 서울 송파구 올림픽공원",
+    "image": "/images/EventList/event4.jpg",
+    "token": 100
+  },
+  {
+    "id": 5,
+    "title": "서울 재즈 페스티벌",
+    "description": "jul 28, 2023 서울 송파구 올림픽공원",
+    "image": "/images/EventList/event5.jpg",
+    "token": 100
+  },
+  {
+    "id": 6,
+    "title": "서울 재즈 페스티벌",
+    "description": "jul 28, 2023 서울 송파구 올림픽공원",
+    "image": "/images/EventList/event6.jpg",
+    "token": 100
+  }
+]

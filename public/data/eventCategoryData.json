@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "mainCategory": "카테고리",
+    "subCategory": ["페스티벌", "콘서트", "퍼포먼스", "클래식"]
+  },
+  {
+    "id": 2,
+    "mainCategory": "나이",
+    "subCategory": ["성인"]
+  },
+  {
+    "id": 1,
+    "mainCategory": "국가",
+    "subCategory": ["국내", "국외"]
+  },
+  {
+    "id": 1,
+    "mainCategory": "token",
+    "subCategory": ""
+  }
+]
