@@ -23,6 +23,8 @@ export const S = {
     flex-direction: column;
     gap: 20px;
     padding: 30px;
+    width: fit-content;
+    margin: auto;
   `,
 
   SectionTitle: styled.p`
@@ -34,12 +36,13 @@ export const S = {
     display: flex;
     gap: 28px;
     justify-content: center;
+    width: fit-content;
   `,
 
   CategoryBox: styled.div`
     position: relative;
-    max-width: 320px;
-    min-width: 320px;
+    max-width: 300px;
+    min-width: 300px;
     aspect-ratio: 16/9;
     border-radius: 10px;
     background-image: url(${props => props.src});
