@@ -4,7 +4,7 @@ import Calendar from 'react-calendar';
 
 import EventCard from '../../components/EventCard/EventCard.jsx';
 import Category from './Category/Category.jsx';
-
+import { PriceRangeFilter } from './PriceRangeFilter.jsx';
 import { S } from './EventList.js';
 import { CalenderBox } from './CalendarBox.js';
 
@@ -36,7 +36,13 @@ const EventList = () => {
           {categoryData.map(data => {
             return <Category data={data} key={data.id} />;
           })}
-          <S.TokenBox />
+          <S.TokenBox>
+            <PriceRangeFilter />
+          </S.TokenBox>
+          <S.TokenQuantity>
+            <span>0</span>
+            <span>300</span>
+          </S.TokenQuantity>
         </S.ContainerLeft>
         <S.ContainerRight>
           <S.TitleBox>

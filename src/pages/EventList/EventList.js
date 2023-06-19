@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { Mixin } from '../../styles/mixin';
 
 export const S = {
   Container: styled.div`
@@ -15,10 +16,16 @@ export const S = {
   `,
 
   TokenBox: styled.div`
+    ${Mixin.flexCenter}
     width: 400px;
     height: 70px;
-    background-color: #8c8c8c;
-    opacity: 22%;
+    background-color: #494949;
+  `,
+
+  TokenQuantity: styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
   `,
 
   ContainerRight: styled.div``,
