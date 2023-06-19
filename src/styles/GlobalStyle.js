@@ -22,7 +22,6 @@ body{
     color: #FFFFFF;
     background-color: #1C1B1B;
     font-family: 'Pretendard';
-    margin-bottom: 100px;
 }
 ol, ul{
     list-style: none;
