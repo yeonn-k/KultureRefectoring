@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
+import Calendar from 'react-calendar';
+
 import EventCard from '../../components/EventCard/EventCard.jsx';
 import Category from './Category/Category.jsx';
 
 import { S } from './EventList.js';
+import { CalenderBox } from './CalendarBox.js';
 
 const EventList = () => {
   const [cardData, setCardData] = useState([]);
@@ -27,7 +30,9 @@ const EventList = () => {
     <div>
       <S.Container>
         <S.ContainerLeft>
-          <S.Calender></S.Calender>
+          <CalenderBox>
+            <Calendar locale="en" />
+          </CalenderBox>
           {categoryData.map(data => {
             return <Category data={data} key={data.id} />;
           })}

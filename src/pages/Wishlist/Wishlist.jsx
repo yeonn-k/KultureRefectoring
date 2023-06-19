@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import EventCard from '../../components/EventCard/EventCard.jsx';
 
 import { S } from './Wishlist';
+import 'react-calendar/dist/Calendar.css';
 
 const Wishlist = () => {
   const [cardData, setCardData] = useState([]);

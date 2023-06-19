@@ -14,14 +14,6 @@ export const S = {
     margin-top: 60px;
   `,
 
-  Calender: styled.div`
-    width: 400px;
-    height: 270px;
-    background-color: #8c8c8c;
-    opacity: 22%;
-    border-radius: 10px;
-  `,
-
   TokenBox: styled.div`
     width: 400px;
     height: 70px;
