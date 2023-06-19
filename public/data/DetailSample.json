@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "name": "Coachella",
+    "thumbnail_images_url": "https://github.com/HaeJungg/project-image/blob/master/p2-Images/Festival/festival-1.jpg?raw=true",
+    "start_events_token": 30,
+    "highest_events_token": 300,
+    "location": "메트라이프 스타디움",
+    "latitude": 40.81344141,
+    "longitude": -74.07441409,
+    "event_start_date": "7/7/2023 20:00:00",
+    "auction_start_date": "6/16/2023 12:00:00",
+    "auction_end_date": "7/1/2023 12:00:00",
+    "total_quantitiy": 300,
+    "remaining_quantity": 200,
+    "description": "불, 물, 공기, 흙 4개의 원소들이 살고 있는 ‘엘리멘트 시티’ 재치 있고 불처럼 열정 넘치는 ‘앰버'는 어느 날 우연히 유쾌하고 감성적이며 물 흐르듯 사는 '웨이드'를 만나 특별한 우정을 쌓으며, 지금껏 믿어온 모든 것들이 흔들리는 새로운 경험을 하게 되는데... 웰컴 투 엘리멘트 시티!"
+  }
+]

@@ -4,7 +4,9 @@ export const FooterContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 100px;
   width: 100%;
+  max-width: none;
   height: 100px;
   background-color: #121212;
   bottom: 0;

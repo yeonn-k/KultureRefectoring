@@ -17,7 +17,9 @@ export const S = {
   `,
 
   NavContainer: styled.div`
-    width: 1440px;
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
     height: 100px;
     background-color: #1c1b1b;
     align-items: center;

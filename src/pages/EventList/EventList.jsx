@@ -54,12 +54,12 @@ const EventList = () => {
             <S.FilterIcon />
             <S.Filter>인기순</S.Filter>
           </S.FilterBox>
-          <S.WrapperCard>
-            {cardData.map(data => {
-              return <EventCard key={data.id} data={data} type="list" />;
-            })}
-          </S.WrapperCard>
         </S.ContainerRight>
+        <S.WrapperCard>
+          {cardData.map(data => {
+            return <EventCard key={data.id} data={data} type="list" />;
+          })}
+        </S.WrapperCard>
       </S.Container>
       <S.More>
         <S.MoreLine />
