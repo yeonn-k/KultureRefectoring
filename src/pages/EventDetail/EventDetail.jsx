@@ -3,78 +3,79 @@ import { S } from './EventDetail.js';
 import Chart from './Chart.jsx';
 import Map from './Map.jsx';
 import EventCard from '../../components/EventCard/EventCard.jsx';
+import BidModal from '../../components/BidModal/BidModal.jsx';
+import useGetFetch from '../../hooks/useGetFetch.js';
+import OrderModal from '../../components/BidOrderModal/BidOrderModal.jsx';
 
 const EventDetail = () => {
-  const [eventData, setEventData] = useState([]);
-  const [detail, setDetail] = useState([]);
   const [btnText, setBtnText] = useState('기부하고 바로 구매');
-  const [bidToken, setBidToken] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [orderOpen, setOrderOpen] = useState(false);
 
-  useEffect(() => {
-    fetch('/data/Graphdata.json')
-      .then(response => response.json())
-      .then(result => {
-        setBidToken(result);
-      });
-  }, []);
-
-  useEffect(() => {
-    fetch('/data/DetailEventSample.json')
-      .then(response => response.json())
-      .then(result => setEventData(result));
-  }, []);
-
-  useEffect(() => {
-    fetch('/data/DetailSample.json')
-      .then(response => response.json())
-      .then(result => {
-        setDetail(result[0]);
-      });
-  }, []);
+  const [bid] = useGetFetch('/data/Graphdata.json');
+  const [event] = useGetFetch('/data/DetailEventSample.json');
+  const [detail] = useGetFetch('/data/DetailSample.json');
 
   const handleMouse = isMouseOver => {
     setBtnText(
       isMouseOver ? (
         <>
           <S.DetailToken src="./images/common/kulture-token.png" alt="token" />
-          {detail.highest_events_token}토큰
+          {detail?.highest_events_token}토큰
         </>
       ) : (
         '기부하고 바로 구매'
       )
     );
   };
-
   const MOCK_DATA = [
     {
       title: '장소',
-      value: detail.location,
+      value: detail?.location,
     },
     {
       title: '일시',
-      value: detail.event_start_date,
+      value: detail?.event_start_date,
     },
     {
       title: '이벤트 설명',
-      value: detail.description,
+      value: detail?.description,
     },
     {
       title: '입찰 마감',
-      value: detail.auction_end_date,
+      value: detail?.auction_end_date,
     },
     {
       title: '남은 티켓',
-      value: ` ${detail.remaining_quantity} / ${detail.total_quantitiy} 매`,
+      value: ` ${detail?.remaining_quantity} / ${detail?.total_quantitiy} 매`,
     },
   ];
 
+  if (!bid?.[0]?.id) return null;
+
   return (
     <S.DetailContainer>
+      {modalOpen && (
+        <BidModal
+          detail={detail}
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+          orderOpen={orderOpen}
+          setOrderOpen={setOrderOpen}
+        />
+      )}
+      {orderOpen && (
+        <OrderModal
+          detail={detail}
+          orderOpen={orderOpen}
+          setOrderOpen={setOrderOpen}
+        />
+      )}
       <S.DetailWrap>
         {/* 좌측 이벤트 이미지 */}
         <S.DetailLeft>
-          <S.DetailMainTitle>{detail.name}</S.DetailMainTitle>
-          <S.DetailImg src={detail.thumbnail_images_url} alt="festival" />
+          <S.DetailMainTitle>{detail?.name}</S.DetailMainTitle>
+          <S.DetailImg src={detail?.thumbnail_images_url} alt="festival" />
         </S.DetailLeft>
         {/* 우측 이벤트 상세 설명 */}
         <S.DetailRight>
@@ -89,7 +90,7 @@ const EventDetail = () => {
 
           <S.StartPriceWrap>
             <S.StartPrice>입찰 시작가</S.StartPrice>
-            <S.StartPrice>{detail.start_events_token}토큰</S.StartPrice>
+            <S.StartPrice>{detail?.start_events_token}토큰</S.StartPrice>
           </S.StartPriceWrap>
           <S.PriceWrap>
             <S.StartPrice>실시간 입찰가</S.StartPrice>
@@ -99,12 +100,15 @@ const EventDetail = () => {
                 alt="token"
               />
               <S.RealTimePrice>
-                {detail.highest_events_token}토큰
+                {detail?.highest_events_token}토큰
               </S.RealTimePrice>
             </div>
           </S.PriceWrap>
           <S.DetailBtnWrap>
-            <S.BidingBtn>구매 입찰</S.BidingBtn>
+            <S.BidingBtn onClick={() => setModalOpen(true)}>
+              구매 입찰
+            </S.BidingBtn>
+
             <S.InstantBtn
               onMouseOver={() => handleMouse(true)}
               onMouseLeave={() => handleMouse(false)}
@@ -113,26 +117,27 @@ const EventDetail = () => {
             </S.InstantBtn>
           </S.DetailBtnWrap>
 
-          <S.DetailTitle>시세</S.DetailTitle>
-          <S.DetailChart>
-            <Chart
-              bidToken={bidToken}
-              setBidToken={setBidToken}
-              colors={{ scheme: 'nivo' }}
-            />
-          </S.DetailChart>
+          <S.ChartContainer>
+            <S.DetailTitle>시세</S.DetailTitle>
+            <S.DetailChart>
+              <Chart bid={bid} colors={{ scheme: 'nivo' }} />
+            </S.DetailChart>
+          </S.ChartContainer>
 
-          <S.DetailTitle>지도 확인하기</S.DetailTitle>
-          <S.mapContainer>
-            <Map />
-          </S.mapContainer>
+          <S.MapContainer>
+            <S.DetailTitle>{detail?.location} 위치 확인하기</S.DetailTitle>
+            <S.mapContainer>
+              <Map />
+            </S.mapContainer>
+          </S.MapContainer>
         </S.DetailRight>
       </S.DetailWrap>
 
       <S.WrapperCard>
-        {eventData.map(data => {
-          return <EventCard key={data.id} data={data} type="list" />;
-        })}
+        {event.length &&
+          event.map(data => {
+            return <EventCard key={data.id} data={data} type="list" />;
+          })}
       </S.WrapperCard>
     </S.DetailContainer>
   );

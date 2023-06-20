@@ -143,4 +143,18 @@ export const S = {
     flex-wrap: wrap;
     justify-content: center;
   `,
+
+  ChartContainer: styled.div`
+    margin: 50px 0;
+  `,
+
+  MapContainer: styled.div`
+    margin: 70px 0 0;
+  `,
+
+  MapLocation: styled.span`
+    margin-left: 10px;
+    color: #97fe67;
+    font-weight: 200;
+  `,
 };

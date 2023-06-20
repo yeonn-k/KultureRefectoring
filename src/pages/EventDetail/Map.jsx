@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import Options from './Options';
 
@@ -8,19 +8,18 @@ const containerStyle = {
 };
 
 function MyComponent() {
-  const [location, setLocation] = useState([]);
+  const [location, setLocation] = useState({});
+  const [map, setMap] = useState(null);
 
   useEffect(() => {
     fetch('/data/DetailSample.json')
       .then(response => response.json())
-      .then(result => {
-        setLocation(result[0]);
-      });
+      .then(result => setLocation(result));
   }, []);
 
   const center = {
-    lat: location.length > 0 ? location.latitude : 0,
-    lng: location.length > 0 ? location.longitude : 0,
+    lat: location.latitude || 0,
+    lng: location.longitude || 0,
   };
 
   const { isLoaded } = useJsApiLoader({
@@ -28,14 +27,12 @@ function MyComponent() {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY,
   });
 
-  const [map, setMap] = useState(null);
-
-  const onLoad = React.useCallback(function callback(map) {
+  const onLoad = map => {
     const bounds = new window.google.maps.LatLngBounds(center);
     map.fitBounds(bounds);
 
     setMap(map);
-  }, []);
+  };
 
   const onUnmount = React.useCallback(function callback(map) {
     setMap(null);
@@ -68,7 +65,7 @@ function MyComponent() {
     }
   }, [map]);
 
-  return isLoaded ? (
+  return isLoaded && location.id ? (
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={center}

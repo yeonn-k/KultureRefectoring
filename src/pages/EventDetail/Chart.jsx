@@ -1,7 +1,7 @@
 import { ResponsiveLine } from '@nivo/line';
 import { S } from './EventDetail.js';
 
-const Chart = ({ data, colors, bidToken, setBidToken }) => {
+const Chart = ({ colors, bid }) => {
   const theme = {
     axis: {
       stroke: 'darkgray',
@@ -23,7 +23,7 @@ const Chart = ({ data, colors, bidToken, setBidToken }) => {
     },
   };
 
-  const CustomTooltip = ({ point }) => {
+  const CustomTooltip = ({ point, bid }) => {
     return (
       <div
         style={{
@@ -43,7 +43,7 @@ const Chart = ({ data, colors, bidToken, setBidToken }) => {
 
   return (
     <ResponsiveLine
-      data={bidToken}
+      data={bid}
       margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
       xScale={{ type: 'point' }}
       yScale={{
