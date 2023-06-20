@@ -57,56 +57,32 @@ const MyDashboard = () => {
               </S.AuctionBoxIP>
               <S.AuctionBoxDone>
                 <S.StatusBox>
-                  <M.Text
-                    size="18px"
-                    weight="500"
-                    col={props => props.theme.kultureGreen}
-                  >
+                  <M.Text size="18px" weight="500" col="kultureGreen">
                     낙찰 성공
                   </M.Text>
                   <S.AuctionDone />
                 </S.StatusBox>
                 <S.TextUnit>
-                  <M.Text
-                    size="100px"
-                    weight="600"
-                    col={props => props.theme.kultureGreen}
-                  >
+                  <M.Text size="100px" weight="600" col="kultureGreen">
                     17
                   </M.Text>
-                  <M.Text
-                    size="20px"
-                    weight="500"
-                    col={props => props.theme.kultureGreen}
-                  >
+                  <M.Text size="20px" weight="500" col="kultureGreen">
                     건
                   </M.Text>
                 </S.TextUnit>
               </S.AuctionBoxDone>
               <S.AuctionBoxFail>
                 <S.StatusBox>
-                  <M.Text
-                    size="18px"
-                    weight="500"
-                    col={props => props.theme.lightGrey}
-                  >
+                  <M.Text size="18px" weight="500" col="lightGrey">
                     낙찰 실패
                   </M.Text>
                   <S.AuctionFail />
                 </S.StatusBox>
                 <S.TextUnit>
-                  <M.Text
-                    size="100px"
-                    weight="600"
-                    col={props => props.theme.lightGrey}
-                  >
+                  <M.Text size="100px" weight="600" col="lightGrey">
                     2
                   </M.Text>
-                  <M.Text
-                    size="20px"
-                    weight="500"
-                    col={props => props.theme.lightGrey}
-                  >
+                  <M.Text size="20px" weight="500" col="lightGrey">
                     건
                   </M.Text>
                 </S.TextUnit>
@@ -132,14 +108,18 @@ const MyDashboard = () => {
                     10,000
                   </M.Text>
                 </S.TokenUnit>
-                <M.CTABtn>충전하러 가기</M.CTABtn>
+                <M.CTABtn onClick={() => navigate('/token')}>
+                  충전하러 가기
+                </M.CTABtn>
               </S.TokenBox>
             </M.SectionWrapper>
 
             <M.SectionWrapper>
-              <M.Text size="22px" weight="600">
-                내 기부액
-              </M.Text>
+              <M.SectionTitleWrapper>
+                <M.Text size="22px" weight="600">
+                  내 기부액
+                </M.Text>
+              </M.SectionTitleWrapper>
               <S.DonationBox>
                 <M.Text size="35px" weight="600">
                   200,000
@@ -152,9 +132,12 @@ const MyDashboard = () => {
           </S.TokenDonationWrapper>
 
           <M.SectionWrapper>
-            <M.Text size="22px" weight="600">
-              내 티켓
-            </M.Text>
+            <M.SectionTitleWrapper>
+              <M.Text size="22px" weight="600">
+                내 티켓
+              </M.Text>
+            </M.SectionTitleWrapper>
+
             <S.TicketBoxWrapper>
               {ticketList.map(
                 ({ id, name, image_url, location, event_start_date }) => {

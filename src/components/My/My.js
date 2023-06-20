@@ -6,12 +6,19 @@ export const M = {
   Text: styled.div`
     font-size: ${props => props.size};
     font-weight: ${props => props.weight};
-    color: ${props => props.col};
+    color: ${props => props.theme[props.col]};
+    width: ${props => props.width};
+  `,
+
+  FlexEnd: styled.div`
+    display: flex;
+    justify-content: flex-end;
   `,
 
   CTABtn: styled.button`
+    display: flex;
     padding: 10px 30px;
-    height: 45px;
+    height: 40px;
     font-size: 20px;
     font-weight: 600;
     color: ${props => props.theme.black};
@@ -88,7 +95,7 @@ export const M = {
   MainContainer: styled.div`
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 70px;
     margin: 0 auto;
   `,
 
@@ -103,5 +110,6 @@ export const M = {
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-bottom: 5px;
   `,
 };
