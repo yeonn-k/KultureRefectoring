@@ -10,6 +10,7 @@ import MyAccount from './pages/MyAccount/MyAccount.jsx';
 import MyToken from './pages/MyToken/MyToken.jsx';
 import MyAuction from './pages/MyAuction/MyAuction.jsx';
 import Home from './pages/Home/Home.jsx';
+import Callback from './pages/Callback/Callback.jsx';
 
 const Router = () => {
   return (
@@ -24,6 +25,7 @@ const Router = () => {
         <Route path="/account" element={<MyAccount />} />
         <Route path="/token" element={<MyToken />} />
         <Route path="/auction" element={<MyAuction />} />
+        <Route path="/oauth/callback/kakao" element={<Callback />} />
       </Routes>
       <Footer />
     </BrowserRouter>

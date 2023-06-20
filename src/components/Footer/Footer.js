@@ -16,4 +16,7 @@ export const FooterContainer = styled.div`
 
 export const FooterImg = styled.img`
   width: 100px;
+  &:hover {
+    cursor: pointer;
+  }
 `;

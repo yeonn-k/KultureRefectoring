@@ -66,6 +66,24 @@ export const S = {
     border: 2px solid #97fe67;
     border-radius: 10px;
     margin-right: 13px;
+  `,
+
+  LogoutBtn: styled.button`
+    width: 73px;
+    height: 24px;
+    font-size: 16px;
+    color: grey;
+    border-radius: 10px;
+    margin-right: 13px;
+  `,
+
+  MyBtn: styled.button`
+    width: 90px;
+    height: 24px;
+    font-size: 16px;
+    color: white;
+    border-radius: 10px;
+    margin-right: 13px;
     cursor: pointer;
   `,
 
