@@ -84,8 +84,6 @@ export const S = {
   `,
 
   More: styled.div`
-    display: flex;
-    justify-content: center;
     margin: 0 auto;
     position: relative;
     width: 1440px;
@@ -115,5 +113,9 @@ export const S = {
     background-color: ${props => props.theme.kultureBackground};
     color: ${props => props.theme.kultureGreen};
     font-weight: 400;
+
+    :hover {
+      cursor: pointer;
+    }
   `,
 };

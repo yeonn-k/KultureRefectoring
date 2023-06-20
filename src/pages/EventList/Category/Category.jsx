@@ -10,7 +10,7 @@ const Category = ({ data }) => {
 
       {Array.isArray(subCategory)
         ? subCategory.map(subcategory => (
-            <S.SubCategories>
+            <S.SubCategories key={data.id}>
               <S.CheckIcon src="/images/common/check-false.png" />
               <S.SubCategory>{subcategory}</S.SubCategory>
             </S.SubCategories>

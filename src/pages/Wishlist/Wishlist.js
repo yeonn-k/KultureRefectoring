@@ -46,18 +46,64 @@ export const S = {
     margin-right: 20px;
     opacity: 0.4;
     color: #d9d9d9;
+
+    &:hover {
+      cursor: pointer;
+    }
   `,
 
   All: styled.span`
     float: right;
     color: #d9d9d9;
     opacity: 0.4;
+
+    &:hover {
+      cursor: pointer;
+    }
   `,
 
   WrapperCard: styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
     margin-top: 60px;
+    display: grid;
+    grid-template-rows: 350px 350px;
+    grid-template-columns: 465px 465px 465px;
+  `,
+
+  More: styled.div`
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    position: relative;
+    width: 1440px;
+    height: 40px;
+    margin-top: 40px;
+  `,
+
+  MoreLine: styled.div`
+    position: absolute;
+    top: 15px;
+    width: 1324px;
+    height: 1px;
+    background-color: ${props => props.theme.kultureGreen};
+  `,
+
+  MoreText: styled.div`
+    position: absolute;
+    left: 50%;
+    margin-left: 37px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 74px;
+    height: 30px;
+    border: 1px solid ${props => props.theme.kultureGreen};
+    border-radius: 10px;
+    background-color: ${props => props.theme.kultureBackground};
+    color: ${props => props.theme.kultureGreen};
+    font-weight: 400;
+
+    :hover {
+      cursor: pointer;
+    }
   `,
 };

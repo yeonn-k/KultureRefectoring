@@ -86,4 +86,31 @@ export const CalenderBox = styled.div`
     text-align: center;
     text-transform: lowercase;
   }
+
+  .react-calendar__navigation button:enabled:hover,
+  .react-calendar__navigation button:enabled:focus {
+    border: 1px solid #8c8c8c;
+    color: #1c1b1b;
+    background: none;
+    height: 30px;
+  }
+
+  .react-calendar__tile:enabled:hover,
+  .react-calendar__tile:enabled:focus {
+    background-color: #e6e6e6;
+    color: #1c1b1b;
+  }
+
+  .react-calendar__tile {
+    color: #e6e6e6;
+  }
+
+  .react-calendar__tile--now {
+    color: #1c1b1b;
+  }
+
+  .react-calendar__navigation__label:hover {
+    background-color: #e6e6e6;
+    color: #1c1b1b;
+  }
 `;

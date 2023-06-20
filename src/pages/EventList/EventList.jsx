@@ -11,6 +11,7 @@ import { CalenderBox } from './CalendarBox.js';
 const EventList = () => {
   const [cardData, setCardData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
+  const [userDate, setUserDate] = useState();
 
   useEffect(() => {
     fetch('/data/eventCardData.json')
@@ -31,7 +32,11 @@ const EventList = () => {
       <S.Container>
         <S.ContainerLeft>
           <CalenderBox>
-            <Calendar locale="en" />
+            <Calendar
+              locale="en"
+              calendarType="Hebrew"
+              onClickDay={setUserDate}
+            />
           </CalenderBox>
           {categoryData.map(data => {
             return <Category data={data} key={data.id} />;
@@ -60,11 +65,11 @@ const EventList = () => {
             })}
           </S.WrapperCard>
         </S.ContainerRight>
+        <S.More>
+          <S.MoreLine />
+          <S.MoreText>더보기</S.MoreText>
+        </S.More>
       </S.Container>
-      <S.More>
-        <S.MoreLine />
-        <S.MoreText>더보기</S.MoreText>
-      </S.More>
     </div>
   );
 };

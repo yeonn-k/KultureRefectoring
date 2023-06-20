@@ -26,11 +26,19 @@ export const S = {
   CheckIcon: styled.img`
     width: 16px;
     margin-right: 10px;
+
+    :hover {
+      cursor: pointer;
+    }
   `,
 
   SubCategory: styled.span`
     font-weight: 600;
     color: #fff;
     opacity: 0.5;
+
+    :hover {
+      cursor: pointer;
+    }
   `,
 };

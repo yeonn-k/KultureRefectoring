@@ -24,9 +24,9 @@ export const S = {
     margin-bottom: 5px;
   `,
 
-  EventDescription: styled.p`
+  EventDescription: styled.div`
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; //grid
     align-items: center;
     font-size: 16px;
     font-weight: 400;
@@ -34,7 +34,7 @@ export const S = {
     margin-bottom: 5px;
   `,
 
-  EventTime: styled.p`
+  EventTime: styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -57,6 +57,10 @@ export const S = {
     height: 23px;
     top: 13px;
     right: 50px;
+
+    &:hover {
+      cursor: pointer;
+    }
   `,
 
   Heart: styled.img`
@@ -65,6 +69,10 @@ export const S = {
     height: 23px;
     top: 13px;
     right: 13px;
+
+    &:hover {
+      cursor: pointer;
+    }
   `,
 
   TokenBox: styled.div`

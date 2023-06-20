@@ -30,7 +30,7 @@ export const PriceRangeFilter = () => {
   const classes = useStyles();
   const [value, setValue] = useState([100, 200]);
 
-  const handleChange = newValue => {
+  const handleChange = (e, newValue) => {
     setValue(newValue);
   };
 

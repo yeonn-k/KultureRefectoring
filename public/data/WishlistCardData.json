@@ -5,7 +5,7 @@
     "time": "1시간 46분 21초",
     "image": "/images/Wishlist/event1.jpg",
     "token": 100,
-    "quantity": 10
+    "quantity": 1
   },
   {
     "id": 2,
@@ -13,7 +13,7 @@
     "time": "1시간 46분 21초",
     "image": "/images/Wishlist/event2.jpg",
     "token": 100,
-    "quantity": 10
+    "quantity": 2
   },
   {
     "id": 3,
@@ -21,7 +21,7 @@
     "time": "1시간 46분 21초",
     "image": "/images/Wishlist/event3.jpg",
     "token": 100,
-    "quantity": 10
+    "quantity": 3
   },
   {
     "id": 4,
@@ -29,7 +29,7 @@
     "time": "1시간 46분 21초",
     "image": "/images/Wishlist/event4.jpg",
     "token": 100,
-    "quantity": 10
+    "quantity": 4
   },
   {
     "id": 5,
@@ -37,7 +37,7 @@
     "time": "1시간 46분 21초",
     "image": "/images/Wishlist/event5.jpg",
     "token": 100,
-    "quantity": 10
+    "quantity": 5
   },
   {
     "id": 6,
@@ -45,6 +45,6 @@
     "time": "1시간 46분 21초",
     "image": "/images/Wishlist/event6.jpg",
     "token": 100,
-    "quantity": 10
+    "quantity": 6
   }
 ]
