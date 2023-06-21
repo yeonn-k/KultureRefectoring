@@ -1,21 +1,27 @@
 import styled from 'styled-components';
+import { Mixin } from '../../styles/mixin';
 
 export const S = {
   Banner: styled.div`
-    position: relative;
+    ${Mixin.flexCenter}
+    flex-direction: column;
+    gap: 25px;
     width: 100%;
+    margin-top: 4px;
     aspect-ratio: ${props => props.ratio};
     background-image: url(${props => props.src});
     background-size: 100%;
+    background-position: center;
+    filter: grayscale(100%);
   `,
 
-  TextMain: styled.p`
-    font-size: 50px;
+  TextMain: styled.div`
+    font-size: 80px;
     font-weight: 600;
   `,
 
-  TextSub: styled.p`
-    font-size: 40px;
+  TextSub: styled.div`
+    font-size: ${props => props.size};
     font-weight: 600;
   `,
   SectionWrapper: styled.div`

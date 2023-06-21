@@ -1,19 +1,29 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import EventCard from '../../components/EventCard/EventCard.jsx';
 import { S } from './Home';
 
 const Home = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <S.Banner src="./images/Home/banner-main.jpg" ratio="2/1">
-        <S.TextMain>Value Proposition</S.TextMain>
+        <S.TextMain>Kindness + Culture</S.TextMain>
       </S.Banner>
       <S.SectionWrapper>
         <S.SectionTitle>카테고리</S.SectionTitle>
         <S.BoxWrapper>
           {CATEGORIES.map(({ id, title, src }) => {
             return (
-              <S.CategoryBox key={id} src={src} alt={title}>
+              <S.CategoryBox
+                key={id}
+                src={src}
+                alt={title}
+                onClick={() => {
+                  navigate(`/list`);
+                }}
+              >
                 <S.CategoryText key={id}>{title}</S.CategoryText>
               </S.CategoryBox>
             );
@@ -29,7 +39,11 @@ const Home = () => {
         </S.BoxWrapper>
       </S.SectionWrapper>
       <S.Banner src="./images/Home/banner-sub.jpg" ratio="3/1">
-        <S.TextSub>Donation</S.TextSub>
+        <S.TextSub size="45px">누구나 문화예술을 즐길 수 있도록.</S.TextSub>
+        <S.TextSub size="18px">
+          *구매한 티켓 금액의 10%는 저소득층 대상 문화생활 지원사업에
+          기부됩니다.
+        </S.TextSub>
       </S.Banner>
     </>
   );
