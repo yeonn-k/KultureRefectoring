@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { MdGridView, MdAccountCircle } from 'react-icons/md';
 import { LuDatabase, LuTicket } from 'react-icons/lu';
+import { Mixin } from '../../styles/mixin';
 
 export const M = {
   Text: styled.div`
@@ -15,15 +16,18 @@ export const M = {
     justify-content: flex-end;
   `,
 
-  CTABtn: styled.button`
-    display: flex;
-    padding: 10px 30px;
+  CTABtn: styled.div`
+    ${Mixin.flexCenter};
+    padding: 5px 20px;
     height: 40px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     color: ${props => props.theme.black};
     background-color: ${props => props.theme.kultureGreen};
     border-radius: 10px;
+    &:hover {
+      cursor: pointer;
+    }
   `,
 
   LearnMoreBtn: styled.img`

@@ -48,9 +48,23 @@ export const S = {
     margin-bottom: 20px;
   `,
 
+  AlertDiv: styled.div`
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 30px;
+  `,
+
+  ZeroAlert: styled.div`
+    display: ${props => (props.status ? 'none' : 'flex')};
+    color: ${props => props.theme.kultureGreen};
+    font-size: 16px;
+    font-weight: 400;
+  `,
+
   Divider: styled.hr`
     border: 1px solid ${props => props.theme.kultureGreen};
-    margin: 40px 0;
+    margin-bottom: 20px;
   `,
 
   OptionBoxWrapper: styled.div`

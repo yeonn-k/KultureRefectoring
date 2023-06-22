@@ -3,6 +3,22 @@ import { MdAlarmOn, MdCheckCircleOutline, MdBlock } from 'react-icons/md';
 import { Mixin } from '../../styles/mixin';
 
 export const S = {
+  EmptyBox: styled.div`
+    ${Mixin.flexCenter};
+    padding: 30px;
+    font-size: 18px;
+    font-weight: 400;
+    color: ${props => props.theme.lightGrey};
+    border-radius: 10px;
+    background-color: ${props => props.theme.darkGrey};
+  `,
+
+  TextUnit: styled.div`
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+  `,
+
   AuctionBoxWrapper: styled.div`
     ${Mixin.flexCenter};
     gap: 18px;
@@ -16,7 +32,7 @@ export const S = {
     flex-direction: column;
     gap: 15px;
     width: 290px;
-    height: 210px;
+    height: 180px;
   `,
 
   AuctionBoxDone: styled.div`
@@ -24,7 +40,7 @@ export const S = {
     flex-direction: column;
     gap: 15px;
     width: 290px;
-    height: 210px;
+    height: 180px;
     margin: 10px 0;
     border: 3px solid ${props => props.theme.kultureGreen};
     border-radius: 10px;
@@ -36,7 +52,7 @@ export const S = {
     flex-direction: column;
     gap: 15px;
     width: 290px;
-    height: 210px;
+    height: 180px;
   `,
 
   StatusBox: styled.div`
@@ -61,10 +77,20 @@ export const S = {
     color: ${props => props.theme.lightGrey};
   `,
 
-  TextUnit: styled.div`
+  SuccessBoxWrapper: styled.div`
     display: flex;
-    align-items: baseline;
-    gap: 5px;
+    flex-direction: column;
+    gap: 10px;
+    width: 930px;
+  `,
+
+  SuccessBox: styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    padding: 10px 30px;
+    background-color: ${props => props.theme.darkGrey};
   `,
 
   TokenDonationWrapper: styled.div`
@@ -81,7 +107,7 @@ export const S = {
     flex-direction: column;
     gap: 25px;
     width: 450px;
-    height: 250px;
+    height: 200px;
     padding-left: 60px;
     border-radius: 10px;
     border: 3px solid ${props => props.theme.kultureGreen};
@@ -91,13 +117,14 @@ export const S = {
     display: flex;
     align-items: center;
     gap: ${props => props.gap};
+    width: ${props => props.width};
   `,
 
   DonationBox: styled.div`
     ${Mixin.flexCenter}
     gap: 10px;
     width: 450px;
-    height: 250px;
+    height: 200px;
     padding: 0 70px;
     border-radius: 10px;
     background-color: ${props => props.theme.darkGrey};

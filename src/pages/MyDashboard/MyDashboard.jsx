@@ -10,6 +10,7 @@ import { S } from './MyDashboard';
 const MyDashboard = () => {
   const navigate = useNavigate();
   const [ticketList, setTicketList] = useState([]);
+  const [successList, setSuccessList] = useState([]);
 
   //ticketList Mock Data
   useEffect(() => {
@@ -19,6 +20,17 @@ const MyDashboard = () => {
         setTicketList(data.list);
       });
   }, []);
+
+  //biddingSuccessful Mock Data
+  useEffect(() => {
+    fetch('data/biddingSuccessful.json')
+      .then(res => res.json())
+      .then(data => {
+        setSuccessList(data);
+      });
+  }, []);
+
+  console.log(successList);
 
   return (
     <>
@@ -41,13 +53,13 @@ const MyDashboard = () => {
             <S.AuctionBoxWrapper>
               <S.AuctionBoxIP>
                 <S.StatusBox>
-                  <M.Text size="18px" weight="500">
+                  <M.Text size="16px" weight="500">
                     입찰 진행 중
                   </M.Text>
                   <S.AuctionIP />
                 </S.StatusBox>
                 <S.TextUnit>
-                  <M.Text size="100px" weight="600">
+                  <M.Text size="70px" weight="600">
                     8
                   </M.Text>
                   <M.Text size="20px" weight="500">
@@ -57,13 +69,13 @@ const MyDashboard = () => {
               </S.AuctionBoxIP>
               <S.AuctionBoxDone>
                 <S.StatusBox>
-                  <M.Text size="18px" weight="500" col="kultureGreen">
+                  <M.Text size="16px" weight="500" col="kultureGreen">
                     낙찰 성공
                   </M.Text>
                   <S.AuctionDone />
                 </S.StatusBox>
                 <S.TextUnit>
-                  <M.Text size="100px" weight="600" col="kultureGreen">
+                  <M.Text size="70px" weight="600" col="kultureGreen">
                     17
                   </M.Text>
                   <M.Text size="20px" weight="500" col="kultureGreen">
@@ -73,13 +85,13 @@ const MyDashboard = () => {
               </S.AuctionBoxDone>
               <S.AuctionBoxFail>
                 <S.StatusBox>
-                  <M.Text size="18px" weight="500" col="lightGrey">
+                  <M.Text size="16px" weight="500" col="lightGrey">
                     낙찰 실패
                   </M.Text>
                   <S.AuctionFail />
                 </S.StatusBox>
                 <S.TextUnit>
-                  <M.Text size="100px" weight="600" col="lightGrey">
+                  <M.Text size="70px" weight="600" col="lightGrey">
                     2
                   </M.Text>
                   <M.Text size="20px" weight="500" col="lightGrey">
@@ -88,6 +100,41 @@ const MyDashboard = () => {
                 </S.TextUnit>
               </S.AuctionBoxFail>
             </S.AuctionBoxWrapper>
+          </M.SectionWrapper>
+
+          <M.SectionWrapper>
+            <M.SectionTitleWrapper>
+              <M.Text size="22px" weight="600">
+                낙찰 수락 대기
+              </M.Text>
+            </M.SectionTitleWrapper>
+            <S.SuccessBoxWrapper>
+              {successList.length === 0 ? (
+                <S.EmptyBox>낙찰 수락 대기중인 이벤트가 없어요!</S.EmptyBox>
+              ) : (
+                successList.map(({ id, title, date, location, price }) => {
+                  return (
+                    <S.SuccessBox key={id}>
+                      <M.Text size="18px" weight="500" width="220px;">
+                        {title}
+                      </M.Text>
+                      <M.Text size="16px" weight="400" width="300px">
+                        {date} ・ {location}
+                      </M.Text>
+
+                      <S.TokenUnit gap="5px" width="80px">
+                        <T.Token src={tokenImg} size="20px" />
+                        <M.Text size="18px" weight="600">
+                          {price.toLocaleString()}
+                        </M.Text>
+                      </S.TokenUnit>
+
+                      <M.CTABtn>구매 확정하기</M.CTABtn>
+                    </S.SuccessBox>
+                  );
+                })
+              )}
+            </S.SuccessBoxWrapper>
           </M.SectionWrapper>
 
           <S.TokenDonationWrapper>
@@ -139,23 +186,27 @@ const MyDashboard = () => {
             </M.SectionTitleWrapper>
 
             <S.TicketBoxWrapper>
-              {ticketList.map(
-                ({ id, name, image_url, location, event_start_date }) => {
-                  return (
-                    <S.TicketBox key={id}>
-                      <S.TicketImage src={image_url} />
-                      <S.TicketInfo>
-                        <M.Text size="22px" weight="500">
-                          {name}
-                        </M.Text>
-                        <M.Text size="16px" weight="400">
-                          {event_start_date} ・ {location}
-                        </M.Text>
-                      </S.TicketInfo>
-                      <M.CTABtn>티켓 확인하기</M.CTABtn>
-                    </S.TicketBox>
-                  );
-                }
+              {ticketList.length === 0 ? (
+                <S.EmptyBox>유효한 티켓이 없어요!</S.EmptyBox>
+              ) : (
+                ticketList.map(
+                  ({ id, name, image_url, location, event_start_date }) => {
+                    return (
+                      <S.TicketBox key={id}>
+                        <S.TicketImage src={image_url} />
+                        <S.TicketInfo>
+                          <M.Text size="22px" weight="500">
+                            {name}
+                          </M.Text>
+                          <M.Text size="16px" weight="400">
+                            {event_start_date} ・ {location}
+                          </M.Text>
+                        </S.TicketInfo>
+                        <M.CTABtn>티켓 확인하기</M.CTABtn>
+                      </S.TicketBox>
+                    );
+                  }
+                )
               )}
             </S.TicketBoxWrapper>
           </M.SectionWrapper>

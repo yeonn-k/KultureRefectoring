@@ -54,6 +54,11 @@ const MyToken = () => {
                   </M.Text>
                 </S.TokenUnit>
               </S.LineUnit>
+              <S.AlertDiv>
+                <S.ZeroAlert status={chargeAmount !== 0}>
+                  *아래에서 옵션을 선택해주세요.
+                </S.ZeroAlert>
+              </S.AlertDiv>
               <S.Divider />
               <S.LineUnit>
                 <M.Text size="22px" weight="600">
