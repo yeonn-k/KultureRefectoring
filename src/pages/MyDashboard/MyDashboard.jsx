@@ -7,12 +7,18 @@ import learnMoreIcon from '../../images/learn-more.png';
 import { M } from '../../components/My/My';
 import { T } from '../../components/Token';
 import { S } from './MyDashboard';
+import TicketModal from '../../components/TicketModal/TicketModal.jsx';
 
 const MyDashboard = () => {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({});
   const [successList, setSuccessList] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [ticketList, setTicketList] = useState([]);
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+    document.body.style.overflow = 'hidden';
+  };
 
   useEffect(() => {
     fetch(`${APIS.users}`, {
@@ -225,7 +231,12 @@ const MyDashboard = () => {
                             {event_start_date} ・ {location}
                           </M.Text>
                         </S.TicketInfo>
-                        <M.CTABtn>티켓 확인하기</M.CTABtn>
+                        <M.CTABtn onClick={handleOpenModal}>
+                          티켓 확인하기
+                        </M.CTABtn>
+                        {isModalOpen ? (
+                          <TicketModal setIsModalOpen={setIsModalOpen} />
+                        ) : null}
                       </S.TicketBox>
                     );
                   }
