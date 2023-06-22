@@ -4,7 +4,6 @@ import { M } from '../../components/My/My';
 import { S } from './MyAccount';
 
 const MyAccount = () => {
-  const handleUnlink = () => {};
   const [userInfo, setUserInfo] = useState({});
 
   //userInfo Mock Data
@@ -54,9 +53,7 @@ const MyAccount = () => {
                 {email}
               </M.Text>
             </S.ProfileBox>
-            <S.DeleteAccount onClick={() => handleUnlink()}>
-              탈퇴하기
-            </S.DeleteAccount>
+            <S.EditInfo>수정하기</S.EditInfo>
           </M.SectionWrapper>
         </M.MainContainer>
       </M.Container>

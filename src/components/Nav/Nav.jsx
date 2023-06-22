@@ -15,21 +15,9 @@ const Nav = () => {
   };
 
   const handleSignOut = () => {
-    fetch(`${APIS.users}/kakao/signout`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        'Content-Type': 'application/json;charset=utf-8',
-      },
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.message === 'Logout successful') {
-          localStorage.removeItem('accessToken');
-          alert('로그아웃 되었습니다!');
-          navigate('/');
-        } else throw new Error('로그아웃 에러');
-      });
+    localStorage.removeItem('accessToken');
+    alert('로그아웃 되었습니다!');
+    navigate('/');
   };
 
   useEffect(() => {
@@ -77,7 +65,13 @@ const Nav = () => {
           <li>
             <S.NavTitleWrap>
               <S.NavTitle to="/list">EVENT</S.NavTitle>
-              <S.NavTitle to="/wishlist">WISHLIST</S.NavTitle>
+              <S.NavWishlist
+                onClick={() =>
+                  !isSignedIn ? handleSignIn() : navigate('/wishlist')
+                }
+              >
+                WISHLIST
+              </S.NavWishlist>
               <S.NavSearch src="./images/common/Search.png" alt="Search" />
             </S.NavTitleWrap>
           </li>

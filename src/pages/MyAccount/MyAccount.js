@@ -6,7 +6,7 @@ export const S = {
     align-items: center;
     flex-direction: column;
     gap: 40px;
-    margin-bottom: 60px;
+    margin-bottom: 20px;
     width: 930px;
     padding: 60px;
     border: 2px solid ${props => props.theme.kultureGreen};
@@ -35,10 +35,10 @@ export const S = {
     gap: 5px;
   `,
 
-  DeleteAccount: styled.button`
+  EditInfo: styled.button`
     font-size: 18px;
     font-weight: 400;
-    color: ${props => props.theme.lightGrey};
     text-decoration: underline;
+    color: ${props => props.theme.lightGrey};
   `,
 };

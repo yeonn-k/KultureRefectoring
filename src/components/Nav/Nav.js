@@ -16,6 +16,20 @@ export const S = {
     }
   `,
 
+  NavWishlist: styled.div`
+    width: 100%;
+    height: 27px;
+    align-items: center;
+    font-size: 22px;
+    margin-right: 40px;
+    padding-bottom: 59px;
+    cursor: pointer;
+
+    &:hover {
+      border-bottom: 3px solid #97fe67;
+    }
+  `,
+
   NavContainer: styled.div`
     max-width: 1440px;
     width: 100%;
