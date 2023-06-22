@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import My from '../../components/My/My.jsx';
+import { APIS } from '../../config.js';
 import tokenImg from '../../images/kulture-token.png';
 import learnMoreIcon from '../../images/learn-more.png';
 import { M } from '../../components/My/My';
@@ -9,17 +10,30 @@ import { S } from './MyDashboard';
 
 const MyDashboard = () => {
   const navigate = useNavigate();
-  const [ticketList, setTicketList] = useState([]);
+  const [userInfo, setUserInfo] = useState({});
   const [successList, setSuccessList] = useState([]);
+  const [ticketList, setTicketList] = useState([]);
 
-  //ticketList Mock Data
   useEffect(() => {
-    fetch('data/ticketList.json')
+    fetch(`${APIS.users}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('accessToken'),
+      },
+    })
       .then(res => res.json())
-      .then(data => {
-        setTicketList(data.list);
-      });
+      .then(data => setUserInfo(data[0]));
   }, []);
+
+  //userInfo Mock Data
+  // useEffect(() => {
+  //   fetch('data/userInfo.json')
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       setUserInfo(data);
+  //     });
+  // }, []);
 
   //biddingSuccessful Mock Data
   useEffect(() => {
@@ -30,11 +44,20 @@ const MyDashboard = () => {
       });
   }, []);
 
-  console.log(successList);
+  //ticketList Mock Data
+  useEffect(() => {
+    fetch('data/ticketList.json')
+      .then(res => res.json())
+      .then(data => {
+        setTicketList(data.list);
+      });
+  }, []);
+
+  const { event_token } = userInfo;
 
   return (
     <>
-      <M.Title>My Dashboard</M.Title>
+      <M.Title>대시보드</M.Title>
 
       <M.Container>
         <My />
@@ -110,7 +133,7 @@ const MyDashboard = () => {
             </M.SectionTitleWrapper>
             <S.SuccessBoxWrapper>
               {successList.length === 0 ? (
-                <S.EmptyBox>낙찰 수락 대기중인 이벤트가 없어요!</S.EmptyBox>
+                <M.EmptyBox>낙찰 수락 대기중인 이벤트가 없어요!</M.EmptyBox>
               ) : (
                 successList.map(({ id, title, date, location, price }) => {
                   return (
@@ -152,7 +175,7 @@ const MyDashboard = () => {
                 <S.TokenUnit gap="25px">
                   <T.Token src={tokenImg} size="60px" />
                   <M.Text size="50px" weight="600">
-                    10,000
+                    {Math.floor(event_token).toLocaleString()}
                   </M.Text>
                 </S.TokenUnit>
                 <M.CTABtn onClick={() => navigate('/token')}>
@@ -187,7 +210,7 @@ const MyDashboard = () => {
 
             <S.TicketBoxWrapper>
               {ticketList.length === 0 ? (
-                <S.EmptyBox>유효한 티켓이 없어요!</S.EmptyBox>
+                <M.EmptyBox>유효한 티켓이 없어요!</M.EmptyBox>
               ) : (
                 ticketList.map(
                   ({ id, name, image_url, location, event_start_date }) => {

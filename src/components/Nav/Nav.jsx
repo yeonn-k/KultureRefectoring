@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { APIS } from '../../config.js';
 import { KAKAO_AUTH_URL } from '../SocialOAuth.js';
 import { S } from './Nav.js';
 

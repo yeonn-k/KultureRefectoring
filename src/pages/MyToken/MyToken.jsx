@@ -1,14 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import My from '../../components/My/My.jsx';
+import { APIS } from '../../config.js';
 import tokenImg from '../../images/kulture-token.png';
 import { M } from '../../components/My/My';
 import { T } from '../../components/Token';
 import { S } from './MyToken';
 
 const MyToken = () => {
+  const [userInfo, setUserInfo] = useState({});
   const [chargeAmount, setChargeAmount] = useState(0);
   const [paymentKRW, setPaymentKRW] = useState(0);
   const [historyList, setHistoryList] = useState([]);
+
+  useEffect(() => {
+    fetch(`${APIS.users}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('accessToken'),
+      },
+    })
+      .then(res => res.json())
+      .then(data => setUserInfo(data[0]));
+  }, []);
+
+  //userInfo Mock Data
+  // useEffect(() => {
+  //   fetch('data/userInfo.json')
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       setUserInfo(data);
+  //     });
+  // }, []);
 
   //TokenHistory Mock Data
   useEffect(() => {
@@ -19,9 +42,11 @@ const MyToken = () => {
       });
   }, []);
 
+  const { event_token } = userInfo;
+
   return (
     <>
-      <M.Title>My Token</M.Title>
+      <M.Title>내 토큰</M.Title>
       <M.Container>
         <My />
         <M.MainContainer>
@@ -39,7 +64,7 @@ const MyToken = () => {
                 <S.TokenUnit gap="15px">
                   <T.Token src={tokenImg} size="35px" />
                   <M.Text size="30px" weight="600">
-                    10,000
+                    {Math.floor(event_token).toLocaleString()}
                   </M.Text>
                 </S.TokenUnit>
               </S.LineUnit>

@@ -116,4 +116,14 @@ export const M = {
     gap: 10px;
     margin-bottom: 5px;
   `,
+
+  EmptyBox: styled.div`
+    ${Mixin.flexCenter};
+    padding: 30px;
+    font-size: 18px;
+    font-weight: 400;
+    color: ${props => props.theme.lightGrey};
+    border-radius: 10px;
+    background-color: ${props => props.theme.darkGrey};
+  `,
 };

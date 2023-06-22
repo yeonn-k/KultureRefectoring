@@ -3,16 +3,6 @@ import { MdAlarmOn, MdCheckCircleOutline, MdBlock } from 'react-icons/md';
 import { Mixin } from '../../styles/mixin';
 
 export const S = {
-  EmptyBox: styled.div`
-    ${Mixin.flexCenter};
-    padding: 30px;
-    font-size: 18px;
-    font-weight: 400;
-    color: ${props => props.theme.lightGrey};
-    border-radius: 10px;
-    background-color: ${props => props.theme.darkGrey};
-  `,
-
   TextUnit: styled.div`
     display: flex;
     align-items: baseline;

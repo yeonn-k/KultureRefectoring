@@ -1,29 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import My from '../../components/My/My.jsx';
+import { APIS } from '../../config.js';
 import { M } from '../../components/My/My';
 import { S } from './MyAccount';
 
 const MyAccount = () => {
   const [userInfo, setUserInfo] = useState({});
 
-  //userInfo Mock Data
   useEffect(() => {
-    fetch('data/userInfo.json')
+    fetch(`${APIS.users}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('accessToken'),
+      },
+    })
       .then(res => res.json())
-      .then(data => {
-        setUserInfo(data);
-      });
+      .then(data => setUserInfo(data[0]));
   }, []);
+
+  //userInfo Mock Data
+  // useEffect(() => {
+  //   fetch('data/userInfo.json')
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       setUserInfo(data);
+  //     });
+  // }, []);
 
   if (Object.keys(userInfo).length === 0) return null;
 
-  const { nickname, profile_image, email, age_range, gender } = userInfo;
+  const { nickname, profile_image_url, email, age_range, gender } = userInfo;
   const age = age_range.split('~')[0];
   const krGender = GENDER[gender];
 
   return (
     <>
-      <M.Title>My Account</M.Title>
+      <M.Title>내 정보</M.Title>
 
       <M.Container>
         <My />
@@ -33,7 +46,7 @@ const MyAccount = () => {
               내 프로필
             </M.Text>
             <S.ProfileBox>
-              <S.ProfileImg src={profile_image} alt={nickname} />
+              <S.ProfileImg src={profile_image_url} alt={nickname} />
               <S.BasicInfo>
                 <M.Text size="20px" weight="500">
                   {nickname}
