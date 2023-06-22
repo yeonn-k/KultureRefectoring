@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { KAKAO_AUTH_URL } from '../SocialOAuth.js';
+import Search from './Search/Search.jsx';
 import { S } from './Nav.js';
 
 const Nav = () => {
   const [isSignedIn, setIsSignedIn] = useState(false);
+  const [IsSearchOpen, setIsSearchOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const accessToken = localStorage.getItem('accessToken');
@@ -25,6 +27,9 @@ const Nav = () => {
 
   return (
     <S.NavContainer>
+      {IsSearchOpen && (
+        <Search IsSearchOpen={IsSearchOpen} setIsSearchOpen={setIsSearchOpen} />
+      )}
       <div>
         <ul>
           <li>
@@ -71,8 +76,11 @@ const Nav = () => {
               >
                 WISHLIST
               </S.NavWishlist>
-              <S.NavTitle to="/reviews">REVIEWS</S.NavTitle>
-              <S.NavSearch src="./images/common/Search.png" alt="Search" />
+              <S.NavSearch
+                src="./images/common/Search.png"
+                alt="Search"
+                onClick={() => setIsSearchOpen(true)}
+              />
             </S.NavTitleWrap>
           </li>
         </ul>

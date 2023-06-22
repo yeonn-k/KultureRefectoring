@@ -79,10 +79,15 @@ const DirectBidModal = ({
     };
   }, []);
 
+  const closeOrder = () => {
+    setDirectBidOpen(false);
+    setIsDirect(false);
+  };
+
   return (
     <S.BidModalContainer ref={outside}>
       <S.BidModalWrapper>
-        <S.CloseIcon onClick={() => setDirectBidOpen(false)} />
+        <S.CloseIcon onClick={closeOrder} />
         <S.BidModalWrap>
           <S.BidEventImg src={detail.thumbnail_images_url} alt="event" />
           <S.BidContentWrap>

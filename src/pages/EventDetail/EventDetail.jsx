@@ -24,11 +24,7 @@ const EventDetail = () => {
   const [directBidOpen, setDirectBidOpen] = useState(false);
   const [reviewList, setReviewList] = useState([]);
   const [isDirect, setIsDirect] = useState(false);
-
-  const userToken =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiaWF0IjoxNjg3MzQ4OTQyLCJleHAiOjE2ODgxMjY1NDJ9.f_pAeolhoGvPe1df13KLRbQGN7AwHbSPrEXge9yB-4s';
-
-  localStorage.setItem('userToken', userToken);
+  const userToken = localStorage.getItem('userToken');
 
   //카드 정보 GET
   useEffect(() => {

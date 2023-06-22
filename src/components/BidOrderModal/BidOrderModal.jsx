@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { BASE_URL_H, BASE_URL_K } from '../../config';
 import { S } from './BidOrderModal.js';
 
-const OrderModal = ({
+const BidOrderModal = ({
   detail,
   nickname,
   coast,
@@ -39,10 +39,7 @@ const OrderModal = ({
     setTicket(1);
   };
 
-  const userToken =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiaWF0IjoxNjg3MzQ4OTQyLCJleHAiOjE2ODgxMjY1NDJ9.f_pAeolhoGvPe1df13KLRbQGN7AwHbSPrEXge9yB-4s';
-
-  localStorage.setItem('userToken', userToken);
+  const userToken = localStorage.getItem('userToken');
 
   const handleBid = () => {
     const data = {
@@ -166,4 +163,4 @@ const OrderModal = ({
   );
 };
 
-export default OrderModal;
+export default BidOrderModal;
