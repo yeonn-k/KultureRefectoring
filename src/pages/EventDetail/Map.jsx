@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import Options from './Options';
+import { BASE_URL_H, BASE_URL_K } from '../../config';
 
 const containerStyle = {
   width: '550px',
@@ -12,14 +13,14 @@ function MyComponent() {
   const [map, setMap] = useState(null);
 
   useEffect(() => {
-    fetch('/data/DetailSample.json')
+    fetch(`${BASE_URL_K}/events/1`)
       .then(response => response.json())
-      .then(result => setLocation(result));
+      .then(result => setLocation(result[0]));
   }, []);
 
   const center = {
-    lat: location.latitude || 0,
-    lng: location.longitude || 0,
+    lat: Number(location.latitude) || 0,
+    lng: Number(location.longitude) || 0,
   };
 
   const { isLoaded } = useJsApiLoader({

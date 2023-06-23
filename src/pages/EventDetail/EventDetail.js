@@ -6,7 +6,8 @@ const BidingBtn = styled.button`
   height: 60px;
   background: #97fe67;
   border-radius: 10px;
-  font-size: 20px;
+  font-size: 22px;
+  font-weight: 500;
   margin: 30px 0;
 
   &:hover {
@@ -35,11 +36,13 @@ export const S = {
   `,
 
   DetailLeft: styled.div`
+    width: 50%;
     position: sticky;
     display: block;
     margin-left: auto;
     margin-right: auto;
     top: 0;
+    padding: 0 20px;
   `,
   DetailWrap: styled.div`
     display: flex;
@@ -49,20 +52,23 @@ export const S = {
   `,
 
   DetailMainTitle: styled.div`
-    margin-top: 20px;
-    font-size: 27px;
-    font-weight: 600;
+    font-size: 40px;
+    font-weight: 700;
+    border-bottom: 1px solid #424242;
   `,
   DetailImg: styled.img`
-    width: 600px;
+    width: 100%;
+    max-width: 800px;
     height: 600px;
     object-fit: cover;
     margin: 20px 0 0 0;
   `,
   DetailRight: styled.div`
+    width: 50%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 40px;
+    padding: 0 20px;
     overflow-y: scroll;
     height: auto;
   `,
@@ -74,9 +80,12 @@ export const S = {
 
   Detailcontents: styled.p`
     font-size: 16px;
-    font-weight: 400px;
+    font-weight: 400;
     width: 434px;
     padding: 20px 0;
+    white-space: pre-wrap;
+    overflow-y: auto;
+    height: auto;
   `,
   StartPriceWrap: styled.div`
     display: flex;
@@ -84,7 +93,7 @@ export const S = {
     margin-top: 20px;
     padding-bottom: 20px;
     padding-top: 10px;
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid #424242;
   `,
   StartPrice: styled.span`
     font-size: 16px;
@@ -114,9 +123,9 @@ export const S = {
   `,
 
   DetailChart: styled.div`
-    width: 650px;
-    height: 300px;
-    margin: 0 auto;
+    width: 670px;
+    height: 360px;
+    margin: auto;
   `,
   BidingBtn,
   InstantBtn,
@@ -129,7 +138,7 @@ export const S = {
   `,
 
   mapContainer: styled.div`
-    margin: 20px auto 0 auto;
+    margin: 20px auto auto 20px;
   `,
 
   googlemapsContainer: styled(GoogleMap)`
@@ -157,4 +166,13 @@ export const S = {
     color: #97fe67;
     font-weight: 200;
   `,
+  RecommnedTitle: styled.p`
+    margin: 20px 0 50px 72px;
+    font-size: 28px;
+    font-weight: 700;
+    min-width: 155px;
+  `,
+  RecommnedWrap: styled.div``,
+
+  ReviewWrapper: styled.div``,
 };

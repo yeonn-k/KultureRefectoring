@@ -1,17 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { BASE_URL_H, BASE_URL_K } from '../../config';
 import { S } from './BidOrderModal.js';
 
 const OrderModal = ({
-  modalOpen,
-  setModalOpen,
   detail,
+  nickname,
+  coast,
+  setCoast,
+  ticket,
   setOrderOpen,
-  orderOpen,
+  setModalOpen,
+  email,
+  setTicket,
+  isDirect,
 }) => {
-  const [coast, setCoast] = useState(0);
-  const [ticket, setTicket] = useState(1);
   const inputRef = useRef();
   const outside = useRef();
+  const navigate = useNavigate('');
 
   useEffect(() => {
     document.body.style.cssText = `
@@ -26,10 +32,69 @@ const OrderModal = ({
     };
   }, []);
 
+  const handleClose = () => {
+    setModalOpen(false);
+    setOrderOpen(false);
+    setCoast('');
+    setTicket(1);
+  };
+
+  const userToken =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiaWF0IjoxNjg3MzQ4OTQyLCJleHAiOjE2ODgxMjY1NDJ9.f_pAeolhoGvPe1df13KLRbQGN7AwHbSPrEXge9yB-4s';
+
+  localStorage.setItem('userToken', userToken);
+
+  const handleBid = () => {
+    const data = {
+      quantity: ticket,
+      biddingEventsToken: coast,
+      eventId: 1,
+    };
+
+    fetch(`${BASE_URL_H}/bid`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: userToken,
+      },
+      body: JSON.stringify(data),
+    })
+      .then(response => response.json())
+      .then(() => {
+        alert('입찰이 완료되었어요!');
+        setModalOpen(false);
+        setOrderOpen(false);
+        navigate('/auction');
+      });
+  };
+  const handleOrder = () => {
+    const data = {
+      eventId: 1,
+      totalEventToken: detail.highestToken * ticket,
+      quantity: ticket,
+    };
+
+    fetch(`${BASE_URL_K}/order`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: userToken,
+      },
+      body: JSON.stringify(data),
+    })
+      .then(response => response.json())
+      .then(() => {
+        navigate('/list ');
+        alert('구매가 완료되었어요!');
+      });
+  };
+
+  console.log(isDirect);
+
   return (
     <S.BidModalContainer ref={outside}>
       <S.BidModalWrapper>
-        <S.CloseIcon onClick={() => setOrderOpen(false)} />
+        <S.CloseIcon onClick={handleClose} />
         <S.BidModalWrap>
           <S.BidEventImg src={detail.thumbnail_images_url} alt="event" />
           <S.BidContentWrap>
@@ -47,12 +112,12 @@ const OrderModal = ({
           <S.BidTitle>입찰자 정보</S.BidTitle>
           <S.OrderContentWrap>
             <S.OrdeTitle>이름</S.OrdeTitle>
-            <S.BidContent>김유저</S.BidContent>
+            <S.BidContent>{nickname}</S.BidContent>
           </S.OrderContentWrap>
 
           <S.OrderContentWrap>
             <S.OrdeTitle>이메일</S.OrdeTitle>
-            <S.BidContent>kulture@kulture.com</S.BidContent>
+            <S.BidContent>{email}</S.BidContent>
           </S.OrderContentWrap>
 
           <S.Divider />
@@ -67,12 +132,14 @@ const OrderModal = ({
                 src="./images/common/kulture-token.png"
                 alt="token"
               />
-              <S.BidContent>100</S.BidContent>
+              <S.BidContent>
+                {isDirect ? detail.highestToken : coast}
+              </S.BidContent>
             </S.BidFlex>
           </S.OrderContentWrap>
           <S.OrderContentWrap>
             <S.OrdeTitle>티켓 매수</S.OrdeTitle>
-            <S.BidContent>2매</S.BidContent>
+            <S.BidContent>{ticket}매</S.BidContent>
           </S.OrderContentWrap>
         </div>
 
@@ -85,11 +152,15 @@ const OrderModal = ({
               src="./images/common/kulture-token.png"
               alt="token"
             />
-            <S.TotalToken>200</S.TotalToken>
+            <S.TotalToken>
+              {isDirect ? detail.highestToken * ticket : coast * ticket}
+            </S.TotalToken>
           </S.BidFlex>
         </S.OrderContentWrap>
 
-        <S.ableBidBtn>구매 입찰</S.ableBidBtn>
+        <S.ableBidBtn onClick={isDirect ? handleOrder : handleBid}>
+          구매 입찰
+        </S.ableBidBtn>
       </S.BidModalWrapper>
     </S.BidModalContainer>
   );

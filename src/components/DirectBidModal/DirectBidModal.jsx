@@ -1,40 +1,33 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import OrderBidModal from '../BidOrderModal/BidOrderModal.js';
-import { S } from './BidModal.js';
+import { S } from './DirectBidModal.js';
 
-const BidModal = ({
-  modalOpen,
-  setModalOpen,
+const DirectBidModal = ({
   detail,
-  setOrderOpen,
-  orderOpen,
   event_token,
   coast,
   setCoast,
   ticket,
   setTicket,
+  setDirectOrderOpen,
+  directOrderOpen,
+  directBidOpen,
+  setDirectBidOpen,
+  isDirect,
+  setIsDirect,
+  setOrderOpen,
+  setModalOpen,
 }) => {
   const [isLackOfToken, setIsLackOfToken] = useState(false);
   const [isValidBtn, setIsValidBtn] = useState(false);
   const inputRef = useRef();
   const outside = useRef();
 
-  const handleBtn = () => {
-    if (coast > event_token) {
-      setIsValidBtn(false);
-    } else {
-      setIsValidBtn(true);
-    }
-    setOrderOpen(true);
-  };
-
   const handleHopePrice = e => {
     const newCoast = parseInt(e.target.value);
     setCoast(newCoast);
   };
 
-  const TotalCoast = coast * ticket;
+  const TotalCoast = detail.highestToken * ticket;
 
   useEffect(() => {
     if (TotalCoast > event_token) {
@@ -67,6 +60,12 @@ const BidModal = ({
     }
   };
 
+  const handleBtn = () => {
+    setDirectBidOpen(false);
+    setOrderOpen(true);
+    setIsDirect(true);
+  };
+
   useEffect(() => {
     document.body.style.cssText = `
       position: fixed; 
@@ -83,7 +82,7 @@ const BidModal = ({
   return (
     <S.BidModalContainer ref={outside}>
       <S.BidModalWrapper>
-        <S.CloseIcon onClick={() => setModalOpen(false)} />
+        <S.CloseIcon onClick={() => setDirectBidOpen(false)} />
         <S.BidModalWrap>
           <S.BidEventImg src={detail.thumbnail_images_url} alt="event" />
           <S.BidContentWrap>
@@ -104,23 +103,14 @@ const BidModal = ({
           <S.Divider />
         </div>
         <div>
-          <S.BidTitle>구매 희망가</S.BidTitle>
+          <S.BidTitle>즉시 구매가</S.BidTitle>
           <S.TokenInputWrap>
-            <S.TokenInput
-              ref={inputRef}
-              value={coast !== 0 ? coast.toString() : ''}
-              type="number"
-              onChange={handleHopePrice}
-            />
-            {!coast && (
-              <S.Placeholder
-                onClick={() => {
-                  inputRef?.current?.focus();
-                }}
-              >
-                희망가 입력
-              </S.Placeholder>
-            )}
+            <S.TokenInputWrap>
+              <S.TokenInput onChange={handleHopePrice}>
+                {TotalCoast}
+              </S.TokenInput>
+            </S.TokenInputWrap>
+
             <S.BidLargeToken
               src="./images/common/kulture-token.png"
               alt="token"
@@ -146,12 +136,10 @@ const BidModal = ({
             <p>{`${Math.floor(event_token)}`}</p>
           </S.BidSaveToken>
         </S.BidContainer>
-        <S.DisableBidBtn disabled={!isValidBtn} onClick={handleBtn}>
-          구매 입찰 계속
-        </S.DisableBidBtn>
+        <S.DisableBidBtn onClick={handleBtn}>바로 입찰 계속</S.DisableBidBtn>
       </S.BidModalWrapper>
     </S.BidModalContainer>
   );
 };
 
-export default BidModal;
+export default DirectBidModal;

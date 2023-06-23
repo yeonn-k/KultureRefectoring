@@ -1,33 +1,128 @@
 import React, { useEffect, useState } from 'react';
-import { S } from './EventDetail.js';
 import Chart from './Chart.jsx';
 import Map from './Map.jsx';
 import EventCard from '../../components/EventCard/EventCard.jsx';
 import BidModal from '../../components/BidModal/BidModal.jsx';
-import useGetFetch from '../../hooks/useGetFetch.js';
-import OrderModal from '../../components/BidOrderModal/BidOrderModal.jsx';
+import BidOrderModal from '../../components/BidOrderModal/BidOrderModal.jsx';
+import DirectBidModal from '../../components/DirectBidModal/DirectBidModal.jsx';
+import ReviewCard from '../../components/ReviewCard/ReviewCard.jsx';
+import { BASE_URL_H, BASE_URL_K } from '../../config';
+import { S } from './EventDetail.js';
 
 const EventDetail = () => {
   const [btnText, setBtnText] = useState('기부하고 바로 구매');
   const [modalOpen, setModalOpen] = useState(false);
   const [orderOpen, setOrderOpen] = useState(false);
+  const [coast, setCoast] = useState(0);
+  const [ticket, setTicket] = useState(1);
+  const [eventList, setEventList] = useState({});
+  const [detail, setDetail] = useState({});
+  const [userInfo, setUserInfo] = useState({});
+  const [bidToken, setBidToken] = useState([]);
+  const [totalToken, setTotalToken] = useState(0);
+  const [directOrderOpen, setDirectOrderOpen] = useState(false);
+  const [directBidOpen, setDirectBidOpen] = useState(false);
+  const [reviewList, setReviewList] = useState([]);
+  const [isDirect, setIsDirect] = useState(false);
 
-  const [bid] = useGetFetch('/data/Graphdata.json');
-  const [event] = useGetFetch('/data/DetailEventSample.json');
-  const [detail] = useGetFetch('/data/DetailSample.json');
+  const userToken =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiaWF0IjoxNjg3MzQ4OTQyLCJleHAiOjE2ODgxMjY1NDJ9.f_pAeolhoGvPe1df13KLRbQGN7AwHbSPrEXge9yB-4s';
+
+  localStorage.setItem('userToken', userToken);
+
+  //카드 정보 GET
+  useEffect(() => {
+    fetch(`${BASE_URL_K}/events`)
+      .then(res => res.json())
+      .then(data => {
+        return setEventList(data.data);
+      });
+  }, []);
+
+  //상세 정보 GET
+  useEffect(() => {
+    fetch(`${BASE_URL_K}/events/1`)
+      .then(res => res.json())
+      .then(data => {
+        setDetail(data[0]);
+        setBidToken(data[0].data);
+      });
+  }, []);
+
+  // 리뷰 정보 GET
+  useEffect(() => {
+    fetch(`${BASE_URL_K}/review/1`)
+      .then(res => res.json())
+      .then(data => {
+        return setReviewList(data);
+      });
+  }, []);
+
+  //유저 정보 GET
+  useEffect(() => {
+    fetch(`${BASE_URL_K}/users`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: userToken,
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        setUserInfo(data[0]);
+      })
+      .catch(error => {
+        console.log('Error:', error);
+      });
+  }, []);
+
+  const listData = reviewList.map(item => ({
+    id: item.id,
+    eventName: item.name,
+    thumbnail_images_url: item.image_url,
+    eventStartDate: item.event_start_date,
+    locationName: item.location,
+  }));
+
+  const { event_token, email, nickname } = userInfo;
+
+  const chartBidData = [
+    {
+      id: 'TOKEN',
+      data: bidToken,
+    },
+  ];
+
+  //그래프 x축 변경
+  const startDate = new Date(detail?.event_start_date);
+  const endDate = new Date(detail?.auction_end_date);
+  const formatDateTime = date => {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    const hour = date.getHours().toString().padStart(2, '0');
+    const minute = date.getMinutes().toString().padStart(2, '0');
+    const period = hour < 12 ? 'AM' : 'PM';
+
+    return `${year}-${month}-${day} ${hour}:${minute} ${period}`;
+  };
+
+  const startTime = formatDateTime(startDate);
+  const endTime = formatDateTime(endDate);
 
   const handleMouse = isMouseOver => {
     setBtnText(
       isMouseOver ? (
         <>
           <S.DetailToken src="./images/common/kulture-token.png" alt="token" />
-          {detail?.highest_events_token}토큰
+          {detail?.highestToken}토큰
         </>
       ) : (
         '기부하고 바로 구매'
       )
     );
   };
+
   const MOCK_DATA = [
     {
       title: '장소',
@@ -35,7 +130,7 @@ const EventDetail = () => {
     },
     {
       title: '일시',
-      value: detail?.event_start_date,
+      value: startTime,
     },
     {
       title: '이벤트 설명',
@@ -43,15 +138,14 @@ const EventDetail = () => {
     },
     {
       title: '입찰 마감',
-      value: detail?.auction_end_date,
+      value: endTime,
     },
     {
       title: '남은 티켓',
-      value: ` ${detail?.remaining_quantity} / ${detail?.total_quantitiy} 매`,
+      value: ` ${detail?.remaining_quantity} / ${detail?.total_quantity} 매`,
     },
   ];
-
-  if (!bid?.[0]?.id) return null;
+  // if (!bid?.[0]?.id) return null;
 
   return (
     <S.DetailContainer>
@@ -62,13 +156,71 @@ const EventDetail = () => {
           setModalOpen={setModalOpen}
           orderOpen={orderOpen}
           setOrderOpen={setOrderOpen}
+          event_token={event_token}
+          coast={coast}
+          setCoast={setCoast}
+          ticket={ticket}
+          setTicket={setTicket}
+          isDirect={isDirect}
+          setIsDirect={setIsDirect}
         />
       )}
       {orderOpen && (
-        <OrderModal
+        <BidOrderModal
           detail={detail}
           orderOpen={orderOpen}
           setOrderOpen={setOrderOpen}
+          nickname={nickname}
+          email={email}
+          coast={coast}
+          totalToken={totalToken}
+          setTotalToken={setTotalToken}
+          ticket={ticket}
+          setTicket={setTicket}
+          setModalOpen={setModalOpen}
+          setCoast={setCoast}
+          isDirect={isDirect}
+          setIsDirect={setIsDirect}
+        />
+      )}
+      {directBidOpen && (
+        <DirectBidModal
+          detail={detail}
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+          orderOpen={orderOpen}
+          setOrderOpen={setOrderOpen}
+          event_token={event_token}
+          coast={coast}
+          setCoast={setCoast}
+          ticket={ticket}
+          setTicket={setTicket}
+          directOrderOpen={directOrderOpen}
+          setDirectOrderOpen={setDirectOrderOpen}
+          directBidOpen={directBidOpen}
+          setDirectBidOpen={setDirectBidOpen}
+          isDirect={isDirect}
+          setIsDirect={setIsDirect}
+        />
+      )}
+      {directOrderOpen && (
+        <DirectOrderModal
+          detail={detail}
+          orderOpen={orderOpen}
+          setOrderOpen={setOrderOpen}
+          nickname={nickname}
+          email={email}
+          coast={coast}
+          totalToken={totalToken}
+          setTotalToken={setTotalToken}
+          ticket={ticket}
+          setTicket={setTicket}
+          setModalOpen={setModalOpen}
+          setCoast={setCoast}
+          directOrderOpen={directOrderOpen}
+          setDirectOrderOpen={setDirectOrderOpen}
+          directBidOpen={directBidOpen}
+          setDirectBidOpen={setDirectBidOpen}
         />
       )}
       <S.DetailWrap>
@@ -90,7 +242,7 @@ const EventDetail = () => {
 
           <S.StartPriceWrap>
             <S.StartPrice>입찰 시작가</S.StartPrice>
-            <S.StartPrice>{detail?.start_events_token}토큰</S.StartPrice>
+            <S.StartPrice>{detail?.startToken}토큰</S.StartPrice>
           </S.StartPriceWrap>
           <S.PriceWrap>
             <S.StartPrice>실시간 입찰가</S.StartPrice>
@@ -100,7 +252,9 @@ const EventDetail = () => {
                 alt="token"
               />
               <S.RealTimePrice>
-                {detail?.highest_events_token}토큰
+                {bidToken.length > 0
+                  ? bidToken[bidToken.length - 2].y + '토큰'
+                  : ''}
               </S.RealTimePrice>
             </div>
           </S.PriceWrap>
@@ -110,6 +264,7 @@ const EventDetail = () => {
             </S.BidingBtn>
 
             <S.InstantBtn
+              onClick={() => setDirectBidOpen(true)}
               onMouseOver={() => handleMouse(true)}
               onMouseLeave={() => handleMouse(false)}
             >
@@ -119,8 +274,9 @@ const EventDetail = () => {
 
           <S.ChartContainer>
             <S.DetailTitle>시세</S.DetailTitle>
+
             <S.DetailChart>
-              <Chart bid={bid} colors={{ scheme: 'nivo' }} />
+              <Chart bid={chartBidData} colors={{ scheme: 'nivo' }} />
             </S.DetailChart>
           </S.ChartContainer>
 
@@ -133,12 +289,31 @@ const EventDetail = () => {
         </S.DetailRight>
       </S.DetailWrap>
 
-      <S.WrapperCard>
-        {event.length &&
-          event.map(data => {
-            return <EventCard key={data.id} data={data} type="list" />;
-          })}
-      </S.WrapperCard>
+      <S.RecommnedWrap>
+        <S.RecommnedTitle>당신이 좋아할만한 이벤트</S.RecommnedTitle>
+        <S.WrapperCard>
+          {eventList.length &&
+            eventList.map(data => {
+              return <EventCard key={data.id} data={data} type="list" />;
+            })}
+        </S.WrapperCard>
+      </S.RecommnedWrap>
+      <S.ReviewWrapper>
+        <S.RecommnedTitle>리뷰</S.RecommnedTitle>
+        {listData.map(event => {
+          return (
+            <ReviewCard
+              key={event.id}
+              id={event.id}
+              thumbnail={event.thumbnail_images_url}
+              title={event.name}
+              location={event.location}
+              startDate={event.event_start_date}
+              endDate={event.auction_end_date}
+            />
+          );
+        })}
+      </S.ReviewWrapper>
     </S.DetailContainer>
   );
 };

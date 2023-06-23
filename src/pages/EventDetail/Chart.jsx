@@ -2,6 +2,14 @@ import { ResponsiveLine } from '@nivo/line';
 import { S } from './EventDetail.js';
 
 const Chart = ({ colors, bid }) => {
+  const processedData = bid.map(item => ({
+    ...item,
+    data: item.data.map(dataPoint => ({
+      ...dataPoint,
+      x: dataPoint.x.slice(0, 5),
+    })),
+  }));
+
   const theme = {
     axis: {
       stroke: 'darkgray',
@@ -43,7 +51,7 @@ const Chart = ({ colors, bid }) => {
 
   return (
     <ResponsiveLine
-      data={bid}
+      data={processedData}
       margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
       xScale={{ type: 'point' }}
       yScale={{

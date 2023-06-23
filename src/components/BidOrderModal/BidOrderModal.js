@@ -94,7 +94,6 @@ export const S = {
     border-radius: 10px;
     border: 3px solid #97fe67;
     background-color: #1c1b1b;
-    box-shadow: rgba(0, 0, 0, 0.8) 0 0 0 9999px;
   `,
 
   BidEventImg: styled.img`

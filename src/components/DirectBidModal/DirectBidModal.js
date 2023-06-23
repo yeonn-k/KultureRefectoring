@@ -118,7 +118,7 @@ export const S = {
     margin: 40px 0;
   `,
 
-  TokenInput: styled.input`
+  TokenInput: styled.div`
     background-color: transparent;
     color: white;
     appearance: none;
@@ -131,15 +131,7 @@ export const S = {
     width: 100%;
     padding-left: 25px;
     z-index: 2;
-
-    ::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-    ::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
+    height: 30px;
   `,
 
   TokenInputWrap: styled.div`
