@@ -19,7 +19,7 @@ a, dl, dt, dd, ol, ul, li, form, label, table{
 }
 body{
     line-height: 1;
-    color: #FFFFFF;
+    color: #ebebeb;
     background-color: #1C1B1B;
     font-family: 'Pretendard';
 }

@@ -8,7 +8,8 @@
     "auction_end_date": "Jun 25, 2023",
     "quantity": 2,
     "bidding_events_token": 100,
-    "bid_status_code": "BID_PENDING"
+    "bid_status_code": "BID_PENDING",
+    "Image_url": "https://github.com/HaeJungg/project-image/blob/master/p2-Images/Festival/festival-9.jpg?raw=true"
   },
 
   {
@@ -20,7 +21,8 @@
     "auction_end_date": "Jun 25, 2023",
     "quantity": 3,
     "bidding_events_token": 200,
-    "bid_status_code": "BID_PENDING"
+    "bid_status_code": "BID_PENDING",
+    "Image_url": "https://github.com/HaeJungg/project-image/blob/master/p2-Images/Festival/festival-9.jpg?raw=true"
   },
 
   {
@@ -32,7 +34,8 @@
     "auction_end_date": "Jun 22, 2023",
     "quantity": 2,
     "bidding_events_token": 600,
-    "bid_status_code": "BID_PENDING"
+    "bid_status_code": "BID_PENDING",
+    "Image_url": "https://github.com/HaeJungg/project-image/blob/master/p2-Images/Festival/festival-9.jpg?raw=true"
   },
   {
     "bidId": 4,
@@ -43,7 +46,8 @@
     "auction_end_date": "Jun 25, 2023",
     "quantity": 1,
     "bidding_events_token": 500,
-    "bid_status_code": "BID_LOSING"
+    "bid_status_code": "BID_LOSING",
+    "Image_url": "https://github.com/HaeJungg/project-image/blob/master/p2-Images/Festival/festival-9.jpg?raw=true"
   },
 
   {
@@ -55,7 +59,8 @@
     "auction_end_date": "Jun 25, 2023",
     "quantity": 3,
     "bidding_events_token": 200,
-    "bid_status_code": "BID_LOSING"
+    "bid_status_code": "BID_LOSING",
+    "Image_url": "https://github.com/HaeJungg/project-image/blob/master/p2-Images/Festival/festival-9.jpg?raw=true"
   },
 
   {
@@ -67,7 +72,8 @@
     "auction_end_date": "Jun 22, 2023",
     "quantity": 2,
     "bidding_events_token": 600,
-    "bid_status_code": "BID_LOSING"
+    "bid_status_code": "BID_LOSING",
+    "Image_url": "https://github.com/HaeJungg/project-image/blob/master/p2-Images/Festival/festival-9.jpg?raw=true"
   },
   {
     "bidId": 7,
@@ -78,7 +84,8 @@
     "auction_end_date": "Jun 25, 2023",
     "quantity": 2,
     "bidding_events_token": 200,
-    "bid_status_code": "BID_WINNING"
+    "bid_status_code": "BID_WINNING",
+    "Image_url": "https://github.com/HaeJungg/project-image/blob/master/p2-Images/Festival/festival-9.jpg?raw=true"
   },
 
   {
@@ -90,7 +97,8 @@
     "auction_end_date": "Jun 25, 2023",
     "quantity": 3,
     "bidding_events_token": 200,
-    "bid_status_code": "BID_WINNING"
+    "bid_status_code": "BID_WINNING",
+    "Image_url": "https://github.com/HaeJungg/project-image/blob/master/p2-Images/Festival/festival-9.jpg?raw=true"
   },
 
   {
@@ -102,7 +110,8 @@
     "auction_end_date": "Jun 22, 2023",
     "quantity": 2,
     "bidding_events_token": 600,
-    "bid_status_code": "BID_WINNING"
+    "bid_status_code": "BID_WINNING",
+    "Image_url": "https://github.com/HaeJungg/project-image/blob/master/p2-Images/Festival/festival-9.jpg?raw=true"
   },
   {
     "bidId": 10,
@@ -113,7 +122,8 @@
     "auction_end_date": "Jun 25, 2023",
     "quantity": 1,
     "bidding_events_token": 500,
-    "bid_status_code": "BID_ACCEPTED"
+    "bid_status_code": "BID_ACCEPTED",
+    "Image_url": "https://github.com/HaeJungg/project-image/blob/master/p2-Images/Festival/festival-9.jpg?raw=true"
   },
 
   {
@@ -125,7 +135,8 @@
     "auction_end_date": "Jun 25, 2023",
     "quantity": 3,
     "bidding_events_token": 200,
-    "bid_status_code": "BID_ACCEPTED"
+    "bid_status_code": "BID_ACCEPTED",
+    "Image_url": "https://github.com/HaeJungg/project-image/blob/master/p2-Images/Festival/festival-9.jpg?raw=true"
   },
 
   {
@@ -137,6 +148,7 @@
     "auction_end_date": "Jun 22, 2023",
     "quantity": 2,
     "bidding_events_token": 600,
-    "bid_status_code": "BID_ACCEPTED"
+    "bid_status_code": "BID_ACCEPTED",
+    "Image_url": "https://github.com/HaeJungg/project-image/blob/master/p2-Images/Festival/festival-9.jpg?raw=true"
   }
 ]
