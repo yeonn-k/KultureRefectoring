@@ -31,8 +31,14 @@ const MENUS = [
   { id: 3, title: '내 토큰', path: '/token', icon: <M.MenuToken /> },
   {
     id: 4,
-    title: '입찰/구매내역',
+    title: '내 입찰내역',
     path: '/auction',
     icon: <M.MenuAuction />,
+  },
+  {
+    id: 5,
+    title: '내 이벤트',
+    path: '/order',
+    icon: <M.MenuOrder />,
   },
 ];

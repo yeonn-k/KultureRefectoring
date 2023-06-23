@@ -1,0 +1,142 @@
+[
+  {
+    "bidId": 22,
+    "event_id": 1,
+    "name": "Pending",
+    "event_start_date": "Jul 27, 2023",
+    "location": "서울 송파구 올림픽공원",
+    "auction_end_date": "Jun 25, 2023",
+    "quantity": 2,
+    "bidding_events_token": 100,
+    "bid_status_code": "BID_PENDING"
+  },
+
+  {
+    "bidId": 2,
+    "event_id": 8,
+    "name": "Pending",
+    "event_start_date": "Aug 21, 2023",
+    "location": "Canggu Deus Ex Machina",
+    "auction_end_date": "Jun 25, 2023",
+    "quantity": 3,
+    "bidding_events_token": 200,
+    "bid_status_code": "BID_PENDING"
+  },
+
+  {
+    "bidId": 3,
+    "event_id": 10,
+    "name": "Pending",
+    "event_start_date": "Sep 6, 2023",
+    "location": "Opera House",
+    "auction_end_date": "Jun 22, 2023",
+    "quantity": 2,
+    "bidding_events_token": 600,
+    "bid_status_code": "BID_PENDING"
+  },
+  {
+    "bidId": 4,
+    "event_id": 4,
+    "name": "Losing",
+    "event_start_date": "Jul 28, 2023",
+    "location": "서울 송파구 올림픽공원",
+    "auction_end_date": "Jun 25, 2023",
+    "quantity": 1,
+    "bidding_events_token": 500,
+    "bid_status_code": "BID_LOSING"
+  },
+
+  {
+    "bidId": 5,
+    "event_id": 8,
+    "name": "Losing",
+    "event_start_date": "Aug 21, 2023",
+    "location": "Canggu Deus Ex Machina",
+    "auction_end_date": "Jun 25, 2023",
+    "quantity": 3,
+    "bidding_events_token": 200,
+    "bid_status_code": "BID_LOSING"
+  },
+
+  {
+    "bidId": 6,
+    "event_id": 10,
+    "name": "Losing",
+    "event_start_date": "Sep 6, 2023",
+    "location": "Opera House",
+    "auction_end_date": "Jun 22, 2023",
+    "quantity": 2,
+    "bidding_events_token": 600,
+    "bid_status_code": "BID_LOSING"
+  },
+  {
+    "bidId": 7,
+    "event_id": 4,
+    "name": "Winning",
+    "event_start_date": "Jul 28, 2023",
+    "location": "서울 송파구 올림픽공원",
+    "auction_end_date": "Jun 25, 2023",
+    "quantity": 2,
+    "bidding_events_token": 200,
+    "bid_status_code": "BID_WINNING"
+  },
+
+  {
+    "bidId": 8,
+    "event_id": 8,
+    "name": "Winning",
+    "event_start_date": "May 21, 2023",
+    "location": "Canggu Deus Ex Machina",
+    "auction_end_date": "Jun 25, 2023",
+    "quantity": 3,
+    "bidding_events_token": 200,
+    "bid_status_code": "BID_WINNING"
+  },
+
+  {
+    "bidId": 9,
+    "event_id": 10,
+    "name": "Winning",
+    "event_start_date": "Sep 6, 2023",
+    "location": "Opera House",
+    "auction_end_date": "Jun 22, 2023",
+    "quantity": 2,
+    "bidding_events_token": 600,
+    "bid_status_code": "BID_WINNING"
+  },
+  {
+    "bidId": 10,
+    "event_id": 4,
+    "name": "Accepted",
+    "event_start_date": "Jul 28, 2023",
+    "location": "서울 송파구 올림픽공원",
+    "auction_end_date": "Jun 25, 2023",
+    "quantity": 1,
+    "bidding_events_token": 500,
+    "bid_status_code": "BID_ACCEPTED"
+  },
+
+  {
+    "bidId": 11,
+    "event_id": 8,
+    "name": "Accepted",
+    "event_start_date": "Aug 21, 2023",
+    "location": "Canggu Deus Ex Machina",
+    "auction_end_date": "Jun 25, 2023",
+    "quantity": 3,
+    "bidding_events_token": 200,
+    "bid_status_code": "BID_ACCEPTED"
+  },
+
+  {
+    "bidId": 12,
+    "event_id": 10,
+    "name": "Accepted",
+    "event_start_date": "Sep 6, 2023",
+    "location": "Opera House",
+    "auction_end_date": "Jun 22, 2023",
+    "quantity": 2,
+    "bidding_events_token": 600,
+    "bid_status_code": "BID_ACCEPTED"
+  }
+]

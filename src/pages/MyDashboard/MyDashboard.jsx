@@ -7,17 +7,40 @@ import learnMoreIcon from '../../images/learn-more.png';
 import { M } from '../../components/My/My';
 import { T } from '../../components/Token';
 import { S } from './MyDashboard';
-import TicketModal from '../../components/TicketModal/TicketModal.jsx';
 
 const MyDashboard = () => {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({});
-  const [successList, setSuccessList] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [ticketList, setTicketList] = useState([]);
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-    document.body.style.overflow = 'hidden';
+  const [orderList, setOrderList] = useState([]);
+  const [bidList, setBidList] = useState([]);
+
+  const handleMakeOrder = (bidId, event_id, bidding_events_token, quantity) => {
+    const bidData = {
+      bidId: bidId,
+      eventId: event_id,
+      quantity: quantity,
+      totalEventToken: bidding_events_token * quantity,
+    };
+
+    if (event_token < bidData.totalEventToken) {
+      alert('토큰이 부족해요!');
+      return;
+    }
+    fetch(`${APIS.order}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('accessToken'),
+      },
+      body: JSON.stringify(bidData),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.message === 'ORDER_COMPLETED') {
+          window.location.reload();
+          alert('구매가 완료되었어요!');
+        }
+      });
   };
 
   useEffect(() => {
@@ -29,7 +52,9 @@ const MyDashboard = () => {
       },
     })
       .then(res => res.json())
-      .then(data => setUserInfo(data[0]));
+      .then(data => {
+        setUserInfo(data[0]);
+      });
   }, []);
 
   //userInfo Mock Data
@@ -41,25 +66,69 @@ const MyDashboard = () => {
   //     });
   // }, []);
 
-  //biddingSuccessful Mock Data
   useEffect(() => {
-    fetch('data/biddingSuccessful.json')
+    fetch(`${APIS.order}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('accessToken'),
+      },
+    })
       .then(res => res.json())
       .then(data => {
-        setSuccessList(data);
+        console.log(data);
+        setOrderList(data);
       });
   }, []);
 
-  //ticketList Mock Data
   useEffect(() => {
-    fetch('data/ticketList.json')
+    fetch(`${APIS.bid}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('accessToken'),
+      },
+    })
       .then(res => res.json())
       .then(data => {
-        setTicketList(data.list);
+        setBidList(data);
       });
   }, []);
+
+  //bid Mock Data
+  // useEffect(() => {
+  //   fetch('data/bidList.json')
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       setBidList(data);
+  //     });
+  // }, []);
 
   const { event_token } = userInfo;
+  const bidPending = bidList.filter(
+    obj => obj.bid_status_code === 'BID_PENDING'
+  );
+  const bidWinning = bidList.filter(
+    obj => obj.bid_status_code === 'BID_WINNING'
+  );
+  const bidWinningValid = bidWinning.filter(obj => {
+    const startDate = new Date(obj.event_start_date);
+    return startDate > new Date();
+  });
+
+  const bidAccepted = bidList.filter(
+    obj => obj.bid_status_code === 'BID_ACCEPTED'
+  );
+  const bidLosing = bidList.filter(obj => obj.event_start_date > new Date());
+
+  const donation = () => {
+    const payments = orderList.map(item => item.total_event_token);
+    let sum = 0;
+    payments.forEach(num => {
+      sum += Math.floor(num);
+    });
+    return sum * 0.1 * 1000;
+  };
 
   return (
     <>
@@ -69,103 +138,6 @@ const MyDashboard = () => {
         <My />
 
         <M.MainContainer>
-          <M.SectionWrapper>
-            <M.SectionTitleWrapper>
-              <M.Text size="22px" weight="600">
-                내 입찰 현황
-              </M.Text>
-              <M.LearnMoreBtn
-                src={learnMoreIcon}
-                onClick={() => navigate('/auction')}
-              />
-            </M.SectionTitleWrapper>
-            <S.AuctionBoxWrapper>
-              <S.AuctionBoxIP>
-                <S.StatusBox>
-                  <M.Text size="16px" weight="500">
-                    입찰 진행 중
-                  </M.Text>
-                  <S.AuctionIP />
-                </S.StatusBox>
-                <S.TextUnit>
-                  <M.Text size="70px" weight="600">
-                    8
-                  </M.Text>
-                  <M.Text size="20px" weight="500">
-                    건
-                  </M.Text>
-                </S.TextUnit>
-              </S.AuctionBoxIP>
-              <S.AuctionBoxDone>
-                <S.StatusBox>
-                  <M.Text size="16px" weight="500" col="kultureGreen">
-                    낙찰 성공
-                  </M.Text>
-                  <S.AuctionDone />
-                </S.StatusBox>
-                <S.TextUnit>
-                  <M.Text size="70px" weight="600" col="kultureGreen">
-                    17
-                  </M.Text>
-                  <M.Text size="20px" weight="500" col="kultureGreen">
-                    건
-                  </M.Text>
-                </S.TextUnit>
-              </S.AuctionBoxDone>
-              <S.AuctionBoxFail>
-                <S.StatusBox>
-                  <M.Text size="16px" weight="500" col="lightGrey">
-                    낙찰 실패
-                  </M.Text>
-                  <S.AuctionFail />
-                </S.StatusBox>
-                <S.TextUnit>
-                  <M.Text size="70px" weight="600" col="lightGrey">
-                    2
-                  </M.Text>
-                  <M.Text size="20px" weight="500" col="lightGrey">
-                    건
-                  </M.Text>
-                </S.TextUnit>
-              </S.AuctionBoxFail>
-            </S.AuctionBoxWrapper>
-          </M.SectionWrapper>
-
-          <M.SectionWrapper>
-            <M.SectionTitleWrapper>
-              <M.Text size="22px" weight="600">
-                낙찰 수락 대기
-              </M.Text>
-            </M.SectionTitleWrapper>
-            <S.SuccessBoxWrapper>
-              {successList.length === 0 ? (
-                <M.EmptyBox>낙찰 수락 대기중인 이벤트가 없어요!</M.EmptyBox>
-              ) : (
-                successList.map(({ id, title, date, location, price }) => {
-                  return (
-                    <S.SuccessBox key={id}>
-                      <M.Text size="18px" weight="500" width="220px;">
-                        {title}
-                      </M.Text>
-                      <M.Text size="16px" weight="400" width="300px">
-                        {date} ・ {location}
-                      </M.Text>
-
-                      <S.TokenUnit gap="5px" width="80px">
-                        <T.Token src={tokenImg} size="20px" />
-                        <M.Text size="18px" weight="600">
-                          {price.toLocaleString()}
-                        </M.Text>
-                      </S.TokenUnit>
-
-                      <M.CTABtn>구매 확정하기</M.CTABtn>
-                    </S.SuccessBox>
-                  );
-                })
-              )}
-            </S.SuccessBoxWrapper>
-          </M.SectionWrapper>
-
           <S.TokenDonationWrapper>
             <M.SectionWrapper>
               <M.SectionTitleWrapper>
@@ -197,52 +169,140 @@ const MyDashboard = () => {
                 </M.Text>
               </M.SectionTitleWrapper>
               <S.DonationBox>
+                <M.Text size="20px" weight="600">
+                  지금까지
+                </M.Text>
                 <M.Text size="35px" weight="600">
-                  200,000
+                  {donation().toLocaleString()}
                 </M.Text>
                 <M.Text size="20px" weight="600">
-                  원 기부했어요!
+                  원 기부했어요
                 </M.Text>
               </S.DonationBox>
             </M.SectionWrapper>
           </S.TokenDonationWrapper>
+          <M.SectionWrapper>
+            <M.SectionTitleWrapper>
+              <M.Text size="22px" weight="600">
+                내 입찰내역
+              </M.Text>
+              <M.LearnMoreBtn
+                src={learnMoreIcon}
+                onClick={() => navigate('/auction')}
+              />
+            </M.SectionTitleWrapper>
+            <S.AuctionBoxWrapper>
+              <S.AuctionBoxIP>
+                <S.StatusBox>
+                  <M.Text size="16px" weight="500">
+                    입찰 진행 중
+                  </M.Text>
+                  <S.AuctionIP />
+                </S.StatusBox>
+                <S.TextUnit>
+                  <M.Text size="70px" weight="600">
+                    {bidPending.length}
+                  </M.Text>
+                  <M.Text size="20px" weight="500">
+                    건
+                  </M.Text>
+                </S.TextUnit>
+              </S.AuctionBoxIP>
+              <S.AuctionBoxDone>
+                <S.StatusBox>
+                  <M.Text size="16px" weight="500" col="kultureGreen">
+                    낙찰 성공
+                  </M.Text>
+                  <S.AuctionDone />
+                </S.StatusBox>
+                <S.TextUnit>
+                  <M.Text size="70px" weight="600" col="kultureGreen">
+                    {bidWinning.length + bidAccepted.length}
+                  </M.Text>
+                  <M.Text size="20px" weight="500" col="kultureGreen">
+                    건
+                  </M.Text>
+                </S.TextUnit>
+              </S.AuctionBoxDone>
+              <S.AuctionBoxFail>
+                <S.StatusBox>
+                  <M.Text size="16px" weight="500" col="lightGrey">
+                    낙찰 실패
+                  </M.Text>
+                  <S.AuctionFail />
+                </S.StatusBox>
+                <S.TextUnit>
+                  <M.Text size="70px" weight="600" col="lightGrey">
+                    {bidLosing.length}
+                  </M.Text>
+                  <M.Text size="20px" weight="500" col="lightGrey">
+                    건
+                  </M.Text>
+                </S.TextUnit>
+              </S.AuctionBoxFail>
+            </S.AuctionBoxWrapper>
+          </M.SectionWrapper>
 
           <M.SectionWrapper>
             <M.SectionTitleWrapper>
               <M.Text size="22px" weight="600">
-                내 티켓
+                낙찰 수락 대기
               </M.Text>
             </M.SectionTitleWrapper>
-
-            <S.TicketBoxWrapper>
-              {ticketList.length === 0 ? (
-                <M.EmptyBox>유효한 티켓이 없어요!</M.EmptyBox>
+            <S.BidBoxWrapper>
+              {bidWinningValid.length === 0 ? (
+                <M.EmptyBox>낙찰 수락 대기중인 이벤트가 없어요!</M.EmptyBox>
               ) : (
-                ticketList.map(
-                  ({ id, name, image_url, location, event_start_date }) => {
-                    return (
-                      <S.TicketBox key={id}>
-                        <S.TicketImage src={image_url} />
-                        <S.TicketInfo>
-                          <M.Text size="22px" weight="500">
-                            {name}
+                bidWinningValid.map(
+                  ({
+                    bidId,
+                    name,
+                    location,
+                    event_start_date,
+                    quantity,
+                    event_id,
+                    bid_status_code,
+                    bidding_events_token,
+                  }) => {
+                    if (bid_status_code !== 'BID_WINNING') {
+                      return null;
+                    } else
+                      return (
+                        <S.BidBox key={bidId}>
+                          <M.Text size="18px" weight="500" width="250px;">
+                            {name} ・ {quantity}매
                           </M.Text>
-                          <M.Text size="16px" weight="400">
+                          <M.Text size="16px" weight="400" width="300px">
                             {event_start_date} ・ {location}
                           </M.Text>
-                        </S.TicketInfo>
-                        <M.CTABtn onClick={handleOpenModal}>
-                          티켓 확인하기
-                        </M.CTABtn>
-                        {isModalOpen ? (
-                          <TicketModal setIsModalOpen={setIsModalOpen} />
-                        ) : null}
-                      </S.TicketBox>
-                    );
+
+                          <S.TokenUnit gap="5px" width="80px">
+                            <T.Token src={tokenImg} size="20px" />
+                            <M.Text size="18px" weight="600">
+                              {(
+                                quantity * bidding_events_token
+                              ).toLocaleString()}
+                            </M.Text>
+                          </S.TokenUnit>
+
+                          <M.CTABtn
+                            onClick={() => {
+                              handleMakeOrder(
+                                bidId,
+                                event_id,
+                                bidding_events_token,
+                                quantity
+                              );
+                            }}
+                          >
+                            구매 확정하기
+                          </M.CTABtn>
+                        </S.BidBox>
+                      );
                   }
                 )
               )}
-            </S.TicketBoxWrapper>
+            </S.BidBoxWrapper>
           </M.SectionWrapper>
         </M.MainContainer>
       </M.Container>

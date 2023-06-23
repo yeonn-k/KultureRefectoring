@@ -115,7 +115,7 @@ export const S = {
     gap: 10px;
     width: 450px;
     height: 200px;
-    padding: 0;
+    padding: 0 70px;
     border-radius: 10px;
     background-color: ${props => props.theme.darkGrey};
   `,

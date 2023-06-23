@@ -6,7 +6,7 @@ import { S } from './MyAuction';
 const MyAuction = () => {
   return (
     <>
-      <M.Title>입찰/구매내역</M.Title>
+      <M.Title>내 입찰내역</M.Title>
 
       <M.Container>
         <My />
@@ -16,7 +16,7 @@ const MyAuction = () => {
               내역
             </M.Text>
             <S.HistoryBoxWrapper>
-              <M.EmptyBox>아직 입찰/구매내역이 없어요!</M.EmptyBox>
+              <M.EmptyBox>아직 입찰내역이 없어요!</M.EmptyBox>
             </S.HistoryBoxWrapper>
           </M.SectionWrapper>
         </M.MainContainer>

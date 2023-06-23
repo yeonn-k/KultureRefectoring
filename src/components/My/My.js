@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { MdGridView, MdAccountCircle } from 'react-icons/md';
+import { MdGridView, MdAccountCircle, MdHistory } from 'react-icons/md';
 import { LuDatabase, LuTicket } from 'react-icons/lu';
 import { Mixin } from '../../styles/mixin';
 
@@ -24,6 +24,21 @@ export const M = {
     font-weight: 600;
     color: ${props => props.theme.black};
     background-color: ${props => props.theme.kultureGreen};
+    border-radius: 10px;
+    &:hover {
+      cursor: pointer;
+    }
+  `,
+
+  CTABtnSecondary: styled.div`
+    ${Mixin.flexCenter};
+    padding: 5px 20px;
+    height: 40px;
+    font-size: 18px;
+    font-weight: 600;
+    color: ${props => props.theme.kultureGreen};
+    background-color: transparent;
+    border: 3px solid ${props => props.theme.kultureGreen};
     border-radius: 10px;
     &:hover {
       cursor: pointer;
@@ -90,7 +105,13 @@ export const M = {
     color: ${props => props.theme.white};
   `,
 
-  MenuAuction: styled(LuTicket)`
+  MenuAuction: styled(MdHistory)`
+    margin-right: 15px;
+    font-size: 25px;
+    color: ${props => props.theme.white};
+  `,
+
+  MenuOrder: styled(LuTicket)`
     margin-right: 15px;
     font-size: 25px;
     color: ${props => props.theme.white};

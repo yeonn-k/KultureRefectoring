@@ -12,6 +12,7 @@ import MyAuction from './pages/MyAuction/MyAuction.jsx';
 import Home from './pages/Home/Home.jsx';
 import Callback from './pages/Callback/Callback.jsx';
 import Reviews from './pages/Reviews/Reviews.jsx';
+import MyOrder from './pages/MyOrder/MyOrder.jsx';
 
 const Router = () => {
   return (
@@ -28,6 +29,7 @@ const Router = () => {
         <Route path="/auction" element={<MyAuction />} />
         <Route path="/oauth/callback/kakao" element={<Callback />} />
         <Route path="/reviews" element={<Reviews />} />
+        <Route path="order" element={<MyOrder />} />
       </Routes>
       <Footer />
     </BrowserRouter>
