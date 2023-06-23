@@ -71,6 +71,7 @@ const Nav = () => {
               >
                 WISHLIST
               </S.NavWishlist>
+              <S.NavTitle to="/reviews">REVIEWS</S.NavTitle>
               <S.NavSearch src="./images/common/Search.png" alt="Search" />
             </S.NavTitleWrap>
           </li>
