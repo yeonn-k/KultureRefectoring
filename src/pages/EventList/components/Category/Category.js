@@ -21,6 +21,7 @@ export const S = {
 
   SubCategories: styled.div`
     height: 21px;
+    width: 100px;
   `,
 
   CheckIcon: styled.img`
@@ -32,13 +33,22 @@ export const S = {
     }
   `,
 
-  SubCategory: styled.span`
+  SubCategoryTrue: styled.span`
     font-weight: 600;
-    color: #fff;
-    opacity: 0.5;
+    color: ${props => props.theme.kultureGreen};
+    :hover {
+      cursor: pointer;
+      color: ${props => props.theme.kultureGreen};
+    }
+  `,
+
+  SubCategoryFalse: styled.span`
+    font-weight: 600;
+    color: #bebebe;
 
     :hover {
       cursor: pointer;
+      color: ${props => props.theme.kultureGreen};
     }
   `,
 };

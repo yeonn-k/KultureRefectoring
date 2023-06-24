@@ -2,21 +2,24 @@
   {
     "id": 1,
     "mainCategory": "카테고리",
-    "subCategory": ["페스티벌", "콘서트", "퍼포먼스", "클래식"]
+    "subCategory": ["페스티벌", "콘서트", "퍼포먼스", "클래식"],
+    "key": "categoryId"
   },
   {
     "id": 2,
     "mainCategory": "나이",
-    "subCategory": ["성인"]
+    "subCategory": ["전체", "성인"],
+    "key": "ageRange"
   },
   {
-    "id": 1,
+    "id": 3,
     "mainCategory": "국가",
-    "subCategory": ["국내", "미국", "호주", "일본"]
+    "subCategory": ["국내", "미국", "호주", "일본"],
+    "key": "countryId"
   },
   {
-    "id": 1,
-    "mainCategory": "token",
+    "id": 4,
+    "mainCategory": "입찰가",
     "subCategory": ""
   }
 ]

@@ -6,30 +6,30 @@ import { useState } from 'react';
 const EventCard = ({
   data,
   type,
-  cardData,
-  setCardData,
   handleChecked,
-
+  handleDeleteOne,
   checkList,
 }) => {
-  const { id, title, description, image, token, time, quantity } = data;
-  const [isLiked, setIsLiked] = useState(false);
-
-  const handleDeleteOne = () => {
-    setIsLiked(true);
-    setCardData(cardData.filter(el => el.id !== id));
-  };
+  const {
+    id,
+    eventName,
+    thumbnail_images_url,
+    startToken,
+    eventStartDate,
+    locationName,
+    remaining_quantity,
+  } = data;
 
   return (
     <S.EventCard>
-      <S.EventImage image={image}>
+      <S.EventImage image={thumbnail_images_url}>
         <S.Heart
           src={
             type !== 'wishlist'
               ? '/images/common/like-false.png'
               : '/images/common/like-true.png'
           }
-          onClick={handleDeleteOne}
+          // onClick={() => handleDeleteOne(id)}
         />
         {type !== 'wishlist' ? (
           ''
@@ -45,12 +45,15 @@ const EventCard = ({
         )}
         <S.TokenBox>
           <S.Token src="/images/common/kulture-token.png" />
-          <span>{token}토큰</span>
+          <span>{startToken}토큰</span>
         </S.TokenBox>
       </S.EventImage>
-      <S.EventTitle>{title}</S.EventTitle>
+      <S.EventTitle>{eventName}</S.EventTitle>
       {type !== 'wishlist' ? (
-        <S.EventDescription>{description}</S.EventDescription>
+        <S.EventDescription>
+          <S.EventDescription>{eventStartDate}</S.EventDescription>
+          <S.EventDescription>{locationName}</S.EventDescription>
+        </S.EventDescription>
       ) : (
         <>
           <S.EventTime>
@@ -58,14 +61,14 @@ const EventCard = ({
               <S.EventIcon src="/images/Wishlist/alarm_on.png" />
               <span>입찰 마감 남은 시간</span>
             </div>
-            <div>{time}</div>
+            <div>{''}</div>
           </S.EventTime>
           <S.EventDescription>
             <div>
               <S.EventIcon src="/images/Wishlist/Vector.png" />
               <span>남은 티켓 수</span>
             </div>
-            <span>{quantity}</span>
+            <span>{remaining_quantity}</span>
           </S.EventDescription>
         </>
       )}

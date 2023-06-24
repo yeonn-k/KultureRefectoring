@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Mixin } from '../../styles/mixin';
 
 export const S = {
   Container: styled.div`
@@ -90,10 +91,8 @@ export const S = {
   MoreText: styled.div`
     position: absolute;
     left: 50%;
-    margin-left: 37px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-left: -37px;
+    ${Mixin.flexCenter}
     width: 74px;
     height: 30px;
     border: 1px solid ${props => props.theme.kultureGreen};

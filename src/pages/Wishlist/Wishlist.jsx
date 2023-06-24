@@ -11,6 +11,8 @@ const Wishlist = () => {
 
   const [checkList, setCheckList] = useState([]);
   const [deleteAll, setdeleteAll] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+  const [isDelete, setIsDelete] = useState(false);
 
   const handleChecked = id => {
     if (checkList.includes(id)) {
@@ -25,12 +27,14 @@ const Wishlist = () => {
     setCardData([]);
   };
 
-  const [isDelete, setIsDelete] = useState(false);
+  const handleDeleteOne = id => {
+    setIsLiked(true);
+    setCardData(cardData.filter(el => el.id !== id));
+  };
 
   const handleDeleteModal = () => {
     setIsDelete(prev => !prev);
   };
-  console.log(isDelete);
 
   const handleDeleteChecked = () => {
     if (checkList !== []) {
@@ -44,7 +48,6 @@ const Wishlist = () => {
       .then(response => response.json())
       .then(result => setCardData(result));
   }, []);
-
   if (!cardData) return null;
 
   return (
@@ -68,6 +71,7 @@ const Wishlist = () => {
                 type="wishlist"
                 cardData={cardData}
                 setCardData={setCardData}
+                handleDeleteOne={handleDeleteOne}
                 handleChecked={handleChecked}
                 handleDeleteChecked={handleDeleteChecked}
                 checkList={checkList}

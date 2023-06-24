@@ -19,7 +19,7 @@ const Router = () => {
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/list" element={<EventList />} />
+        <Route path="/events" element={<EventList />} />
         <Route path="/event" element={<EventDetail />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/dashboard" element={<MyDashboard />} />

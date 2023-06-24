@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Mixin } from '../../styles/mixin';
 
 export const CalenderBox = styled.div`
   width: 400px;
@@ -51,16 +52,16 @@ export const CalenderBox = styled.div`
 
   .react-calendar__tile--active:enabled:hover,
   .react-calendar__tile--active:enabled:focus {
-    background-color: #97fe67;
+    background-color: ${props => props.theme.kultureGreen};
 
     abbr {
-      color: #97fe67;
+      color: ${props => props.theme.kultureGreen};
     }
   }
 
   .react-calendar__tile--active {
-    background-color: #97fe67;
-    color: #97fe67;
+    background-color: ${props => props.theme.kultureGreen};
+    color: ${props => props.theme.kultureGreen};
   }
 
   .react-calendar__tile--now {
@@ -97,7 +98,7 @@ export const CalenderBox = styled.div`
 
   .react-calendar__tile:enabled:hover,
   .react-calendar__tile:enabled:focus {
-    background-color: #e6e6e6;
+    /* background-color: #e6e6e6; */
     color: #1c1b1b;
   }
 

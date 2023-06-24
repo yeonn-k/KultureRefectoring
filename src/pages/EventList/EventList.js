@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components';
 import { Mixin } from '../../styles/mixin';
+import { hexToRgb } from '@material-ui/core';
+import { getByDisplayValue } from '@testing-library/react';
 
 export const S = {
   Container: styled.div`
@@ -59,22 +61,16 @@ export const S = {
 
   FilterBox: styled.div`
     width: 860px;
-    height: 20px;
-    margin-bottom: 30px;
-  `,
-
-  Filter: styled.div`
-    float: right;
-  `,
-
-  FilterIcon: styled.div`
-    float: right;
-    width: 36px;
     height: 26px;
-    background-image: url('/images/EventList/filterIcon.png');
-    background-size: cover;
-    background-position-y: -3px;
+    margin-bottom: 34px;
   `,
+
+  FilterContent: styled.div`
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+  `,
+  Filter: styled.div``,
 
   WrapperCard: styled.div`
     display: flex;
@@ -86,7 +82,7 @@ export const S = {
   More: styled.div`
     margin: 0 auto;
     position: relative;
-    width: 1440px;
+    width: 1324px;
     height: 40px;
     margin-top: 40px;
   `,
@@ -102,10 +98,8 @@ export const S = {
   MoreText: styled.div`
     position: absolute;
     left: 50%;
-    margin-left: 37px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-left: -37px;
+    ${Mixin.flexCenter}
     width: 74px;
     height: 30px;
     border: 1px solid ${props => props.theme.kultureGreen};

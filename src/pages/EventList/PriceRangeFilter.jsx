@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useLocation, useSearchParams } from 'react-router-dom';
+
 import {
   makeStyles,
   ThemeProvider,
@@ -26,9 +28,8 @@ function valuetext(value) {
   return `${value}`;
 }
 
-export const PriceRangeFilter = () => {
+export const PriceRangeFilter = ({ value, setValue }) => {
   const classes = useStyles();
-  const [value, setValue] = useState([100, 200]);
 
   const handleChange = (e, newValue) => {
     setValue(newValue);
@@ -46,6 +47,7 @@ export const PriceRangeFilter = () => {
           getAriaValueText={valuetext}
           min={0}
           max={300}
+          step={10}
         />
       </ThemeProvider>
     </div>

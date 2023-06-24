@@ -26,7 +26,8 @@ export const S = {
 
   EventDescription: styled.div`
     display: flex;
-    justify-content: space-between; //grid
+    margin-right: 10px;
+    /* justify-content: space-between;  */
     align-items: center;
     font-size: 16px;
     font-weight: 400;
