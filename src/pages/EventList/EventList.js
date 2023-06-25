@@ -1,9 +1,12 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Mixin } from '../../styles/mixin';
-import { hexToRgb } from '@material-ui/core';
-import { getByDisplayValue } from '@testing-library/react';
 
 export const S = {
+  EventList: styled.div`
+    width: 1324px;
+    margin: 0 auto;
+  `,
+
   Container: styled.div`
     display: flex;
     width: 1324px;
@@ -12,7 +15,10 @@ export const S = {
   `,
 
   ContainerLeft: styled.div`
+    position: sticky;
+    top: 170px;
     width: 400px;
+    height: 900px;
     margin-right: 64px;
     margin-top: 60px;
   `,
@@ -84,20 +90,20 @@ export const S = {
     position: relative;
     width: 1324px;
     height: 40px;
-    margin-top: 40px;
+    margin-top: 80px;
   `,
 
   MoreLine: styled.div`
     position: absolute;
     top: 15px;
-    width: 1324px;
+    width: 860px;
     height: 1px;
     background-color: ${props => props.theme.kultureGreen};
   `,
 
   MoreText: styled.div`
     position: absolute;
-    left: 50%;
+    left: 430px;
     margin-left: -37px;
     ${Mixin.flexCenter}
     width: 74px;

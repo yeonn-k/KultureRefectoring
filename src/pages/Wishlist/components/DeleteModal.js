@@ -13,7 +13,7 @@ export const S = {
     top: 38%;
     left: 50%;
     margin-left: -181px;
-    width: 27%;
+    width: 362px;
     height: 20%;
     background-color: rgba(35, 35, 35, 0.93);
     border-radius: 13px;

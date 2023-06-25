@@ -6,7 +6,6 @@ import { useSearchParams } from 'react-router-dom';
 const Category = ({ data, handleCategoryState }) => {
   const { mainCategory, subCategory, key } = data;
 
-  const [searchParams, setSearchParams] = useSearchParams();
   const [checkedCategory, setCheckedCategory] = useState([]);
 
   const handleCheckedCategory = id => {

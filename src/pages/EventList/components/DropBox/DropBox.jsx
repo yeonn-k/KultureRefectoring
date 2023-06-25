@@ -1,7 +1,7 @@
 import React from 'react';
 import { DROP_MENU } from '../../data/dropMenu';
 import { S } from './DropBox';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 const DropBox = ({ isOpenDropBox, setIsOpenDropBox }) => {
   const [searchParams, setSearchParams] = useSearchParams();

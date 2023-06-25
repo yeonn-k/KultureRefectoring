@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { S } from './EventCard';
-import { useState } from 'react';
 
 const EventCard = ({
   data,
@@ -9,15 +8,21 @@ const EventCard = ({
   handleChecked,
   handleDeleteOne,
   checkList,
+  setId,
+  wishlist,
+  setWishlist,
+  TOKEN,
+  wishlistId,
 }) => {
   const {
-    id,
+    event_id,
     eventName,
     thumbnail_images_url,
     startToken,
     eventStartDate,
     locationName,
     remaining_quantity,
+    auction_end_date,
   } = data;
 
   return (
@@ -25,30 +30,36 @@ const EventCard = ({
       <S.EventImage image={thumbnail_images_url}>
         <S.Heart
           src={
-            type !== 'wishlist'
-              ? '/images/common/like-false.png'
-              : '/images/common/like-true.png'
+            wishlistId.includes(event_id)
+              ? '/images/common/like-true.png'
+              : '/images/common/like-false.png'
           }
-          // onClick={() => handleDeleteOne(id)}
+          onClick={() => {
+            setId(wishlist, event_id);
+          }}
         />
+
         {type !== 'wishlist' ? (
           ''
         ) : (
           <S.Check
             src={
-              checkList.includes(id)
+              checkList.includes(event_id)
                 ? '/images/common/check-true.png'
                 : '/images/common/check-false.png'
             }
-            onClick={() => handleChecked(id)}
+            onClick={() => handleChecked(event_id)}
           />
         )}
+
         <S.TokenBox>
           <S.Token src="/images/common/kulture-token.png" />
           <span>{startToken}토큰</span>
         </S.TokenBox>
       </S.EventImage>
       <S.EventTitle>{eventName}</S.EventTitle>
+      <S.EventDescription>{auction_end_date}</S.EventDescription>
+
       {type !== 'wishlist' ? (
         <S.EventDescription>
           <S.EventDescription>{eventStartDate}</S.EventDescription>
@@ -61,15 +72,15 @@ const EventCard = ({
               <S.EventIcon src="/images/Wishlist/alarm_on.png" />
               <span>입찰 마감 남은 시간</span>
             </div>
-            <div>{''}</div>
+            <div>{auction_end_date}</div>
           </S.EventTime>
-          <S.EventDescription>
+          <S.WishlistEventDescription>
             <div>
               <S.EventIcon src="/images/Wishlist/Vector.png" />
               <span>남은 티켓 수</span>
             </div>
             <span>{remaining_quantity}</span>
-          </S.EventDescription>
+          </S.WishlistEventDescription>
         </>
       )}
     </S.EventCard>

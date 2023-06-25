@@ -27,7 +27,17 @@ export const S = {
   EventDescription: styled.div`
     display: flex;
     margin-right: 10px;
-    /* justify-content: space-between;  */
+    align-items: center;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21px;
+    margin-bottom: 5px;
+  `,
+
+  WishlistEventDescription: styled.div`
+    display: flex;
+    margin-right: 10px;
+    justify-content: space-between;
     align-items: center;
     font-size: 16px;
     font-weight: 400;

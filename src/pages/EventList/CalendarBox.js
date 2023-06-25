@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Mixin } from '../../styles/mixin';
 
 export const CalenderBox = styled.div`
   width: 400px;
@@ -98,7 +97,6 @@ export const CalenderBox = styled.div`
 
   .react-calendar__tile:enabled:hover,
   .react-calendar__tile:enabled:focus {
-    /* background-color: #e6e6e6; */
     color: #1c1b1b;
   }
 

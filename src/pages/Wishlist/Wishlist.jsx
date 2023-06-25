@@ -1,54 +1,123 @@
 import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import EventCard from '../../components/EventCard/EventCard.jsx';
+import { APIS } from '../../config.js';
+import fetchLiked from '../../hooks/fetchLiked.js';
 
 import { S } from './Wishlist';
 import 'react-calendar/dist/Calendar.css';
 import DeleteModal from './components/DeleteModal.jsx';
 
-const Wishlist = () => {
-  const [cardData, setCardData] = useState([]);
+const Wishlist = event_id => {
+  const TOKEN = localStorage.getItem('accessToken');
+
+  const [wishlist, setWishlist] = useState([]);
+
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [checkList, setCheckList] = useState([]);
+  const [wishlistId, setWishlistId] = useState([]);
   const [deleteAll, setdeleteAll] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
+  const [checkLiked, setCheckLiked] = useState('');
 
-  const handleChecked = id => {
-    if (checkList.includes(id)) {
-      setCheckList(checkList.filter(el => el !== id));
+  let limit = searchParams.get('limit');
+
+  const handleChecked = event_id => {
+    if (checkList.includes(event_id)) {
+      setCheckList(checkList.filter(el => el !== event_id));
     } else {
-      setCheckList([...checkList, id]);
+      setCheckList([...checkList, event_id]);
     }
   };
 
   const handleDeleteAll = () => {
     setdeleteAll(true);
-    setCardData([]);
+    setWishlist([]);
+
+    const url = `${APIS.wishlist}`;
+    const deleteCards = wishlistId.join(',');
+
+    fetch(`${url}/${deleteCards}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json;charset=urf-8',
+        Authorization: TOKEN,
+      },
+    }).then(response => {
+      if (response.ok) {
+      }
+    });
   };
 
   const handleDeleteOne = id => {
     setIsLiked(true);
-    setCardData(cardData.filter(el => el.id !== id));
+    setWishlist(wishlist.filter(el => el.id !== id));
   };
 
   const handleDeleteModal = () => {
     setIsDelete(prev => !prev);
   };
 
-  const handleDeleteChecked = () => {
+  const handleDeleteChecked = id => {
     if (checkList !== []) {
-      let copy = [...cardData];
-      setCardData(copy.filter(el => !checkList.includes(el.id)));
+      let copy = [...wishlist];
+      setWishlist(copy.filter(el => !checkList.includes(el.id)));
     }
+
+    const url = `${APIS.wishlist}`;
+    const deleteCards = checkList.join(',');
+
+    fetch(`${url}/${deleteCards}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json;charset=urf-8',
+        Authorization: TOKEN,
+      },
+    }).then(response => {
+      if (response.ok) {
+      }
+    });
   };
 
+  const handleMoreEvent = () => {
+    searchParams.set('limit', Number(limit) + 6);
+    setSearchParams(searchParams);
+  };
+
+  if (!limit) {
+    limit = 6;
+    setSearchParams({ limit });
+  }
+
   useEffect(() => {
-    fetch('data/WishListCardData.json')
+    const url = `${APIS.wishlist}`;
+
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: TOKEN,
+      },
+    })
       .then(response => response.json())
-      .then(result => setCardData(result));
+      .then(result => {
+        setWishlist(result.wishlist);
+        let idList = [];
+        result.wishlist.forEach(el => {
+          idList.push(el.event_id);
+        });
+        setWishlistId(idList);
+      });
   }, []);
-  if (!cardData) return null;
+
+  const setId = (data, event_id) => {
+    setCheckLiked(fetchLiked(TOKEN, APIS.wishlist, data, event_id));
+  };
+
+  if (!wishlist) return null;
 
   return (
     <div>
@@ -63,23 +132,32 @@ const Wishlist = () => {
           <S.Select onClick={handleDeleteModal}>선택삭제</S.Select>
         </S.DeleteBox>
         <S.WrapperCard>
-          {cardData.map(data => {
-            return (
-              <EventCard
-                data={data}
-                key={data.id}
-                type="wishlist"
-                cardData={cardData}
-                setCardData={setCardData}
-                handleDeleteOne={handleDeleteOne}
-                handleChecked={handleChecked}
-                handleDeleteChecked={handleDeleteChecked}
-                checkList={checkList}
-              />
-            );
-          })}
+          {wishlist.length !== 0 ? (
+            wishlist.map(data => {
+              return (
+                <EventCard
+                  data={data}
+                  key={data.event_id}
+                  type="wishlist"
+                  wishlist={wishlist}
+                  setWishlist={setWishlist}
+                  setId={setId}
+                  handleDeleteOne={handleDeleteOne}
+                  handleChecked={handleChecked}
+                  handleDeleteChecked={handleDeleteChecked}
+                  checkList={checkList}
+                  TOKEN={TOKEN}
+                  wishlistId={wishlistId}
+                />
+              );
+            })
+          ) : (
+            <S.EmptyBox>
+              <span>이벤트 카드를 담아주세요!</span>
+            </S.EmptyBox>
+          )}
         </S.WrapperCard>
-        <S.More>
+        <S.More onClick={handleMoreEvent}>
           <S.MoreLine />
           <S.MoreText>더보기</S.MoreText>
         </S.More>

@@ -70,6 +70,11 @@ export const S = {
     grid-template-columns: 465px 465px 465px;
   `,
 
+  EmptyBox: styled.div`
+    width: 1324px;
+    ${Mixin.flexCenter}
+  `,
+
   More: styled.div`
     display: flex;
     justify-content: center;

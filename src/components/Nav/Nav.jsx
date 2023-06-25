@@ -68,7 +68,7 @@ const Nav = () => {
         <ul>
           <li>
             <S.NavTitleWrap>
-              <S.NavTitle to="/list">EVENT</S.NavTitle>
+              <S.NavTitle to="/events">EVENT</S.NavTitle>
               <S.NavWishlist
                 onClick={() =>
                   !isSignedIn ? handleSignIn() : navigate('/wishlist')

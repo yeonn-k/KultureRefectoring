@@ -199,7 +199,7 @@ const EventDetail = () => {
           setIsDirect={setIsDirect}
         />
       )}
-      {directOrderOpen && (
+      {/* {directOrderOpen && (
         <DirectOrderModal
           detail={detail}
           orderOpen={orderOpen}
@@ -218,7 +218,7 @@ const EventDetail = () => {
           directBidOpen={directBidOpen}
           setDirectBidOpen={setDirectBidOpen}
         />
-      )}
+      )} */}
       <S.DetailWrap>
         {/* 좌측 이벤트 이미지 */}
         <S.DetailLeft>
