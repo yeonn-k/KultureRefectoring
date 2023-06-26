@@ -42,7 +42,7 @@ const Chart = ({ colors, bid }) => {
         }}
       >
         <div>
-          <S.TooltipImg src="./images/common/kulture-token.png" alt="token" />
+          <S.TooltipImg src="/images/common/kulture-token.png" alt="token" />
           {Math.floor(point.data.y)}
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import EventCard from '../../../components/EventCard/EventCard.jsx';
-import { BASE_URL_H, BASE_URL_K } from '../../../config';
+import { APIS } from '../../../config';
 import { S } from './Search.js';
 
 const Search = ({ IsSearchOpen, setIsSearchOpen }) => {
@@ -8,7 +8,7 @@ const Search = ({ IsSearchOpen, setIsSearchOpen }) => {
   const [userInput, setUserInput] = useState('');
 
   useEffect(() => {
-    fetch(`${BASE_URL_H}/events`)
+    fetch(`${APIS.events}`)
       .then(res => res.json())
       .then(data => setList(data.list));
   }, [list]);

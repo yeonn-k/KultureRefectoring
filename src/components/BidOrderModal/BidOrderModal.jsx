@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BASE_URL_H, BASE_URL_K } from '../../config';
+import { APIS } from '../../config';
 import { S } from './BidOrderModal.js';
 
 const BidOrderModal = ({
@@ -18,6 +18,7 @@ const BidOrderModal = ({
   const inputRef = useRef();
   const outside = useRef();
   const navigate = useNavigate('');
+  const TOKEN = localStorage.getItem('accessToken');
 
   useEffect(() => {
     document.body.style.cssText = `
@@ -39,8 +40,6 @@ const BidOrderModal = ({
     setTicket(1);
   };
 
-  const userToken = localStorage.getItem('userToken');
-
   const handleBid = () => {
     const data = {
       quantity: ticket,
@@ -48,11 +47,11 @@ const BidOrderModal = ({
       eventId: 1,
     };
 
-    fetch(`${BASE_URL_H}/bid`, {
+    fetch(`${APIS.bid}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        Authorization: userToken,
+        Authorization: TOKEN,
       },
       body: JSON.stringify(data),
     })
@@ -71,11 +70,11 @@ const BidOrderModal = ({
       quantity: ticket,
     };
 
-    fetch(`${BASE_URL_K}/order`, {
+    fetch(`${APIS.order}/now`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        Authorization: userToken,
+        Authorization: TOKEN,
       },
       body: JSON.stringify(data),
     })
@@ -126,7 +125,7 @@ const BidOrderModal = ({
             <S.BidFlex>
               <S.BidToken
                 className="clickIcon"
-                src="./images/common/kulture-token.png"
+                src="/images/common/kulture-token.png"
                 alt="token"
               />
               <S.BidContent>
@@ -146,7 +145,7 @@ const BidOrderModal = ({
           <p>총 입찰 토큰</p>
           <S.BidFlex>
             <S.BidLargeToken
-              src="./images/common/kulture-token.png"
+              src="/images/common/kulture-token.png"
               alt="token"
             />
             <S.TotalToken>

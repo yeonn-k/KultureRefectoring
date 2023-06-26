@@ -19,6 +19,7 @@ export const S = {
     align-items: center;
     gap: 5px;
   `,
+
   StatusWrapper: styled.div`
     display: flex;
     justify-content: space-between;

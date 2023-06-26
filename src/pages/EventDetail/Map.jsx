@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import Options from './Options';
-import { BASE_URL_H, BASE_URL_K } from '../../config';
+import { APIS } from '../../config';
+import { useParams } from 'react-router-dom';
 
 const containerStyle = {
   width: '550px',
@@ -11,9 +12,11 @@ const containerStyle = {
 function MyComponent() {
   const [location, setLocation] = useState({});
   const [map, setMap] = useState(null);
+  const params = useParams();
+  const eventId = params.id;
 
   useEffect(() => {
-    fetch(`${BASE_URL_K}/events/1`)
+    fetch(`${APIS.events}/${eventId}`)
       .then(response => response.json())
       .then(result => setLocation(result[0]));
   }, []);
@@ -29,13 +32,10 @@ function MyComponent() {
   });
 
   const onLoad = map => {
-    const bounds = new window.google.maps.LatLngBounds(center);
-    map.fitBounds(bounds);
-
     setMap(map);
   };
 
-  const onUnmount = React.useCallback(function callback(map) {
+  const onUnmount = useCallback(function callback(map) {
     setMap(null);
   }, []);
 
@@ -63,8 +63,11 @@ function MyComponent() {
       marker.addListener('mouseout', () => {
         tooltip.close();
       });
+
+      map.setCenter(center);
+      map.setZoom(18);
     }
-  }, [map]);
+  }, [map, center]);
 
   return isLoaded && location.id ? (
     <GoogleMap

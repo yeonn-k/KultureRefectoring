@@ -54,12 +54,13 @@ export const S = {
   DetailMainTitle: styled.div`
     font-size: 40px;
     font-weight: 700;
+    padding-bottom: 20px;
     border-bottom: 1px solid #424242;
   `,
   DetailImg: styled.img`
     width: 100%;
     max-width: 800px;
-    height: 600px;
+    height: 700px;
     object-fit: cover;
     margin: 20px 0 0 0;
   `,
@@ -68,7 +69,7 @@ export const S = {
     margin-left: auto;
     margin-right: auto;
     margin-top: 40px;
-    padding: 0 20px;
+    padding: 0 50px;
     overflow-y: scroll;
     height: auto;
   `,

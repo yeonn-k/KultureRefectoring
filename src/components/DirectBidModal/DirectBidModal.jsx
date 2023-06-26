@@ -8,14 +8,9 @@ const DirectBidModal = ({
   setCoast,
   ticket,
   setTicket,
-  setDirectOrderOpen,
-  directOrderOpen,
-  directBidOpen,
   setDirectBidOpen,
-  isDirect,
   setIsDirect,
   setOrderOpen,
-  setModalOpen,
 }) => {
   const [isLackOfToken, setIsLackOfToken] = useState(false);
   const [isValidBtn, setIsValidBtn] = useState(false);
@@ -117,7 +112,7 @@ const DirectBidModal = ({
             </S.TokenInputWrap>
 
             <S.BidLargeToken
-              src="./images/common/kulture-token.png"
+              src="/images/common/kulture-token.png"
               alt="token"
             />
           </S.TokenInputWrap>
@@ -125,7 +120,7 @@ const DirectBidModal = ({
         <S.BidContainer>
           {isLackOfToken && (
             <S.GoToCharge>
-              <S.ChargeText to="/mytoken">
+              <S.ChargeText to="/token">
                 토큰이 부족해요! 충전하러 가기!
               </S.ChargeText>
               <S.ChargeIcon />
@@ -135,7 +130,7 @@ const DirectBidModal = ({
             <S.BidTokenPrice>보유 토큰</S.BidTokenPrice>
             <S.BidToken
               className="clickIcon"
-              src="./images/common/kulture-token.png"
+              src="/images/common/kulture-token.png"
               alt="token"
             />
             <p>{`${Math.floor(event_token)}`}</p>

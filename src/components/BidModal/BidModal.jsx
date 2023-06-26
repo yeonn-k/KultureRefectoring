@@ -122,7 +122,7 @@ const BidModal = ({
               </S.Placeholder>
             )}
             <S.BidLargeToken
-              src="./images/common/kulture-token.png"
+              src="/images/common/kulture-token.png"
               alt="token"
             />
           </S.TokenInputWrap>
@@ -130,7 +130,7 @@ const BidModal = ({
         <S.BidContainer>
           {isLackOfToken && (
             <S.GoToCharge>
-              <S.ChargeText to="/mytoken">
+              <S.ChargeText to="/token">
                 토큰이 부족해요! 충전하러 가기!
               </S.ChargeText>
               <S.ChargeIcon />
@@ -140,7 +140,7 @@ const BidModal = ({
             <S.BidTokenPrice>보유 토큰</S.BidTokenPrice>
             <S.BidToken
               className="clickIcon"
-              src="./images/common/kulture-token.png"
+              src="/images/common/kulture-token.png"
               alt="token"
             />
             <p>{`${Math.floor(event_token)}`}</p>

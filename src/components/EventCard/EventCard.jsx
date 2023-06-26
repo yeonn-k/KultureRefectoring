@@ -32,7 +32,7 @@ const EventCard = ({
       <S.EventImage image={thumbnail_images_url}>
         <S.Heart
           src={
-            wishlistId.includes(event_id)
+            wishlistId?.includes(event_id)
               ? '/images/common/like-true.png'
               : '/images/common/like-false.png'
           }
