@@ -16,6 +16,7 @@ export const S = {
     margin-bottom: 10px;
     border-radius: 10px;
     background-image: url(${props => props.src});
+    background-color: ${props => props.theme.darkGrey};
     background-size: 100%;
   `,
 

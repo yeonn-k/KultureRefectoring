@@ -4,12 +4,24 @@ import { APIS } from '../../config.js';
 import { M } from '../../components/My/My';
 import { S } from './MyOrder';
 import TicketModal from '../../components/TicketModal/TicketModal.jsx';
+import ReviewModal from '../../components/ReviewModal/ReviewModal.jsx';
 
 const MyOrder = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isTicketModalOpen, setIsTicketModalOpen] = useState(false);
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const [forReviewId, setForReviewId] = useState('');
+  const [forReviewName, setForReviewName] = useState('');
   const [orderList, setOrderList] = useState([]);
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
+
+  const handleTicketModal = () => {
+    setIsTicketModalOpen(true);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const handleReviewModal = (event_id, name) => {
+    setIsReviewModalOpen(true);
+    setForReviewId(event_id);
+    setForReviewName(name);
     document.body.style.overflow = 'hidden';
   };
 
@@ -23,7 +35,6 @@ const MyOrder = () => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         setOrderList(data);
       });
   }, []);
@@ -71,11 +82,13 @@ const MyOrder = () => {
                               {event_start_date} ・ {location}
                             </M.Text>
                           </S.TicketInfo>
-                          <M.CTABtn onClick={handleOpenModal}>
+                          <M.CTABtn onClick={handleTicketModal}>
                             티켓 확인하기
                           </M.CTABtn>
-                          {isModalOpen ? (
-                            <TicketModal setIsModalOpen={setIsModalOpen} />
+                          {isTicketModalOpen ? (
+                            <TicketModal
+                              setIsTicketModalOpen={setIsTicketModalOpen}
+                            />
                           ) : null}
                         </S.TicketBox>
                       );
@@ -92,10 +105,17 @@ const MyOrder = () => {
             </M.SectionTitleWrapper>
             <S.TicketBoxWrapper>
               {orderList.length === 0 ? (
-                <M.EmptyBox>지난 이벤트가 없어요! </M.EmptyBox>
+                <M.EmptyBox>지난 이벤트가 없어요!</M.EmptyBox>
               ) : (
                 orderList.map(
-                  ({ id, name, image_url, location, event_start_date }) => {
+                  ({
+                    id,
+                    name,
+                    image_url,
+                    location,
+                    event_start_date,
+                    event_id,
+                  }) => {
                     if (new Date(event_start_date) > new Date()) {
                       return null;
                     } else
@@ -110,7 +130,18 @@ const MyOrder = () => {
                               {event_start_date} ・ {location}
                             </M.Text>
                           </S.TicketInfo>
-                          <M.CTABtnSecondary>리뷰 남기기</M.CTABtnSecondary>
+                          <M.CTABtnSecondary
+                            onClick={() => handleReviewModal(event_id, name)}
+                          >
+                            리뷰 남기기
+                          </M.CTABtnSecondary>
+                          {isReviewModalOpen ? (
+                            <ReviewModal
+                              setIsReviewModalOpen={setIsReviewModalOpen}
+                              eventId={forReviewId}
+                              name={forReviewName}
+                            />
+                          ) : null}
                         </S.TicketBox>
                       );
                   }

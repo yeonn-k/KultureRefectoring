@@ -11,7 +11,7 @@ export const S = {
     right: 0;
     bottom: 0;
     left: 0;
-    backdrop-filter: blur(5px);
+    backdrop-filter: brightness(70%);
   `,
 
   Modal: styled.div`

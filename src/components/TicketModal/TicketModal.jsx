@@ -2,9 +2,9 @@ import React from 'react';
 import { QRCodeCanvas } from 'qrcode.react';
 import { S } from './TicketModal';
 
-const TicketModal = ({ setIsModalOpen }) => {
+const TicketModal = ({ setIsTicketModalOpen }) => {
   const handleCloseModal = () => {
-    setIsModalOpen(false);
+    setIsTicketModalOpen(false);
     document.body.style.overflow = 'unset';
   };
 

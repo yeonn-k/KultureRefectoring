@@ -1,17 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import { S } from './Reviews';
+import React, { useState, useEffect } from 'react';
 import ReviewCard from '../../components/ReviewCard/ReviewCard.jsx';
+import { APIS } from '../../config';
+import { S } from './Reviews';
 
 const Reviews = () => {
   const [reviewList, setReviewList] = useState([]);
 
-  useEffect(() => {
-    fetch('data/reviews.json')
+  const getReview = () => {
+    fetch(`${APIS.review}`)
       .then(res => res.json())
       .then(data => {
         setReviewList(data);
       });
+  };
+
+  useEffect(() => {
+    getReview();
   }, []);
+
+  //Review Mock Data
+  // useEffect(() => {
+  //   fetch('data/reviews.json')
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       setReviewList(data);
+  //     });
+  // }, []);
 
   return (
     <S.Container>
@@ -22,9 +36,14 @@ const Reviews = () => {
 
       <S.ReviewCardContainer>
         <S.ReviewCardWrapper>
-          {reviewList.map(({ id, src, nickname, text }) => {
+          {reviewList.map(({ id, image_url, nickname, content }) => {
             return (
-              <ReviewCard key={id} src={src} nickname={nickname} text={text} />
+              <ReviewCard
+                key={id}
+                src={image_url}
+                nickname={nickname}
+                text={content}
+              />
             );
           })}
         </S.ReviewCardWrapper>
