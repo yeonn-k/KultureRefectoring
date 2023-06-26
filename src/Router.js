@@ -21,7 +21,7 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/events" element={<EventList />} />
-        <Route path="/event" element={<EventDetail />} />
+        <Route path="/event/:id" element={<EventDetail />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/dashboard" element={<MyDashboard />} />
         <Route path="/account" element={<MyAccount />} />

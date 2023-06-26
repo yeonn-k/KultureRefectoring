@@ -47,7 +47,7 @@ const EventDetail = () => {
 
   // 리뷰 정보 GET
   useEffect(() => {
-    fetch(`${BASE_URL_K}/review/1`)
+    fetch(`${BASE_URL_K}/review`)
       .then(res => res.json())
       .then(data => {
         return setReviewList(data);
@@ -71,15 +71,6 @@ const EventDetail = () => {
         console.log('Error:', error);
       });
   }, []);
-
-  const listData = reviewList.map(item => ({
-    id: item.id,
-    eventName: item.name,
-    thumbnail_images_url: item.image_url,
-    eventStartDate: item.event_start_date,
-    locationName: item.location,
-  }));
-
   const { event_token, email, nickname } = userInfo;
 
   const chartBidData = [
@@ -199,26 +190,6 @@ const EventDetail = () => {
           setIsDirect={setIsDirect}
         />
       )}
-      {/* {directOrderOpen && (
-        <DirectOrderModal
-          detail={detail}
-          orderOpen={orderOpen}
-          setOrderOpen={setOrderOpen}
-          nickname={nickname}
-          email={email}
-          coast={coast}
-          totalToken={totalToken}
-          setTotalToken={setTotalToken}
-          ticket={ticket}
-          setTicket={setTicket}
-          setModalOpen={setModalOpen}
-          setCoast={setCoast}
-          directOrderOpen={directOrderOpen}
-          setDirectOrderOpen={setDirectOrderOpen}
-          directBidOpen={directBidOpen}
-          setDirectBidOpen={setDirectBidOpen}
-        />
-      )} */}
       <S.DetailWrap>
         {/* 좌측 이벤트 이미지 */}
         <S.DetailLeft>
@@ -286,7 +257,7 @@ const EventDetail = () => {
       </S.DetailWrap>
 
       <S.RecommnedWrap>
-        <S.RecommnedTitle>당신이 좋아할만한 이벤트</S.RecommnedTitle>
+        <S.RecommnedTitle>추천 이벤트</S.RecommnedTitle>
         <S.WrapperCard>
           {eventList.length &&
             eventList.map(data => {
@@ -294,18 +265,16 @@ const EventDetail = () => {
             })}
         </S.WrapperCard>
       </S.RecommnedWrap>
+      <S.RecommnedTitle>리뷰</S.RecommnedTitle>
       <S.ReviewWrapper>
-        <S.RecommnedTitle>리뷰</S.RecommnedTitle>
-        {listData.map(event => {
+        {reviewList.map(event => {
           return (
             <ReviewCard
               key={event.id}
               id={event.id}
-              thumbnail={event.thumbnail_images_url}
-              title={event.name}
-              location={event.location}
-              startDate={event.event_start_date}
-              endDate={event.auction_end_date}
+              src={event.image_url}
+              nickname={event.nickname}
+              text={event.content}
             />
           );
         })}

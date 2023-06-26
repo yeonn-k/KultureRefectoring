@@ -167,12 +167,22 @@ export const S = {
     font-weight: 200;
   `,
   RecommnedTitle: styled.p`
-    margin: 20px 0 50px 72px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 50px 100px;
     font-size: 28px;
     font-weight: 700;
     min-width: 155px;
+    border-bottom: 2px solid #424242;
+    padding-bottom: 10px;
   `,
   RecommnedWrap: styled.div``,
 
-  ReviewWrapper: styled.div``,
+  ReviewWrapper: styled.div`
+    display: flex;
+    gap: 10px 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+  `,
 };
