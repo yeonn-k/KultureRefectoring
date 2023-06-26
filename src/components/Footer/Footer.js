@@ -7,6 +7,7 @@ export const FooterContainer = styled.div`
   margin-top: 100px;
   width: 100%;
   max-width: none;
+  min-width: 1360px;
   height: 100px;
   background-color: #121212;
   bottom: 0;

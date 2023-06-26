@@ -104,6 +104,7 @@ const MyDashboard = () => {
   // }, []);
 
   const { event_token } = userInfo;
+
   const bidPending = bidList.filter(
     obj => obj.bid_status_code === 'BID_PENDING'
   );
@@ -118,7 +119,8 @@ const MyDashboard = () => {
   const bidAccepted = bidList.filter(
     obj => obj.bid_status_code === 'BID_ACCEPTED'
   );
-  const bidLosing = bidList.filter(obj => obj.event_start_date > new Date());
+
+  const bidLosing = bidList.filter(obj => obj.bid_status_code === 'BID_LOSING');
 
   const donation = () => {
     const payments = orderList.map(item => item.total_event_token);

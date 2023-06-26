@@ -8,7 +8,7 @@ export const S = {
   `,
 
   Loading: styled.div`
-    color: ${props => props.theme.darkGrey};
+    color: ${props => props.theme.lightGrey};
     font-size: 20px;
   `,
 };

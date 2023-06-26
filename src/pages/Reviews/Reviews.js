@@ -2,14 +2,17 @@ import styled from 'styled-components';
 
 export const S = {
   Container: styled.div`
-    margin: 0 auto;
-    max-width: 1440px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    min-width: 1360px;
   `,
 
   TitleWrapper: styled.div`
     display: flex;
     justify-content: flex-end;
     align-items: baseline;
+    min-width: 1360px;
     margin-bottom: 40px;
     margin-right: 40px;
   `,
@@ -27,8 +30,7 @@ export const S = {
   `,
 
   ReviewCardContainer: styled.div`
-    width: fit-content;
-    margin: 0 auto;
+    margin: 0 30px;
   `,
 
   ReviewCardWrapper: styled.div`

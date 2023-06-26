@@ -53,7 +53,7 @@ const Nav = () => {
                 onClick={() =>
                   !isSignedIn ? handleSignIn() : navigate('/token')
                 }
-                src="./images/common/kulture-token.png"
+                src="/images/common/kulture-token.png"
                 alt="Token"
               />
             </S.NavTopWrap>
@@ -64,7 +64,7 @@ const Nav = () => {
       <S.NavTitleContainer>
         <S.NavLogo
           onClick={() => navigate('/')}
-          src="./images/common/kulture-logo.png"
+          src="/images/common/kulture-logo.png"
         />
         <ul>
           <li>
@@ -77,8 +77,9 @@ const Nav = () => {
               >
                 WISHLIST
               </S.NavWishlist>
+              <S.NavTitle to="/reviews">REVIEWS</S.NavTitle>
               <S.NavSearch
-                src="./images/common/Search.png"
+                src="/images/common/Search.png"
                 alt="Search"
                 onClick={() => setIsSearchOpen(true)}
               />

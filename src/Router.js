@@ -10,9 +10,10 @@ import MyAccount from './pages/MyAccount/MyAccount.jsx';
 import MyToken from './pages/MyToken/MyToken.jsx';
 import MyAuction from './pages/MyAuction/MyAuction.jsx';
 import Home from './pages/Home/Home.jsx';
-import Callback from './pages/Callback/Callback.jsx';
+import OAuthCallback from './pages/Callback/OAuthCallback.jsx';
 import Reviews from './pages/Reviews/Reviews.jsx';
 import MyOrder from './pages/MyOrder/MyOrder.jsx';
+import PaymentCallback from './pages/Callback/PaymentCallback.jsx';
 
 const Router = () => {
   return (
@@ -27,9 +28,10 @@ const Router = () => {
         <Route path="/account" element={<MyAccount />} />
         <Route path="/token" element={<MyToken />} />
         <Route path="/auction" element={<MyAuction />} />
-        <Route path="/oauth/callback/kakao" element={<Callback />} />
+        <Route path="/oauth/callback/kakao" element={<OAuthCallback />} />
         <Route path="/reviews" element={<Reviews />} />
         <Route path="order" element={<MyOrder />} />
+        <Route path="/payment/callback/kakao" element={<PaymentCallback />} />
       </Routes>
       <Footer />
     </BrowserRouter>

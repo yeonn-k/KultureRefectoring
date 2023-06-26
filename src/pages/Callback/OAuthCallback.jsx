@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { APIS } from '../../config';
 import { REST_API_KEY, REDIRECT_URI } from '../../components/SocialOAuth';
-import { S } from './Callback';
+import { S } from './OAuthCallback';
 
-const Callback = () => {
+const OAuthCallback = () => {
   const navigate = useNavigate();
   const AUTH_CODE = new URLSearchParams(window.location.search).get('code');
 
@@ -34,6 +34,7 @@ const Callback = () => {
               localStorage.setItem('accessToken', data.accessToken);
               alert('로그인에 성공했어요!');
               navigate('/');
+              window.location.reload();
             } else throw new Error('로그인 에러');
           });
       });
@@ -46,4 +47,4 @@ const Callback = () => {
   );
 };
 
-export default Callback;
+export default OAuthCallback;

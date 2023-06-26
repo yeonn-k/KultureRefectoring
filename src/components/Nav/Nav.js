@@ -32,6 +32,7 @@ export const S = {
 
   NavContainer: styled.div`
     max-width: 1440px;
+    min-width: 1360px;
     width: 100%;
     margin: 0 auto;
     height: 100px;

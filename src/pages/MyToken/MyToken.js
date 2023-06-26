@@ -1,7 +1,23 @@
 import styled from 'styled-components';
 import { MdCheck } from 'react-icons/md';
+import { Mixin } from '../../styles/mixin';
 
 export const S = {
+  PaymentBtn: styled.div`
+    ${Mixin.flexCenter};
+    padding: 5px 20px;
+    height: 40px;
+    font-size: 18px;
+    font-weight: 600;
+    color: ${props => props.theme.black};
+    background-color: ${props =>
+      props.active ? props.theme.kultureGreen : '#cccccc'};
+    border-radius: 10px;
+    &:hover {
+      cursor: pointer;
+    }
+  `,
+
   CheckIcon: styled(MdCheck)`
     margin-right: 15px;
     font-size: 25px;

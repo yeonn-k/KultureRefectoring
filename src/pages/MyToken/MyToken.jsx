@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { nanoid } from 'nanoid';
 import My from '../../components/My/My.jsx';
 import { APIS } from '../../config.js';
+import { makeParams } from '../../utils/makeParams.js';
 import tokenImg from '../../images/kulture-token.png';
 import { M } from '../../components/My/My';
 import { T } from '../../components/Token';
@@ -11,6 +13,34 @@ const MyToken = () => {
   const [chargeAmount, setChargeAmount] = useState(0);
   const [paymentKRW, setPaymentKRW] = useState(0);
   const [historyList, setHistoryList] = useState([]);
+
+  const handleKakaoReady = () => {
+    const params = makeParams(keys, values);
+
+    if (chargeAmount === 0) {
+      alert('충전 옵션을 선택해주세요.');
+    } else
+      fetch(`https://kapi.kakao.com/v1/payment/ready`, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+          Authorization: `KakaoAK ${process.env.REACT_APP_ADMIN_KEY}`,
+        },
+        body: params.toString(),
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.tid) {
+            window.localStorage.setItem('tid', data.tid);
+            window.localStorage.setItem(
+              'orderId',
+              params.get('partner_order_id')
+            );
+            window.localStorage.setItem('userId', userId);
+            window.location.href = data.next_redirect_pc_url;
+          }
+        });
+  };
 
   useEffect(() => {
     fetch(`${APIS.users}`, {
@@ -42,7 +72,34 @@ const MyToken = () => {
       });
   }, []);
 
-  const { event_token } = userInfo;
+  const { userId, event_token } = userInfo;
+  const keys = [
+    'cid',
+    'partner_order_id',
+    'partner_user_id',
+    'item_name',
+    'quantity',
+    'total_amount',
+    'vat_amount',
+    'tax_free_amount',
+    'approval_url',
+    'cancel_url',
+    'fail_url',
+  ];
+
+  const values = [
+    'TC0ONETIME',
+    nanoid(),
+    userId,
+    '토큰 충전',
+    chargeAmount,
+    paymentKRW,
+    0,
+    0,
+    'http://localhost:3000/payment/callback/kakao',
+    'http://localhost:3000/token',
+    'http://localhost:3000/token',
+  ];
 
   return (
     <>
@@ -99,7 +156,12 @@ const MyToken = () => {
                 </S.KRWUnit>
               </S.LineUnit>
               <M.FlexEnd>
-                <M.CTABtn>결제하기</M.CTABtn>
+                <S.PaymentBtn
+                  onClick={handleKakaoReady}
+                  active={chargeAmount !== 0}
+                >
+                  결제하기
+                </S.PaymentBtn>
               </M.FlexEnd>
             </S.ChargeBox>
             <S.OptionBoxWrapper>

@@ -9,7 +9,7 @@ const Footer = () => {
     <FooterContainer>
       <FooterImg
         onClick={() => navigate('/')}
-        src="../images/common/kulture-logo-mono.png"
+        src="/images/common/kulture-logo-mono.png"
       />
     </FooterContainer>
   );

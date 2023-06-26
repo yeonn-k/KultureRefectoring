@@ -33,6 +33,11 @@ const MyAuction = () => {
   //     });
   // }, []);
 
+  const bidPending = bidList.filter(
+    obj => obj.bid_status_code === 'BID_PENDING'
+  );
+  const bidEnded = bidList.filter(obj => obj.bid_status_code !== 'BID_PENDING');
+
   return (
     <>
       <M.Title>내 입찰내역</M.Title>
@@ -67,21 +72,21 @@ const MyAuction = () => {
                   })}
                 </S.KeyWrapper>
                 <S.HistoryBoxWrapper>
-                  {bidList.map(
-                    ({
-                      bidId,
-                      name,
-                      location,
-                      event_start_date,
-                      Image_url,
-                      auction_end_date,
-                      quantity,
-                      bid_status_code,
-                      bidding_events_token,
-                    }) => {
-                      if (bid_status_code !== 'BID_PENDING') {
-                        return null;
-                      } else
+                  {bidPending.length === 0 ? (
+                    <M.EmptyBox>입찰 진행 중인 이벤트가 없어요!</M.EmptyBox>
+                  ) : (
+                    bidPending.map(
+                      ({
+                        bidId,
+                        name,
+                        location,
+                        event_start_date,
+                        Image_url,
+                        auction_end_date,
+                        quantity,
+                        bid_status_code,
+                        bidding_events_token,
+                      }) => {
                         return (
                           <S.HistoryBox key={bidId}>
                             <S.EventImg src={Image_url} />
@@ -103,7 +108,8 @@ const MyAuction = () => {
                             <S.EndDate>{auction_end_date}</S.EndDate>
                           </S.HistoryBox>
                         );
-                    }
+                      }
+                    )
                   )}
                 </S.HistoryBoxWrapper>
               </>
@@ -115,21 +121,21 @@ const MyAuction = () => {
                   })}
                 </S.KeyWrapper>
                 <S.HistoryBoxWrapper>
-                  {bidList.map(
-                    ({
-                      bidId,
-                      name,
-                      location,
-                      event_start_date,
-                      Image_url,
-                      auction_end_date,
-                      quantity,
-                      bid_status_code,
-                      bidding_events_token,
-                    }) => {
-                      if (bid_status_code === 'BID_PENDING') {
-                        return null;
-                      } else
+                  {bidEnded.length === 0 ? (
+                    <M.EmptyBox>입찰이 종료된 이벤트가 없어요!</M.EmptyBox>
+                  ) : (
+                    bidEnded.map(
+                      ({
+                        bidId,
+                        name,
+                        location,
+                        event_start_date,
+                        Image_url,
+                        auction_end_date,
+                        quantity,
+                        bid_status_code,
+                        bidding_events_token,
+                      }) => {
                         return (
                           <S.HistoryBox key={bidId}>
                             <S.EventImg src={Image_url} />
@@ -158,7 +164,8 @@ const MyAuction = () => {
                             </S.BidResult>
                           </S.HistoryBox>
                         );
-                    }
+                      }
+                    )
                   )}
                 </S.HistoryBoxWrapper>
               </>

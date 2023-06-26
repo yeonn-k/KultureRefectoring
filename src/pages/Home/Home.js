@@ -7,6 +7,7 @@ export const S = {
     flex-direction: column;
     gap: 25px;
     width: 100%;
+    min-width: 1360px;
     margin-top: 4px;
     aspect-ratio: ${props => props.ratio};
     background-image: url(${props => props.src});
@@ -18,11 +19,13 @@ export const S = {
   TextMain: styled.div`
     font-size: 80px;
     font-weight: 600;
+    text-shadow: ${props => props.theme.darkGrey} 5px 0 10px;
   `,
 
   TextSub: styled.div`
     font-size: ${props => props.size};
     font-weight: 600;
+    text-shadow: ${props => props.theme.darkGrey} 5px 0 10px;
   `,
   SectionWrapper: styled.div`
     display: flex;
