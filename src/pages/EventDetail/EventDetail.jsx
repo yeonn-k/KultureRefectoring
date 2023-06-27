@@ -308,21 +308,27 @@ const EventDetail = () => {
             })}
         </S.WrapperCard>
       </S.RecommnedWrap>
-      <S.RecommnedTitle>리뷰</S.RecommnedTitle>
-      <S.ReviewWrapper>
-        {reviewList.map(data => {
-          return (
-            <ReviewCard
-              key={data.event_id}
-              data={data}
-              type="list"
-              setId={setId}
-              wishlistId={wishlistId}
-              wishlist={wishlist}
-            />
-          );
-        })}
-      </S.ReviewWrapper>
+      {reviewList.length !==
+      (
+        <>
+          <S.RecommnedTitle>리뷰</S.RecommnedTitle>
+          <S.ReviewWrapper>
+            {reviewList.map(data => {
+              return (
+                <ReviewCard
+                  onClick={() => {}}
+                  key={data.event_id}
+                  data={data}
+                  type="list"
+                  setId={setId}
+                  wishlistId={wishlistId}
+                  wishlist={wishlist}
+                />
+              );
+            })}
+          </S.ReviewWrapper>
+        </>
+      )}
     </S.DetailContainer>
   );
 };

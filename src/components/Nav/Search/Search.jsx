@@ -7,26 +7,20 @@ const Search = ({ IsSearchOpen, setIsSearchOpen }) => {
   const [list, setList] = useState([]);
   const [userInput, setUserInput] = useState('');
 
-  useEffect(() => {
-    fetch(`${APIS.events}`)
-      .then(res => res.json())
-      .then(data => setList(data.list));
-  }, [list]);
-
-  const listData = list.map(item => ({
-    id: item.id,
-    eventName: item.name,
-    thumbnail_images_url: item.image_url,
-    eventStartDate: item.event_start_date,
-    locationName: item.location,
-  }));
-
   const getValue = e => {
     setUserInput(e.target.value.toLowerCase());
   };
 
-  const searched = listData.filter(item =>
-    item.eventName.toLowerCase().includes(userInput)
+  useEffect(() => {
+    fetch(`${APIS.events}`)
+      .then(res => res.json())
+      .then(data => {
+        setList(data.data);
+      });
+  }, []);
+
+  const searched = list.filter(item =>
+    item.eventName?.toLowerCase().includes(userInput)
   );
 
   return (
@@ -43,10 +37,15 @@ const Search = ({ IsSearchOpen, setIsSearchOpen }) => {
           <S.SearchIcon />
         </S.InnerWrapper>
         <S.ListWrap>
-          {userInput &&
-            searched.map(data => {
-              return <EventCard key={data.id} data={data} type="list" />;
-            })}
+          <S.ListBox>
+            {userInput &&
+              list &&
+              searched.map(data => {
+                return (
+                  <EventCard key={data.event_id} data={data} type="list" />
+                );
+              })}
+          </S.ListBox>
         </S.ListWrap>
       </S.SearchWrapper>
     </S.SearchContainer>

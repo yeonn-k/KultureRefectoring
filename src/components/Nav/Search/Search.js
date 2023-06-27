@@ -33,9 +33,10 @@ export const S = {
 
   SearchWrapper: styled.div`
     position: fixed;
+    right: 0;
+    left: 0;
     top: 0;
     width: 100%;
-    max-width: 1440px;
     height: 250px;
     background-color: #1c1b1b;
     box-shadow: rgba(0, 0, 0, 0.8) 0 0 0 9999px;
@@ -72,13 +73,20 @@ export const S = {
   `,
 
   ListWrap: styled.div`
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin: 80px auto;
-    gap: 20px;
-    overflow-x: auto;
     width: 100%;
     background-color: #1c1b1b;
+    display: flex;
+  `,
+  ListBox: styled.div`
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    right: 0;
+    left: 0;
+    top: 0;
+    width: 1440px;
+    gap: 20px;
+    margin: 80px auto 0 auto;
+    overflow-x: auto;
   `,
 };

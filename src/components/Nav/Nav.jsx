@@ -31,6 +31,33 @@ const Nav = () => {
       {IsSearchOpen && (
         <Search IsSearchOpen={IsSearchOpen} setIsSearchOpen={setIsSearchOpen} />
       )}
+
+      <S.NavTitleContainer>
+        <S.NavLogo
+          onClick={() => navigate('/')}
+          src="/images/common/kulture-logo.png"
+        />
+        <ul>
+          <li>
+            <S.NavTitleWrap>
+              <S.NavTitle to="/events">EVENT</S.NavTitle>
+              <S.NavWishlist
+                onClick={() =>
+                  !isSignedIn ? handleSignIn() : navigate('/wishlist')
+                }
+              >
+                WISHLIST
+              </S.NavWishlist>
+              <S.NavTitle to="/reviews">REVIEWS</S.NavTitle>
+              <S.NavSearch
+                src="/images/common/Search.png"
+                alt="Search"
+                onClick={() => setIsSearchOpen(true)}
+              />
+            </S.NavTitleWrap>
+          </li>
+        </ul>
+      </S.NavTitleContainer>
       <div>
         <ul>
           <li>
@@ -60,33 +87,6 @@ const Nav = () => {
           </li>
         </ul>
       </div>
-
-      <S.NavTitleContainer>
-        <S.NavLogo
-          onClick={() => navigate('/')}
-          src="/images/common/kulture-logo.png"
-        />
-        <ul>
-          <li>
-            <S.NavTitleWrap>
-              <S.NavTitle to="/events">EVENT</S.NavTitle>
-              <S.NavWishlist
-                onClick={() =>
-                  !isSignedIn ? handleSignIn() : navigate('/wishlist')
-                }
-              >
-                WISHLIST
-              </S.NavWishlist>
-              <S.NavTitle to="/reviews">REVIEWS</S.NavTitle>
-              <S.NavSearch
-                src="/images/common/Search.png"
-                alt="Search"
-                onClick={() => setIsSearchOpen(true)}
-              />
-            </S.NavTitleWrap>
-          </li>
-        </ul>
-      </S.NavTitleContainer>
     </S.NavContainer>
   );
 };

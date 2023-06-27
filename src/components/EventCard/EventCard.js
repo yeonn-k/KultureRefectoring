@@ -15,6 +15,9 @@ export const S = {
     border-radius: 10px;
     background-image: url(${props => props.image});
     background-size: cover;
+    &:hover {
+      cursor: pointer;
+    }
   `,
 
   EventTitle: styled.h2`
@@ -22,6 +25,10 @@ export const S = {
     font-weight: 700;
     line-height: 26px;
     margin-bottom: 5px;
+
+    &:hover {
+      cursor: pointer;
+    }
   `,
 
   EventDescription: styled.div`

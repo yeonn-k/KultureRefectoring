@@ -6,7 +6,7 @@ const Chart = ({ colors, bid }) => {
     ...item,
     data: item.data.map(dataPoint => ({
       ...dataPoint,
-      x: dataPoint.x.slice(0, 5),
+      x: dataPoint?.x?.slice(0, 5),
     })),
   }));
 

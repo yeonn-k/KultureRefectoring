@@ -34,10 +34,11 @@ export const S = {
     max-width: 1440px;
     min-width: 1360px;
     width: 100%;
-    margin: 0 auto;
     height: 100px;
     background-color: #1c1b1b;
-    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
   `,
 
   NavTitleContainer: styled.div`
@@ -68,7 +69,6 @@ export const S = {
 
   NavTopWrap: styled.div`
     display: flex;
-    float: right;
     margin-top: 15px;
     margin-right: 5px;
   `,
