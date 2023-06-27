@@ -1,6 +1,4 @@
-const fetchLiked = (TOKEN, url, wishlist, event_id) => {
-  let check;
-
+const fetchLiked = (TOKEN, url, wishlist, event_id, setData, fetchData) => {
   const isExistData =
     wishlist &&
     wishlist.filter(el => el.event_id === Number(event_id)).length > 0;
@@ -14,7 +12,7 @@ const fetchLiked = (TOKEN, url, wishlist, event_id) => {
       },
     }).then(response => {
       if (response.ok) {
-        check = 'delete';
+        setData(prev => prev.filter(({ event_id: id }) => id !== event_id));
       }
     });
   } else {
@@ -29,10 +27,8 @@ const fetchLiked = (TOKEN, url, wishlist, event_id) => {
       }),
     })
       .then(response => response.json())
-      .then(data => (check = 'post'));
+      .then(data => fetchData());
   }
-
-  return check;
 };
 
 export default fetchLiked;

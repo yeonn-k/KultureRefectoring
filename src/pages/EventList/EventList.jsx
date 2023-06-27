@@ -21,7 +21,6 @@ const EventList = () => {
 
   const [cardData, setCardData] = useState([]);
   const [wishlist, setWishlist] = useState([]);
-  const [wishlistId, setWishlistId] = useState([]);
 
   const [categoryData, setCategoryData] = useState([]);
   const [userDate, setUserDate] = useState(new Date());
@@ -33,6 +32,7 @@ const EventList = () => {
 
   const [searchParams, setSearchParams] = useSearchParams([]);
   const [value, setValue] = useState([0, 300]);
+  const wishlistId = wishlist.map(({ event_id }) => event_id);
 
   const location = useLocation();
 
@@ -46,17 +46,7 @@ const EventList = () => {
     setSearchParams({ limit });
   }
 
-  useEffect(() => {
-    const url = `${APIS.event}${location.search}&minPrice=${value[0]}&maxPrice=${value[1]}`;
-
-    fetch(url)
-      .then(response => response.json())
-      .then(result => {
-        setCardData(result.data);
-      });
-  }, [value, limit, location.search, checkLiked]);
-
-  useEffect(() => {
+  const getWishList = () => {
     const url = `${APIS.wishlist}`;
 
     fetch(url, {
@@ -69,16 +59,27 @@ const EventList = () => {
       .then(response => response.json())
       .then(result => {
         setWishlist(result.wishlist);
-        let idList = [];
-        result.wishlist.forEach(el => {
-          idList.push(el.event_id);
-        });
-        setWishlistId(idList);
       });
-  }, [wishlistId]);
+  };
+
+  useEffect(() => {
+    const url = `${APIS.event}${location.search}&minPrice=${value[0]}&maxPrice=${value[1]}`;
+
+    fetch(url)
+      .then(response => response.json())
+      .then(result => {
+        setCardData(result.data);
+      });
+  }, [value, limit, location.search, checkLiked]);
+
+  useEffect(() => {
+    getWishList();
+  }, []);
 
   const setId = (data, event_id) => {
-    setCheckLiked(fetchLiked(TOKEN, APIS.wishlist, data, event_id));
+    setCheckLiked(
+      fetchLiked(TOKEN, APIS.wishlist, data, event_id, setWishlist, getWishList)
+    );
   };
 
   useEffect(() => {

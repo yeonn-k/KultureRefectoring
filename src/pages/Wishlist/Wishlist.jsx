@@ -7,7 +7,8 @@ import fetchLiked from '../../hooks/fetchLiked.js';
 
 import { S } from './Wishlist';
 import 'react-calendar/dist/Calendar.css';
-import DeleteModal from './components/DeleteModal.jsx';
+import DeleteModal from './components/DeleteModal/DeleteModal.jsx';
+import { check } from 'prettier';
 
 const Wishlist = event_id => {
   const TOKEN = localStorage.getItem('accessToken');
@@ -92,7 +93,7 @@ const Wishlist = event_id => {
     setSearchParams({ limit });
   }
 
-  useEffect(() => {
+  const getWishList = () => {
     const url = `${APIS.wishlist}`;
 
     fetch(url, {
@@ -111,10 +112,14 @@ const Wishlist = event_id => {
         });
         setWishlistId(idList);
       });
-  }, []);
+  };
+
+  useEffect(() => {
+    getWishList();
+  }, [checkList]);
 
   const setId = (data, event_id) => {
-    setCheckLiked(fetchLiked(TOKEN, APIS.wishlist, data, event_id));
+    fetchLiked(TOKEN, APIS.wishlist, data, event_id, setWishlist, getWishList);
   };
 
   if (!wishlist) return null;
