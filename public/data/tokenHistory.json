@@ -1,37 +1,37 @@
 [
   {
     "id": 1,
-    "type": "충전",
+    "token_type": "충전",
     "date": "2023-07-06",
     "name": "결제 충전",
-    "amount": 600
+    "event_token": 600
   },
   {
     "id": 2,
-    "type": "사용",
+    "token_type": "사용",
     "date": "2023-06-24",
     "name": "The Divide Tour",
-    "amount": 300
+    "event_token": 300
   },
   {
     "id": 3,
-    "type": "사용",
+    "token_type": "사용",
     "date": "2023-05-24",
     "name": "Don Quixote",
-    "amount": 200
+    "event_token": 200
   },
   {
     "id": 4,
-    "type": "충전",
+    "token_type": "충전",
     "date": "2023-04-27",
     "name": "결제 충전",
-    "amount": 100
+    "event_token": 100
   },
   {
     "id": 5,
-    "type": "충전",
+    "token_type": "충전",
     "date": "2023-04-21",
     "name": "결제 충전",
-    "amount": 400
+    "event_token": 400
   }
 ]

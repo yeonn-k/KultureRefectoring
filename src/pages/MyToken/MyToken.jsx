@@ -63,14 +63,28 @@ const MyToken = () => {
   //     });
   // }, []);
 
-  //TokenHistory Mock Data
   useEffect(() => {
-    fetch('data/tokenHistory.json')
+    fetch(`${APIS.users}/token`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('accessToken'),
+      },
+    })
       .then(res => res.json())
       .then(data => {
         setHistoryList(data);
       });
   }, []);
+
+  //TokenHistory Mock Data
+  // useEffect(() => {
+  //   fetch('data/tokenHistory.json')
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       setHistoryList(data);
+  //     });
+  // }, []);
 
   const { userId, event_token } = userInfo;
   const keys = [
@@ -216,32 +230,35 @@ const MyToken = () => {
               </M.Text>
             </M.SectionTitleWrapper>
             <S.HistoryBoxWrapper>
-              {historyList.map(({ id, type, date, name, amount }) => {
-                return (
-                  <S.HistoryBox key={id}>
-                    <M.Text
-                      size="18px"
-                      weight="600"
-                      col={type === '사용' ? 'kultureGreen' : 'white'}
-                    >
-                      {type}
-                    </M.Text>
-                    <M.Text size="18px" weight="400">
-                      {date}
-                    </M.Text>
-                    <M.Text size="18px" weight="500" width="300px">
-                      {name}
-                    </M.Text>
-                    <M.Text
-                      size="18px"
-                      weight="600"
-                      col={type === '사용' ? 'kultureGreen' : ''}
-                    >
-                      {type === '사용' ? '-' : '+'} {amount}
-                    </M.Text>
-                  </S.HistoryBox>
-                );
-              })}
+              {historyList.map(
+                ({ id, token_type, date, name, event_token }) => {
+                  return (
+                    <S.HistoryBox key={id}>
+                      <M.Text
+                        size="18px"
+                        weight="600"
+                        col={token_type === '사용' ? 'kultureGreen' : 'white'}
+                      >
+                        {token_type}
+                      </M.Text>
+                      <M.Text size="18px" weight="400">
+                        {date}
+                      </M.Text>
+                      <M.Text size="18px" weight="500" width="300px">
+                        {name}
+                      </M.Text>
+                      <M.Text
+                        size="18px"
+                        weight="600"
+                        col={token_type === '사용' ? 'kultureGreen' : ''}
+                      >
+                        {token_type === '사용' ? '-' : '+'}{' '}
+                        {Math.floor(event_token)}
+                      </M.Text>
+                    </S.HistoryBox>
+                  );
+                }
+              )}
             </S.HistoryBoxWrapper>
           </M.SectionWrapper>
         </M.MainContainer>

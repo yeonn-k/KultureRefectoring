@@ -1,6 +1,5 @@
 export const BASE_URL_K = 'http://10.58.52.241:8000';
-export const BASE_URL_H = 'http://10.58.52.133:8000';
-export const BASE_URL_K_R = 'http://10.58.52.241:8000';
+export const BASE_URL_H = `http://10.58.52.133:8000`;
 
 export const APIS = {
   bid: `${BASE_URL_K}/bid`,
