@@ -4,6 +4,7 @@ import { APIS } from '../../config';
 import { S } from './Reviews';
 
 const Reviews = () => {
+  const TOKEN = localStorage.getItem('accessToken');
   const [reviewList, setReviewList] = useState([]);
 
   const getReview = () => {
@@ -17,6 +18,22 @@ const Reviews = () => {
   useEffect(() => {
     getReview();
   }, []);
+
+  const deleteReview = id => {
+    fetch(`${APIS.review}/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: TOKEN,
+      },
+    }).then(response => {
+      if (response.ok) {
+        setReviewList(prevReviewList =>
+          prevReviewList.filter(review => review.id !== id)
+        );
+      }
+    });
+  };
 
   //Review Mock Data
   // useEffect(() => {
@@ -43,6 +60,8 @@ const Reviews = () => {
                 src={image_url}
                 nickname={nickname}
                 text={content}
+                deleteReview={deleteReview}
+                id={id}
               />
             );
           })}

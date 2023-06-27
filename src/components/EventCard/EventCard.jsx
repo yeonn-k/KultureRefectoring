@@ -3,7 +3,7 @@ import React from 'react';
 import useLiked from '../../hooks/fetchLiked';
 
 import { S } from './EventCard';
-import Timer from '../../pages/Wishlist/components/Timer/Timer.jsx';
+// import Timer from '../../pages/Wishlist/components/Timer/Timer.jsx';
 
 import { useState } from 'react';
 
@@ -80,10 +80,7 @@ const EventCard = ({
               <S.EventIcon src="/images/Wishlist/alarm_on.png" />
               <span>입찰 마감 남은 시간</span>
             </div>
-            <div>
-              <Timer />
-            </div>
-            {/* */}
+            <div>{/* <Timer /> */}</div>
           </S.EventTime>
           <S.WishlistEventDescription>
             <div>
