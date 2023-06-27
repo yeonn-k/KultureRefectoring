@@ -24,10 +24,8 @@ const ReviewModal = ({ setIsReviewModalOpen, eventId, name }) => {
     const reviewData = { eventId: eventId, content: reviewText };
     const data = JSON.stringify(reviewData);
 
-    formData.append('imageUrl', imageFile);
+    formData.append('imageUrls', imageFile);
     formData.append('data', data);
-
-    console.log(eventId);
 
     if (reviewText !== '') {
       fetch(`${APIS.review}`, {

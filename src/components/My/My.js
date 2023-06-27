@@ -121,7 +121,6 @@ export const M = {
     display: flex;
     flex-direction: column;
     gap: 70px;
-    min-width: 1100px;
     margin: 0 auto;
   `,
 

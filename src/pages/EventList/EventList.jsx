@@ -49,18 +49,19 @@ const EventList = () => {
 
   const getWishList = () => {
     const url = `${APIS.wishlist}`;
-
-    fetch(url, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        Authorization: TOKEN,
-      },
-    })
-      .then(response => response.json())
-      .then(result => {
-        setWishlist(result.wishlist);
-      });
+    if (TOKEN) {
+      fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          Authorization: TOKEN,
+        },
+      })
+        .then(response => response.json())
+        .then(result => {
+          setWishlist(result.wishlist);
+        });
+    }
   };
 
   useEffect(() => {
