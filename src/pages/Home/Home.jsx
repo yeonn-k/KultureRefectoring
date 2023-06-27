@@ -1,10 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import EventCard from '../../components/EventCard/EventCard.jsx';
+import fetchLiked from '../../hooks/fetchLiked.js';
+import { APIS } from '../../config.js';
 import { S } from './Home';
 
 const Home = () => {
   const navigate = useNavigate();
+  const TOKEN = localStorage.getItem('accessToken');
+  const [checkLiked, setCheckLiked] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
+  const [cardData, setCardData] = useState([]);
+  const setId = (data, event_id) => {
+    setCheckLiked(
+      fetchLiked(TOKEN, APIS.wishlist, data, event_id, setWishlist, getWishList)
+    );
+  };
+
+  const wishlistId = wishlist.map(({ event_id }) => event_id);
+
+  const getWishList = () => {
+    const url = `${APIS.wishlist}`;
+    if (TOKEN) {
+      fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          Authorization: TOKEN,
+        },
+      })
+        .then(response => response.json())
+        .then(result => {
+          setWishlist(result.wishlist);
+        });
+    }
+  };
+
+  useEffect(() => {
+    fetch('data/homeEventCard.json')
+      .then(res => res.json())
+      .then(data => {
+        setCardData(data);
+      });
+  }, []);
+
+  useEffect(() => {
+    getWishList();
+  }, []);
 
   return (
     <>
@@ -21,7 +63,7 @@ const Home = () => {
                 src={src}
                 alt={title}
                 onClick={() => {
-                  navigate(`/list`);
+                  navigate(`/events`);
                 }}
               >
                 <S.CategoryText key={id}>{title}</S.CategoryText>
@@ -33,8 +75,17 @@ const Home = () => {
       <S.SectionWrapper>
         <S.SectionTitle>지금 인기있는 이벤트</S.SectionTitle>
         <S.BoxWrapper>
-          {EVENTS.map(data => {
-            return <EventCard type="home" key={data.id} data={data} />;
+          {cardData.map(data => {
+            return (
+              <EventCard
+                key={data.event_id}
+                data={data}
+                setId={setId}
+                wishlistId={wishlistId}
+                wishlist={wishlist}
+                type="home"
+              />
+            );
           })}
         </S.BoxWrapper>
       </S.SectionWrapper>
@@ -56,35 +107,4 @@ const CATEGORIES = [
   { id: 2, title: '콘서트', src: './images/Home/category-concert.jpg' },
   { id: 3, title: '퍼포먼스', src: './images/Home/category-performance.jpg' },
   { id: 4, title: '클래식', src: './images/Home/category-classical.jpg' },
-];
-
-const EVENTS = [
-  {
-    id: 37,
-    title: 'Electric Picnic',
-    image:
-      'https://github.com/HaeJungg/project-image/blob/master/p2-Images/Festival/festival-37.jpg?raw=true',
-    token: 100,
-    description: 'Jul 02, 2023',
-
-    location: '컨벤션',
-  },
-  {
-    id: 55,
-    title: 'The Beautiful Trauma World Tour',
-    image:
-      'https://github.com/HaeJungg/project-image/blob/master/p2-Images/Concert/concert-15.jpg?raw=true',
-    token: 150,
-    description: 'Jul 16, 2023',
-    location: '고척 스카이돔',
-  },
-  {
-    id: 78,
-    title: 'Cinderella',
-    image:
-      'https://github.com/HaeJungg/project-image/blob/master/p2-Images/Performance/performance-18.jpg?raw=true',
-    token: 200,
-    description: 'Jul 23, 2023',
-    location: '오페라하우스',
-  },
 ];

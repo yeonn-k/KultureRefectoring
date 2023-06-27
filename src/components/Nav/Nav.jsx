@@ -19,6 +19,7 @@ const Nav = () => {
     localStorage.removeItem('accessToken');
     alert('로그아웃 되었습니다!');
     navigate('/');
+    window.location.reload();
   };
 
   useEffect(() => {

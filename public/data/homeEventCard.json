@@ -1,0 +1,26 @@
+[
+  {
+    "event_id": 37,
+    "startToken": "40",
+    "eventName": "Electric Picnic",
+    "eventStartDate": "2023-07-02",
+    "locationName": "컨벤션",
+    "thumbnail_images_url": "https://github.com/HaeJungg/project-image/blob/master/p2-Images/Festival/festival-37.jpg?raw=true"
+  },
+  {
+    "event_id": 55,
+    "startToken": "50",
+    "eventName": "The Beautiful Trauma World Tour",
+    "eventStartDate": "2023-07-16",
+    "locationName": "고척 스카이돔",
+    "thumbnail_images_url": "https://github.com/HaeJungg/project-image/blob/master/p2-Images/Concert/concert-15.jpg?raw=true"
+  },
+  {
+    "event_id": 78,
+    "startToken": "30",
+    "eventName": "Cinderella",
+    "eventStartDate": "2023-07-23",
+    "locationName": "오페라하우스",
+    "thumbnail_images_url": "https://github.com/HaeJungg/project-image/blob/master/p2-Images/Performance/performance-18.jpg?raw=true"
+  }
+]
