@@ -1,11 +1,7 @@
 import React from 'react';
 
-import useLiked from '../../hooks/fetchLiked';
-
+import Timer from './Timer/Timer.jsx';
 import { S } from './EventCard';
-// import Timer from '../../pages/Wishlist/components/Timer/Timer.jsx';
-
-import { useState } from 'react';
 
 const EventCard = ({
   data,
@@ -28,11 +24,8 @@ const EventCard = ({
     locationName,
     remaining_quantity,
     auction_end_date,
+    start_events_token,
   } = data;
-
-  // const isLiked = useLiked(wishlist, setWishlist, TOKEN);
-
-  // const likeId = type === 'wishlist' ? event_id : '';
 
   return (
     <S.EventCard>
@@ -63,7 +56,7 @@ const EventCard = ({
 
         <S.TokenBox>
           <S.Token src="/images/common/kulture-token.png" />
-          <span>{startToken}토큰</span>
+          <span>{Number(start_events_token)}토큰</span>
         </S.TokenBox>
       </S.EventImage>
       <S.EventTitle>{eventName}</S.EventTitle>
@@ -80,7 +73,9 @@ const EventCard = ({
               <S.EventIcon src="/images/Wishlist/alarm_on.png" />
               <span>입찰 마감 남은 시간</span>
             </div>
-            <div>{/* <Timer /> */}</div>
+            <div>
+              <Timer auction_end_date={auction_end_date} event_id={event_id} />
+            </div>
           </S.EventTime>
           <S.WishlistEventDescription>
             <div>
