@@ -1,6 +1,3 @@
-import { Portal } from '@material-ui/core';
-import { StyledEngineProvider } from '@mui/material';
-import { style } from '@mui/system';
 import styled from 'styled-components';
 
 export const S = {

@@ -3,18 +3,19 @@ import { useLocation, useSearchParams } from 'react-router-dom';
 
 import Calendar from 'react-calendar';
 
+import fetchLiked from '../../hooks/fetchLiked.js';
+
+import GoToTop from '../../components/GoToTop/GoToTop.jsx';
 import EventCard from '../../components/EventCard/EventCard.jsx';
 import Category from './components/Category/Category.jsx';
 import DropBox from './components/DropBox/DropBox.jsx';
-import fetchLiked from '../../hooks/fetchLiked.js';
-
-import { PriceRangeFilter } from './PriceRangeFilter.jsx';
-
-import { S } from './EventList.js';
 
 import { CalenderBox } from './CalendarBox.js';
+import { PriceRangeFilter } from './PriceRangeFilter.jsx';
+
 import { APIS } from '../../config.js';
-import GoToTop from '../../components/GoToTop/GoToTop.jsx';
+
+import { S } from './EventList.js';
 
 const EventList = () => {
   const TOKEN = localStorage.getItem('accessToken');
@@ -170,7 +171,7 @@ const EventList = () => {
             <span>0</span>
             <span>300</span>
           </S.TokenQuantity>
-          <GoToTop />
+          <GoToTop type="list" />
         </S.ContainerLeft>
         <S.ContainerRight>
           <S.TitleBox>

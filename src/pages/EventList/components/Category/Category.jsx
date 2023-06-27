@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import { S } from './Category';
-import { useSearchParams } from 'react-router-dom';
 
 const Category = ({ data, handleCategoryState }) => {
   const { mainCategory, subCategory, key } = data;

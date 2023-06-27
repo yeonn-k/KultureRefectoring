@@ -1,12 +1,12 @@
 import React from 'react';
-import { DROP_MENU } from '../../data/dropMenu';
-import { S } from './DropBox';
 import { useSearchParams } from 'react-router-dom';
+
+import { DROP_MENU } from '../../data/dropMenu';
+
+import { S } from './DropBox';
 
 const DropBox = ({ isOpenDropBox, setIsOpenDropBox }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-
-  let orderBy = searchParams.get('orderBy');
 
   const handleOrderBy = key => {
     searchParams.set('orderBy', key);

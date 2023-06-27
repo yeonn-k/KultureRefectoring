@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import EventCard from '../../components/EventCard/EventCard.jsx';
-import { APIS } from '../../config.js';
 import fetchLiked from '../../hooks/fetchLiked.js';
+
+import EventCard from '../../components/EventCard/EventCard.jsx';
+import DeleteModal from './components/DeleteModal/DeleteModal.jsx';
+
+import { APIS } from '../../config.js';
 
 import { S } from './Wishlist';
 import 'react-calendar/dist/Calendar.css';
-import DeleteModal from './components/DeleteModal/DeleteModal.jsx';
-import { check } from 'prettier';
+import GoToTop from '../../components/GoToTop/GoToTop.jsx';
 
 const Wishlist = event_id => {
   const TOKEN = localStorage.getItem('accessToken');
@@ -174,6 +176,7 @@ const Wishlist = event_id => {
           />
         )}
       </S.Container>
+      <GoToTop />
     </div>
   );
 };
