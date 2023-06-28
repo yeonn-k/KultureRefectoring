@@ -246,19 +246,20 @@ const MyToken = () => {
                         >
                           {token_type === 'usage' ? '사용' : '충전'}
                         </M.Text>
-                        <M.Text size="18px" weight="400">
+                        <M.Text width="200px" size="18px" weight="400">
                           {date}
                         </M.Text>
-                        <M.Text size="18px" weight="500" width="300px">
+                        <M.Text size="18px" weight="500" width="350px">
                           {token_type === 'usage' ? name : '카카오페이 결제'}
                         </M.Text>
                         <M.Text
+                          width="80px"
                           size="18px"
                           weight="600"
                           col={token_type === 'usage' ? 'kultureGreen' : ''}
                         >
                           {token_type === 'usage' ? '-' : '+'}{' '}
-                          {Math.floor(event_token)}
+                          {Math.floor(event_token).toLocaleString()}
                         </M.Text>
                       </S.HistoryBox>
                     );

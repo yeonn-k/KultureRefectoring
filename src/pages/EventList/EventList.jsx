@@ -46,8 +46,6 @@ const EventList = () => {
     setSearchParams({ limit });
   }
 
-  console.log(wishlist);
-
   const getWishList = () => {
     const url = `${APIS.wishlist}?limit=${limit}`;
     if (TOKEN) {

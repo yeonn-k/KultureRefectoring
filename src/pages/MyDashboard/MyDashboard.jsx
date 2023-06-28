@@ -26,7 +26,7 @@ const MyDashboard = () => {
       alert('토큰이 부족해요!');
       return;
     }
-    fetch(`${APIS.order}`, {
+    fetch(`${APIS.order}/bid`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

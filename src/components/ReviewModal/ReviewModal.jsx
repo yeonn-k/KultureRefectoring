@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { APIS } from '../../config';
 import { S } from './ReviewModal';
 
@@ -6,6 +7,8 @@ const ReviewModal = ({ setIsReviewModalOpen, eventId, name }) => {
   const [reviewText, setReviewText] = useState('');
   const [imageFile, setImageFile] = useState({});
   const [fileName, setFileName] = useState('*업로드할 이미지를 선택해주세요.');
+
+  const navigate = useNavigate();
 
   const handleText = e => {
     setReviewText(e.target.value);
@@ -38,7 +41,7 @@ const ReviewModal = ({ setIsReviewModalOpen, eventId, name }) => {
         .then(res => res.json())
         .then(data => {
           if (data.message === 'Create_Completed') {
-            window.location.reload();
+            navigate('/reviews');
             alert('리뷰가 등록되었습니다!');
             return;
           }

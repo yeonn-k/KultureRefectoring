@@ -6,6 +6,7 @@ import { S } from './Reviews';
 const Reviews = () => {
   const TOKEN = localStorage.getItem('accessToken');
   const [reviewList, setReviewList] = useState([]);
+  const [userInfo, setUserInfo] = useState([]);
 
   const getReview = () => {
     fetch(`${APIS.review}`)
@@ -14,6 +15,20 @@ const Reviews = () => {
         setReviewList(data);
       });
   };
+
+  useEffect(() => {
+    if (TOKEN) {
+      fetch(`${APIS.users}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: localStorage.getItem('accessToken'),
+        },
+      })
+        .then(res => res.json())
+        .then(data => setUserInfo(data[0]));
+    }
+  }, []);
 
   useEffect(() => {
     getReview();
@@ -53,7 +68,7 @@ const Reviews = () => {
 
       <S.ReviewCardContainer>
         <S.ReviewCardWrapper>
-          {reviewList.map(({ id, image_url, nickname, content }) => {
+          {reviewList.map(({ id, image_url, nickname, content, user_id }) => {
             return (
               <ReviewCard
                 key={id}
@@ -62,6 +77,7 @@ const Reviews = () => {
                 text={content}
                 deleteReview={deleteReview}
                 id={id}
+                isMine={user_id === userInfo.id}
               />
             );
           })}
