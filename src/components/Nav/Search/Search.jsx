@@ -6,22 +6,26 @@ import { S } from './Search.js';
 const Search = ({ IsSearchOpen, setIsSearchOpen }) => {
   const [list, setList] = useState([]);
   const [userInput, setUserInput] = useState('');
+  const [offset, setOffset] = useState(0);
+
+  const LIMIT = 50;
+  const nextOffset = LIMIT + offset;
 
   const getValue = e => {
     setUserInput(e.target.value.toLowerCase());
   };
 
   useEffect(() => {
-    fetch(`${APIS.events}`)
+    fetch(`${APIS.events}?limit=${LIMIT}&offset=${nextOffset - 50}`)
       .then(res => res.json())
       .then(data => {
         setList(data.data);
       });
   }, []);
 
-  const searched = list.filter(item =>
-    item.eventName?.toLowerCase().includes(userInput)
-  );
+  const searched =
+    list &&
+    list.filter(item => item.eventName?.toLowerCase().includes(userInput));
 
   return (
     <S.SearchContainer>

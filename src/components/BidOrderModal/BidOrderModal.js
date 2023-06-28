@@ -45,7 +45,7 @@ const ableBidBtn = styled.button`
   font-weight: 600;
   border-radius: 10px;
   float: right;
-  margin-top: 10px;
+  margin: 20px auto;
 `;
 
 const Divider = styled.hr`
@@ -60,6 +60,7 @@ const PrimeDrivider = styled(Divider)`
 const BidContent = styled.p`
   font-size: 16px;
   font-weight: 400;
+  margin-bottom: 10px;
 `;
 
 const BidContents = styled(BidContent)`
@@ -88,7 +89,7 @@ export const S = {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 750px;
-    height: 700px;
+    height: 790px;
     margin: 0 auto;
     padding: 40px;
     border-radius: 10px;

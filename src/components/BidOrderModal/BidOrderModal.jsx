@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { APIS } from '../../config';
+import { formatDateTime } from '../../utils/formatDateTime';
 import { S } from './BidOrderModal.js';
 
 const BidOrderModal = ({
+  id,
   detail,
   nickname,
   coast,
@@ -44,7 +46,7 @@ const BidOrderModal = ({
     const data = {
       quantity: ticket,
       biddingEventsToken: coast,
-      eventId: 1,
+      eventId: detail.id,
     };
 
     fetch(`${APIS.bid}`, {
@@ -63,9 +65,10 @@ const BidOrderModal = ({
         navigate('/auction');
       });
   };
+
   const handleOrder = () => {
     const data = {
-      eventId: 1,
+      eventId: detail.id,
       totalEventToken: detail.highestToken * ticket,
       quantity: ticket,
     };
@@ -80,12 +83,15 @@ const BidOrderModal = ({
     })
       .then(response => response.json())
       .then(() => {
-        navigate('/list ');
         alert('구매가 완료되었어요!');
+        navigate('/order ');
       });
   };
 
-  console.log(isDirect);
+  //날짜 변경
+  const startDate = new Date(detail?.event_start_date);
+
+  const startTime = formatDateTime(startDate);
 
   return (
     <S.BidModalContainer ref={outside}>
@@ -96,7 +102,7 @@ const BidOrderModal = ({
           <S.BidContentWrap>
             <S.BidTitle>{detail.name}</S.BidTitle>
 
-            <S.BidContent>{detail.event_start_date}</S.BidContent>
+            <S.BidContent>{startTime}</S.BidContent>
             <S.BidContent> {detail.location}</S.BidContent>
           </S.BidContentWrap>
         </S.BidModalWrap>
@@ -105,7 +111,7 @@ const BidOrderModal = ({
           <S.Divider />
         </div>
         <div>
-          <S.BidTitle>입찰자 정보</S.BidTitle>
+          <S.BidTitle> {isDirect ? '주문자 정보' : '입찰자 정보'}</S.BidTitle>
           <S.OrderContentWrap>
             <S.OrdeTitle>이름</S.OrdeTitle>
             <S.BidContent>{nickname}</S.BidContent>
@@ -121,7 +127,7 @@ const BidOrderModal = ({
         <div>
           <S.BidTitle>최종 주문 정보</S.BidTitle>
           <S.OrderContentWrap>
-            <S.OrdeTitle>입찰가</S.OrdeTitle>
+            <S.OrdeTitle> {isDirect ? '구매 가격' : '입찰가'}</S.OrdeTitle>
             <S.BidFlex>
               <S.BidToken
                 className="clickIcon"
@@ -143,6 +149,7 @@ const BidOrderModal = ({
 
         <S.OrderContentWrap>
           <p>총 입찰 토큰</p>
+
           <S.BidFlex>
             <S.BidLargeToken
               src="/images/common/kulture-token.png"
@@ -154,8 +161,20 @@ const BidOrderModal = ({
           </S.BidFlex>
         </S.OrderContentWrap>
 
+        <S.OrderContentWrap>
+          <p>기부액</p>
+
+          <S.BidFlex>
+            <S.BidContent>
+              {isDirect
+                ? `${(detail.highestToken * ticket * 100).toLocaleString()}원`
+                : `${(coast * ticket * 100).toLocaleString()}원`}
+            </S.BidContent>
+          </S.BidFlex>
+        </S.OrderContentWrap>
+
         <S.ableBidBtn onClick={isDirect ? handleOrder : handleBid}>
-          구매 입찰
+          {isDirect ? '구매 확정' : '구매 입찰'}
         </S.ableBidBtn>
       </S.BidModalWrapper>
     </S.BidModalContainer>

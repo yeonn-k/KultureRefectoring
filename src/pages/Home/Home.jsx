@@ -17,7 +17,7 @@ const Home = () => {
     );
   };
 
-  const wishlistId = wishlist.map(({ event_id }) => event_id);
+  const wishlistId = wishlist?.map(({ event_id }) => event_id);
 
   const getWishList = () => {
     const url = `${APIS.wishlist}`;

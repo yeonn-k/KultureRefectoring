@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { formatDateTime } from '../../utils/formatDateTime';
 import { S } from './DirectBidModal.js';
 
 const DirectBidModal = ({
@@ -79,6 +80,11 @@ const DirectBidModal = ({
     setIsDirect(false);
   };
 
+  //날짜 변경
+  const startDate = new Date(detail?.event_start_date);
+
+  const startTime = formatDateTime(startDate);
+
   return (
     <S.BidModalContainer ref={outside}>
       <S.BidModalWrapper>
@@ -88,7 +94,7 @@ const DirectBidModal = ({
           <S.BidContentWrap>
             <S.BidTitle>{detail.name}</S.BidTitle>
 
-            <S.BidContent>{detail.event_start_date}</S.BidContent>
+            <S.BidContent>{startTime}</S.BidContent>
             <S.BidContent> {detail.location}</S.BidContent>
           </S.BidContentWrap>
         </S.BidModalWrap>
@@ -133,10 +139,10 @@ const DirectBidModal = ({
               src="/images/common/kulture-token.png"
               alt="token"
             />
-            <p>{`${Math.floor(event_token)}`}</p>
+            <p>{`${Math.floor(event_token).toLocaleString()}`}</p>
           </S.BidSaveToken>
         </S.BidContainer>
-        <S.DisableBidBtn onClick={handleBtn}>바로 입찰 계속</S.DisableBidBtn>
+        <S.DisableBidBtn onClick={handleBtn}>즉시 구매 계속</S.DisableBidBtn>
       </S.BidModalWrapper>
     </S.BidModalContainer>
   );

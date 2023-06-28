@@ -22,33 +22,36 @@ const MyAccount = () => {
   const handleNameChange = e => {
     setUserName(e.target.value);
   };
-
   const handleModify = e => {
     const formData = new FormData();
 
-    const NameData = { nickname: userName };
-    const data = JSON.stringify(NameData);
-
-    formData.append('profileImageUrl', imgFile);
-    formData.append('data', data);
-
     if (userName !== '') {
-      fetch(`${APIS.users}`, {
-        method: 'PATCH',
-        headers: {
-          Authorization: localStorage.getItem('accessToken'),
-        },
-        body: formData,
-      })
-        .then(res => res.json())
-        .then(data => {
-          if (data.message === 'Update UserInfo') {
-            window.location.reload();
-            alert('정보가 수정되었습니다!');
-            setIsModify(false);
-          }
-        });
+      formData.append('data', JSON.stringify({ nickname: userName }));
     }
+
+    if (imgFile) {
+      formData.append('profileImageUrl', imgFile);
+    }
+
+    if (userName === '' && !imgFile) {
+      return;
+    }
+
+    fetch(`${APIS.users}`, {
+      method: 'PATCH',
+      headers: {
+        Authorization: localStorage.getItem('accessToken'),
+      },
+      body: formData,
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.message === 'Update UserInfo') {
+          setIsModify(false);
+          window.location.href = window.location.href;
+          alert('정보가 수정되었습니다!');
+        }
+      });
   };
 
   useEffect(() => {
@@ -67,8 +70,11 @@ const MyAccount = () => {
 
   const { nickname, profile_image_url, email, age_range, gender } = userInfo;
   const age = age_range.split('~')[0];
-  const krGender = GENDER[gender];
+  const krGender = GENDER[gender] || '';
 
+  const handleImgChange = () => {
+    document.getElementById('fileUpload').click();
+  };
   return (
     <>
       <M.Title>내 정보</M.Title>
@@ -95,7 +101,7 @@ const MyAccount = () => {
                       />
                     </label>
 
-                    <S.ChangeImg />
+                    <S.ChangeImg onClick={handleImgChange} />
                   </>
                 )}
                 <S.ProfileImg src={profile_image_url} alt={nickname} />

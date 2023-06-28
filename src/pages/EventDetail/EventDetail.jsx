@@ -26,19 +26,15 @@ const EventDetail = () => {
   const [directBidOpen, setDirectBidOpen] = useState(false);
   const [reviewList, setReviewList] = useState([]);
   const [isDirect, setIsDirect] = useState(false);
+  const [offset, setOffset] = useState(0);
+
+  const LIMIT = 100;
+  const nextOffset = LIMIT + offset;
+
   const TOKEN = localStorage.getItem('accessToken');
 
   const params = useParams();
   const eventId = params.id;
-
-  //카드 정보 GET
-  useEffect(() => {
-    fetch(`${APIS.events}`)
-      .then(res => res.json())
-      .then(data => {
-        return setEventList(data.data);
-      });
-  }, []);
 
   //상세 정보 GET
   useEffect(() => {
@@ -50,6 +46,15 @@ const EventDetail = () => {
       });
   }, []);
 
+  //카드 정보 GET
+  useEffect(() => {
+    fetch(`${APIS.events}?limit=${LIMIT}&offset=${nextOffset - 100}`)
+      .then(res => res.json())
+      .then(data => {
+        return setEventList(data.data);
+      });
+  }, []);
+
   // 리뷰 정보 GET
   useEffect(() => {
     fetch(`${APIS.review}/${eventId}`)
@@ -58,6 +63,8 @@ const EventDetail = () => {
         return setReviewList(data);
       });
   }, []);
+
+  console.log(reviewList);
 
   //유저 정보 GET
   useEffect(() => {
@@ -114,6 +121,12 @@ const EventDetail = () => {
 
   const { event_token, email, nickname } = userInfo || {};
 
+  const { id, category_id } = eventList;
+
+  const searched = eventList.filter(item => {
+    return item.category_id === detail.category_id;
+  });
+
   const chartBidData = [
     {
       id: 'TOKEN',
@@ -121,7 +134,7 @@ const EventDetail = () => {
     },
   ];
 
-  //그래프 x축 변경
+  //날짜변경
   const startDate = new Date(detail?.event_start_date);
   const endDate = new Date(detail?.auction_end_date);
   const formatDateTime = date => {
@@ -187,6 +200,8 @@ const EventDetail = () => {
     <S.DetailContainer>
       {modalOpen && (
         <BidModal
+          category_id={category_id}
+          id={id}
           detail={detail}
           modalOpen={modalOpen}
           setModalOpen={setModalOpen}
@@ -203,6 +218,8 @@ const EventDetail = () => {
       )}
       {orderOpen && (
         <BidOrderModal
+          category_id={category_id}
+          id={id}
           detail={detail}
           orderOpen={orderOpen}
           setOrderOpen={setOrderOpen}
@@ -221,6 +238,8 @@ const EventDetail = () => {
       )}
       {directBidOpen && (
         <DirectBidModal
+          category_id={category_id}
+          id={id}
           detail={detail}
           modalOpen={modalOpen}
           orderOpen={orderOpen}
@@ -302,23 +321,24 @@ const EventDetail = () => {
       <S.RecommnedWrap>
         <S.RecommnedTitle>추천 이벤트</S.RecommnedTitle>
         <S.WrapperCard>
-          {eventList.length &&
-            eventList.map(data => {
-              return <EventCard key={data.id} data={data} type="list" />;
+          {searched.length &&
+            searched.slice(0, 6).map(data => {
+              return <EventCard key={data.event_id} data={data} type="list" />;
             })}
         </S.WrapperCard>
       </S.RecommnedWrap>
-      {reviewList.length !==
-      (
+      {reviewList.length && (
         <>
           <S.RecommnedTitle>리뷰</S.RecommnedTitle>
           <S.ReviewWrapper>
             {reviewList.map(data => {
               return (
                 <ReviewCard
-                  onClick={() => {}}
                   key={data.event_id}
+                  src={data.image_url}
+                  nickname={data.nickname}
                   data={data}
+                  text={data.content}
                   type="list"
                   setId={setId}
                   wishlistId={wishlistId}

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import OrderBidModal from '../BidOrderModal/BidOrderModal.js';
+import { formatDateTime } from '../../utils/formatDateTime';
 import { S } from './BidModal.js';
 
 const BidModal = ({
@@ -19,16 +20,6 @@ const BidModal = ({
   const [isValidBtn, setIsValidBtn] = useState(false);
   const inputRef = useRef();
   const outside = useRef();
-
-  const handleBtn = () => {
-    if (coast > event_token) {
-      setIsValidBtn(false);
-    } else {
-      setIsValidBtn(true);
-    }
-    setOrderOpen(true);
-  };
-
   const handleHopePrice = e => {
     const newCoast = parseInt(e.target.value);
     setCoast(newCoast);
@@ -80,6 +71,25 @@ const BidModal = ({
     };
   }, []);
 
+  const handleBtn = () => {
+    if (coast < detail.startToken) {
+      alert('입찰 시작가보다 낮음 금액입니다.');
+      setIsValidBtn(false);
+      return;
+    } else if (coast > event_token) {
+      alert('입찰 시작가보다 낮음 금액입니다.');
+      setIsValidBtn(false);
+    } else {
+      setIsValidBtn(true);
+    }
+    setOrderOpen(true);
+  };
+
+  //날짜 변경
+  const startDate = new Date(detail?.event_start_date);
+
+  const startTime = formatDateTime(startDate);
+
   return (
     <S.BidModalContainer ref={outside}>
       <S.BidModalWrapper>
@@ -89,7 +99,7 @@ const BidModal = ({
           <S.BidContentWrap>
             <S.BidTitle>{detail.name}</S.BidTitle>
 
-            <S.BidContent>{detail.event_start_date}</S.BidContent>
+            <S.BidContent>{startTime}</S.BidContent>
             <S.BidContent> {detail.location}</S.BidContent>
           </S.BidContentWrap>
         </S.BidModalWrap>
@@ -143,7 +153,7 @@ const BidModal = ({
               src="/images/common/kulture-token.png"
               alt="token"
             />
-            <p>{`${Math.floor(event_token)}`}</p>
+            <p>{`${Math.floor(event_token).toLocaleString()}`}</p>
           </S.BidSaveToken>
         </S.BidContainer>
         <S.DisableBidBtn disabled={!isValidBtn} onClick={handleBtn}>
