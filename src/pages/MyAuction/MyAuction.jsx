@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import My from '../../components/My/My.jsx';
 import tokenImg from '../../images/kulture-token.png';
 import { APIS } from '../../config.js';
@@ -9,6 +10,8 @@ import { S } from './MyAuction';
 const MyAuction = () => {
   const [isIP, setIsIP] = useState(true);
   const [bidList, setBidList] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`${APIS.bid}`, {
@@ -86,12 +89,20 @@ const MyAuction = () => {
                         quantity,
                         bid_status_code,
                         bidding_events_token,
+                        event_id,
                       }) => {
                         return (
                           <S.HistoryBox key={bidId}>
-                            <S.EventImg src={Image_url} />
+                            <S.EventImg
+                              onClick={() => navigate(`/event/${event_id}`)}
+                              src={Image_url}
+                            />
                             <S.EventInfoUnit>
-                              <S.EventName>{name}</S.EventName>
+                              <S.EventName
+                                onClick={() => navigate(`/event/${event_id}`)}
+                              >
+                                {name}
+                              </S.EventName>
                               <S.DateLocation>
                                 {location} ・ {event_start_date}
                               </S.DateLocation>
@@ -135,12 +146,20 @@ const MyAuction = () => {
                         quantity,
                         bid_status_code,
                         bidding_events_token,
+                        event_id,
                       }) => {
                         return (
                           <S.HistoryBox key={bidId}>
-                            <S.EventImg src={Image_url} />
+                            <S.EventImg
+                              onClick={() => navigate(`/event/${event_id}`)}
+                              src={Image_url}
+                            />
                             <S.EventInfoUnit>
-                              <S.EventName>{name}</S.EventName>
+                              <S.EventName
+                                onClick={() => navigate(`/event/${event_id}`)}
+                              >
+                                {name}
+                              </S.EventName>
                               <S.DateLocation>
                                 {location} ・ {event_start_date}
                               </S.DateLocation>

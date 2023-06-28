@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import My from '../../components/My/My.jsx';
 import { APIS } from '../../config.js';
 import { M } from '../../components/My/My';
@@ -12,6 +13,8 @@ const MyOrder = () => {
   const [forReviewId, setForReviewId] = useState('');
   const [forReviewName, setForReviewName] = useState('');
   const [orderList, setOrderList] = useState([]);
+
+  const navigate = useNavigate();
 
   const handleTicketModal = () => {
     setIsTicketModalOpen(true);
@@ -67,17 +70,31 @@ const MyOrder = () => {
                 <M.EmptyBox>유효한 티켓이 없어요!</M.EmptyBox>
               ) : (
                 orderList.map(
-                  ({ id, name, image_url, location, event_start_date }) => {
+                  ({
+                    id,
+                    event_id,
+                    name,
+                    image_url,
+                    location,
+                    event_start_date,
+                  }) => {
                     if (new Date(event_start_date) < new Date()) {
                       return null;
                     } else
                       return (
                         <S.TicketBox key={id}>
-                          <S.TicketImage src={image_url} />
+                          <S.TicketImage
+                            onClick={() => navigate(`/event/${event_id}`)}
+                            src={image_url}
+                          />
                           <S.TicketInfo>
-                            <M.Text size="22px" weight="500">
+                            <S.EventName
+                              onClick={() => navigate(`/event/${event_id}`)}
+                              size="22px"
+                              weight="500"
+                            >
                               {name}
-                            </M.Text>
+                            </S.EventName>
                             <M.Text size="16px" weight="400">
                               {event_start_date} ・ {location}
                             </M.Text>
@@ -121,11 +138,18 @@ const MyOrder = () => {
                     } else
                       return (
                         <S.TicketBox key={id}>
-                          <S.TicketImage src={image_url} />
+                          <S.TicketImage
+                            onClick={() => navigate(`/event/${event_id}`)}
+                            src={image_url}
+                          />
                           <S.TicketInfo>
-                            <M.Text size="22px" weight="500">
+                            <S.EventName
+                              onClick={() => navigate(`/event/${event_id}`)}
+                              size="22px"
+                              weight="500"
+                            >
                               {name}
-                            </M.Text>
+                            </S.EventName>
                             <M.Text size="16px" weight="400">
                               {event_start_date} ・ {location}
                             </M.Text>

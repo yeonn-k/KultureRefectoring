@@ -120,31 +120,17 @@ export const S = {
     background-color: ${props => props.theme.darkGrey};
   `,
 
-  TicketBoxWrapper: styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    width: 930px;
+  EventName: styled.div`
+    font-size: ${props => props.size};
+    font-weight: ${props => props.weight};
+    color: ${props => props.theme[props.col]};
+    width: ${props => props.width};
+    &:hover {
+      cursor: pointer;
+    }
   `,
 
-  TicketBox: styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 10px;
-    padding: 20px 30px;
-    background-color: ${props => props.theme.darkGrey};
-  `,
-
-  TicketImage: styled.div`
-    width: 230px;
-    aspect-ratio: 16/9;
-    border-radius: 10px;
-    background-image: url(${props => props.src});
-    background-size: 100%;
-  `,
-
-  TicketInfo: styled.div`
+  EventInfo: styled.div`
     display: flex;
     flex-direction: column;
     gap: 15px;

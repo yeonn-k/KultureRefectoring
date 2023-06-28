@@ -142,12 +142,24 @@ export const S = {
     border-radius: 10px;
     background-image: url(${props => props.src});
     background-size: 100%;
+    &:hover {
+      cursor: pointer;
+    }
   `,
-
   TicketInfo: styled.div`
     display: flex;
     flex-direction: column;
     gap: 15px;
     width: 420px;
+  `,
+
+  EventName: styled.div`
+    font-size: ${props => props.size};
+    font-weight: ${props => props.weight};
+    color: ${props => props.theme[props.col]};
+    width: ${props => props.width};
+    &:hover {
+      cursor: pointer;
+    }
   `,
 };

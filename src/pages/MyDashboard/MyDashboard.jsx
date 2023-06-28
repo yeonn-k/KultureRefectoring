@@ -270,9 +270,16 @@ const MyDashboard = () => {
                     } else
                       return (
                         <S.BidBox key={bidId}>
-                          <M.Text size="18px" weight="500" width="250px;">
+                          <S.EventName
+                            onClick={() => {
+                              navigate(`/event/${event_id}`);
+                            }}
+                            size="18px"
+                            weight="500"
+                            width="250px;"
+                          >
                             {name} ・ {quantity}매
-                          </M.Text>
+                          </S.EventName>
                           <M.Text size="16px" weight="400" width="300px">
                             {event_start_date} ・ {location}
                           </M.Text>

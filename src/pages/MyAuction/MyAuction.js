@@ -78,6 +78,9 @@ export const S = {
     border-radius: 7px;
     background-image: url(${props => props.src});
     background-size: 100%;
+    &:hover {
+      cursor: pointer;
+    }
   `,
 
   EventInfoUnit: styled.div`
@@ -90,6 +93,9 @@ export const S = {
   EventName: styled.div`
     font-size: 18px;
     font-weight: 500;
+    &:hover {
+      cursor: pointer;
+    }
   `,
 
   DateLocation: styled.div`

@@ -230,34 +230,40 @@ const MyToken = () => {
               </M.Text>
             </M.SectionTitleWrapper>
             <S.HistoryBoxWrapper>
-              {historyList.map(
-                ({ id, token_type, date, name, event_token }) => {
-                  return (
-                    <S.HistoryBox key={id}>
-                      <M.Text
-                        size="18px"
-                        weight="600"
-                        col={token_type === '사용' ? 'kultureGreen' : 'white'}
-                      >
-                        {token_type}
-                      </M.Text>
-                      <M.Text size="18px" weight="400">
-                        {date}
-                      </M.Text>
-                      <M.Text size="18px" weight="500" width="300px">
-                        {name}
-                      </M.Text>
-                      <M.Text
-                        size="18px"
-                        weight="600"
-                        col={token_type === '사용' ? 'kultureGreen' : ''}
-                      >
-                        {token_type === '사용' ? '-' : '+'}{' '}
-                        {Math.floor(event_token)}
-                      </M.Text>
-                    </S.HistoryBox>
-                  );
-                }
+              {historyList.length === 0 ? (
+                <M.EmptyBox>토큰 거래내역이 없어요!</M.EmptyBox>
+              ) : (
+                historyList.map(
+                  ({ id, token_type, date, name, event_token }) => {
+                    return (
+                      <S.HistoryBox key={id}>
+                        <M.Text
+                          size="18px"
+                          weight="600"
+                          col={
+                            token_type === 'usage' ? 'kultureGreen' : 'white'
+                          }
+                        >
+                          {token_type === 'usage' ? '사용' : '충전'}
+                        </M.Text>
+                        <M.Text size="18px" weight="400">
+                          {date}
+                        </M.Text>
+                        <M.Text size="18px" weight="500" width="300px">
+                          {token_type === 'usage' ? name : '카카오페이 결제'}
+                        </M.Text>
+                        <M.Text
+                          size="18px"
+                          weight="600"
+                          col={token_type === 'usage' ? 'kultureGreen' : ''}
+                        >
+                          {token_type === 'usage' ? '-' : '+'}{' '}
+                          {Math.floor(event_token)}
+                        </M.Text>
+                      </S.HistoryBox>
+                    );
+                  }
+                )
               )}
             </S.HistoryBoxWrapper>
           </M.SectionWrapper>
