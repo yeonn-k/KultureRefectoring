@@ -19,7 +19,9 @@ export const S = {
   `,
 
   GoToTopBox: styled.div`
-    position: absolute;
+    position: sticky;
+    float: right;
+    bottom: 50px;
     right: 50px;
     width: 50px;
     height: 50px;

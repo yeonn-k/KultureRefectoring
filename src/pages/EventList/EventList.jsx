@@ -27,12 +27,11 @@ const EventList = () => {
   const [userDate, setUserDate] = useState(new Date());
   const [isInSearchParams, setIsInSearchParams] = useState([]);
   const [checkLiked, setCheckLiked] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams([]);
 
-  const [categoryState, setCategoryState] = useState('');
   const [isOpenDropBox, setIsOpenDropBox] = useState(false);
 
-  const [searchParams, setSearchParams] = useSearchParams([]);
-  const [value, setValue] = useState([0, 300]);
+  const [value, setValue] = useState([0, 100]);
   const wishlistId = wishlist.map(({ event_id }) => event_id);
 
   const location = useLocation();
@@ -47,8 +46,10 @@ const EventList = () => {
     setSearchParams({ limit });
   }
 
+  console.log(wishlist);
+
   const getWishList = () => {
-    const url = `${APIS.wishlist}`;
+    const url = `${APIS.wishlist}?limit=${limit}`;
     if (TOKEN) {
       fetch(url, {
         method: 'GET',
@@ -65,7 +66,7 @@ const EventList = () => {
   };
 
   useEffect(() => {
-    const url = `${APIS.event}${location.search}&minPrice=${value[0]}&maxPrice=${value[1]}`;
+    const url = `${APIS.events}${location.search}&minPrice=${value[0]}&maxPrice=${value[1]}`;
 
     fetch(url)
       .then(response => response.json())
@@ -76,7 +77,7 @@ const EventList = () => {
 
   useEffect(() => {
     getWishList();
-  }, []);
+  }, [limit]);
 
   const setId = (data, event_id) => {
     setCheckLiked(
@@ -85,10 +86,6 @@ const EventList = () => {
   };
 
   useEffect(() => {
-    searchParams.delete('categoryId');
-    searchParams.delete('countryId');
-    searchParams.delete('ageRange');
-    searchParams.delete('orderBy');
     searchParams.delete('eventStartDate');
     setSearchParams(searchParams);
   }, []);
@@ -170,7 +167,7 @@ const EventList = () => {
           </S.TokenBox>
           <S.TokenQuantity>
             <span>0</span>
-            <span>300</span>
+            <span>100</span>
           </S.TokenQuantity>
           <GoToTop type="list" />
         </S.ContainerLeft>

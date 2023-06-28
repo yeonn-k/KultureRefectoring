@@ -29,6 +29,7 @@ const EventCard = ({
     remaining_quantity,
     auction_end_date,
     start_events_token,
+    name,
   } = data;
 
   const navigate = useNavigate();
@@ -79,6 +80,7 @@ const EventCard = ({
         </S.EventDescription>
       ) : (
         <>
+          <S.EventTitle>{name}</S.EventTitle>
           <S.EventTime>
             <div>
               <S.EventIcon src="/images/Wishlist/alarm_on.png" />

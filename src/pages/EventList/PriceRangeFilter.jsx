@@ -46,7 +46,7 @@ export const PriceRangeFilter = ({ value, setValue }) => {
           aria-labelledby="range-slider"
           getAriaValueText={valuetext}
           min={0}
-          max={300}
+          max={100}
           step={10}
         />
       </ThemeProvider>

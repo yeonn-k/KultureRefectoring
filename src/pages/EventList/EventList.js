@@ -36,7 +36,9 @@ export const S = {
     margin-top: 10px;
   `,
 
-  ContainerRight: styled.div``,
+  ContainerRight: styled.div`
+    width: 860px;
+  `,
   Titlesymbol: styled.img`
     float: right;
     width: 40px;

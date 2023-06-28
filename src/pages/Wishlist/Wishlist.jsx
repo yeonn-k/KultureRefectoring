@@ -96,7 +96,7 @@ const Wishlist = event_id => {
   }
 
   const getWishList = () => {
-    const url = `${APIS.wishlist}`;
+    const url = `${APIS.wishlist}?limit=${limit}`;
 
     fetch(url, {
       method: 'GET',
@@ -118,7 +118,7 @@ const Wishlist = event_id => {
 
   useEffect(() => {
     getWishList();
-  }, [checkList]);
+  }, [checkList, limit]);
 
   const setId = (data, event_id) => {
     fetchLiked(TOKEN, APIS.wishlist, data, event_id, setWishlist, getWishList);
