@@ -24,8 +24,6 @@ const EventList = () => {
   const [wishlist, setWishlist] = useState([]);
 
   const [categoryData, setCategoryData] = useState([]);
-  const [userDate, setUserDate] = useState(new Date());
-  const [isInSearchParams, setIsInSearchParams] = useState([]);
   const [checkLiked, setCheckLiked] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams([]);
 
@@ -36,15 +34,7 @@ const EventList = () => {
 
   const location = useLocation();
 
-  let offset = searchParams.get('offset');
   let limit = searchParams.get('limit');
-
-  let eventStartDate = searchParams.get('eventStartDate');
-
-  if (!limit) {
-    limit = 6;
-    setSearchParams({ limit });
-  }
 
   const getWishList = () => {
     const url = `${APIS.wishlist}?limit=${limit}`;

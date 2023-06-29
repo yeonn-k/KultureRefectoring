@@ -11,6 +11,7 @@ import { APIS } from '../../config.js';
 import { S } from './Wishlist';
 import 'react-calendar/dist/Calendar.css';
 import GoToTop from '../../components/GoToTop/GoToTop.jsx';
+import { type } from '@testing-library/user-event/dist/type/index.js';
 
 const Wishlist = event_id => {
   const TOKEN = localStorage.getItem('accessToken');
@@ -24,7 +25,7 @@ const Wishlist = event_id => {
   const [deleteAll, setdeleteAll] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
-  const [checkLiked, setCheckLiked] = useState('');
+  const [type, setType] = useState('');
 
   let limit = searchParams.get('limit');
 
@@ -38,7 +39,6 @@ const Wishlist = event_id => {
 
   const handleDeleteAll = () => {
     setdeleteAll(true);
-    setWishlist([]);
 
     const url = `${APIS.wishlist}`;
     const deleteCards = wishlistId.join(',');
@@ -51,6 +51,7 @@ const Wishlist = event_id => {
       },
     }).then(response => {
       if (response.ok) {
+        getWishList();
       }
     });
   };
@@ -68,6 +69,7 @@ const Wishlist = event_id => {
     if (checkList !== []) {
       let copy = [...wishlist];
       setWishlist(copy.filter(el => !checkList.includes(el.id)));
+      setType('checked');
     }
 
     const url = `${APIS.wishlist}`;
@@ -81,6 +83,7 @@ const Wishlist = event_id => {
       },
     }).then(response => {
       if (response.ok) {
+        getWishList();
       }
     });
   };
@@ -89,11 +92,6 @@ const Wishlist = event_id => {
     searchParams.set('limit', Number(limit) + 6);
     setSearchParams(searchParams);
   };
-
-  if (!limit) {
-    limit = 6;
-    setSearchParams({ limit });
-  }
 
   const getWishList = () => {
     const url = `${APIS.wishlist}?limit=${limit}`;
@@ -118,7 +116,7 @@ const Wishlist = event_id => {
 
   useEffect(() => {
     getWishList();
-  }, [checkList, limit]);
+  }, [limit]);
 
   const setId = (data, event_id) => {
     fetchLiked(TOKEN, APIS.wishlist, data, event_id, setWishlist, getWishList);
@@ -135,9 +133,26 @@ const Wishlist = event_id => {
         </S.TitleBox>
         <S.TitleLine />
         <S.DeleteBox>
-          <S.All onClick={handleDeleteAll}>전체삭제</S.All>
-          <S.Select onClick={handleDeleteModal}>선택삭제</S.Select>
+          <S.All
+            onClick={() => {
+              handleDeleteModal();
+              setType('all');
+            }}
+          >
+            전체삭제
+          </S.All>
+          <S.Select
+            onClick={() => {
+              handleDeleteModal();
+              setType('checked');
+            }}
+            disabled={!checkList || checkList.length === 0}
+            type="checked"
+          >
+            선택삭제
+          </S.Select>
         </S.DeleteBox>
+
         <S.WrapperCard>
           {wishlist.length !== 0 ? (
             wishlist.map(data => {
@@ -173,6 +188,9 @@ const Wishlist = event_id => {
             checkList={checkList}
             handleDeleteChecked={handleDeleteChecked}
             handleDeleteModal={handleDeleteModal}
+            handleDeleteAll={handleDeleteAll}
+            setIsDelete={setIsDelete}
+            type={type}
           />
         )}
       </S.Container>

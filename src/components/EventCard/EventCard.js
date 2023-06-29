@@ -1,6 +1,13 @@
 import styled from 'styled-components';
 
 export const S = {
+  Click: styled.div`
+    position: absolute;
+    top: 40px;
+    width: 404px;
+    height: 290px;
+  `,
+
   EventCard: styled.div`
     width: 404px;
     height: 305px;

@@ -14,6 +14,8 @@ import OAuthCallback from './pages/Callback/OAuthCallback.jsx';
 import Reviews from './pages/Reviews/Reviews.jsx';
 import MyOrder from './pages/MyOrder/MyOrder.jsx';
 import PaymentCallback from './pages/Callback/PaymentCallback.jsx';
+import GoToTop from './components/GoToTop/GoToTop.jsx';
+import Search from './components/Nav/Search/Search.jsx';
 
 const Router = () => {
   return (
@@ -33,6 +35,8 @@ const Router = () => {
         <Route path="order" element={<MyOrder />} />
         <Route path="/payment/callback/kakao" element={<PaymentCallback />} />
       </Routes>
+      <GoToTop />
+
       <Footer />
     </BrowserRouter>
   );

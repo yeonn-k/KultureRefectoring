@@ -40,10 +40,10 @@ const Nav = () => {
         <ul>
           <li>
             <S.NavTitleWrap>
-              <S.NavTitle to="/events">EVENT</S.NavTitle>
+              <S.NavTitle to="/events?limit=6">EVENT</S.NavTitle>
               <S.NavWishlist
                 onClick={() =>
-                  !isSignedIn ? handleSignIn() : navigate('/wishlist')
+                  !isSignedIn ? handleSignIn() : navigate('/wishlist?limit=6')
                 }
               >
                 WISHLIST

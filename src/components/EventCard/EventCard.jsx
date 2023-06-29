@@ -2,7 +2,6 @@ import React from 'react';
 
 import Timer from './Timer/Timer.jsx';
 import { S } from './EventCard';
-// import Timer from '../../pages/Wishlist/components/Timer/Timer.jsx';
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -41,7 +40,9 @@ const EventCard = ({
 
   return (
     <S.EventCard>
-      <S.EventImage onClick={goToEvent} image={thumbnail_images_url}>
+      <S.EventImage image={thumbnail_images_url}>
+        <S.Click onClick={goToEvent}></S.Click>
+
         <S.Heart
           src={
             wishlistId?.includes(event_id)

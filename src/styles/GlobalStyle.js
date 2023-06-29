@@ -22,6 +22,7 @@ body{
     color: #ebebeb;
     background-color: #1C1B1B;
     font-family: 'Pretendard';
+    overflow-x: hidden;
 }
 ol, ul{
     list-style: none;

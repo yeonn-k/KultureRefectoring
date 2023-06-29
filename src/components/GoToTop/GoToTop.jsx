@@ -1,8 +1,14 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { S } from './GoToTop';
 
 const GoToTop = ({ type }) => {
   const goToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  const location = useLocation();
+  if (location.pathname === '/account') {
+    return null;
+  }
 
   return (
     <>

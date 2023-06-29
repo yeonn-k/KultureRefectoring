@@ -16,7 +16,7 @@ export const S = {
 
   ContainerLeft: styled.div`
     position: sticky;
-    top: 170px;
+    top: 34px;
     width: 400px;
     height: 900px;
     margin-right: 64px;
@@ -70,7 +70,7 @@ export const S = {
   FilterBox: styled.div`
     width: 860px;
     height: 26px;
-    margin-bottom: 34px;
+    margin-bottom: 14px;
   `,
 
   FilterContent: styled.div`
@@ -78,6 +78,7 @@ export const S = {
     display: flex;
     flex-direction: column;
   `,
+
   Filter: styled.div``,
 
   WrapperCard: styled.div`

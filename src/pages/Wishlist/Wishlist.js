@@ -42,7 +42,7 @@ export const S = {
     width: 1324px;
   `,
 
-  Select: styled.span`
+  Select: styled.button`
     float: right;
     margin-right: 20px;
     opacity: 0.4;
@@ -53,7 +53,7 @@ export const S = {
     }
   `,
 
-  All: styled.span`
+  All: styled.button`
     float: right;
     color: #d9d9d9;
     opacity: 0.4;
