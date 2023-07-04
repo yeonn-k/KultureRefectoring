@@ -1,4 +1,4 @@
-# Project grön
+# Project kulture
 
 ![waving](https://capsule-render.vercel.app/api?type=waving&height=200&fontAlignY=40&text=kulture&color=gradient)
 
