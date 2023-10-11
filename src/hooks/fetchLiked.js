@@ -10,11 +10,13 @@ const fetchLiked = (TOKEN, url, wishlist, event_id, setData, fetchData) => {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization: TOKEN,
       },
-    }).then(response => {
-      if (response.ok) {
-        setData(prev => prev.filter(({ event_id: id }) => id !== event_id));
-      }
-    });
+    })
+      .then(response => {
+        if (response.ok) {
+          setData(prev => prev.filter(({ event_id: id }) => id !== event_id));
+        }
+      })
+      .catch(error => console.log('Error: ', error));
   } else {
     fetch(url, {
       method: 'POST',
@@ -27,7 +29,8 @@ const fetchLiked = (TOKEN, url, wishlist, event_id, setData, fetchData) => {
       }),
     })
       .then(response => response.json())
-      .then(data => fetchData());
+      .then(data => fetchData())
+      .catch(error => console.log('Error: ', error));
   }
 };
 

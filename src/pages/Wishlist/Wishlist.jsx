@@ -66,7 +66,7 @@ const Wishlist = event_id => {
   };
 
   const handleDeleteChecked = id => {
-    if (checkList !== []) {
+    if (checkList.length > 0) {
       let copy = [...wishlist];
       setWishlist(copy.filter(el => !checkList.includes(el.id)));
       setType('checked');
@@ -84,6 +84,8 @@ const Wishlist = event_id => {
     }).then(response => {
       if (response.ok) {
         getWishList();
+      } else {
+        throw new Error('network error');
       }
     });
   };
@@ -103,7 +105,13 @@ const Wishlist = event_id => {
         Authorization: TOKEN,
       },
     })
-      .then(response => response.json())
+      .then(response => {
+        if (response.ok) {
+          response.json();
+        } else {
+          throw new Error('network error');
+        }
+      })
       .then(result => {
         setWishlist(result.wishlist);
         let idList = [];
@@ -111,7 +119,8 @@ const Wishlist = event_id => {
           idList.push(el.event_id);
         });
         setWishlistId(idList);
-      });
+      })
+      .catch(error => console.log('Error: ', error));
   };
 
   useEffect(() => {

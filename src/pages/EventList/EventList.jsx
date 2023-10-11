@@ -46,10 +46,17 @@ const EventList = () => {
           Authorization: TOKEN,
         },
       })
-        .then(response => response.json())
+        .then(response => {
+          if (response.ok) {
+            response.json();
+          } else {
+            throw new Error('network error');
+          }
+        })
         .then(result => {
           setWishlist(result.wishlist);
-        });
+        })
+        .catch(error => console.log('Error: ', error));
     }
   };
 
@@ -57,10 +64,17 @@ const EventList = () => {
     const url = `${APIS.events}${location.search}&minPrice=${value[0]}&maxPrice=${value[1]}`;
 
     fetch(url)
-      .then(response => response.json())
+      .then(response => {
+        if (response.ok) {
+          response.json();
+        } else {
+          throw new Error('network error');
+        }
+      })
       .then(result => {
         setCardData(result.data);
-      });
+      })
+      .catch(error => console.log('Error: ', error));
   }, [value, limit, location.search, checkLiked]);
 
   useEffect(() => {
@@ -80,8 +94,15 @@ const EventList = () => {
 
   useEffect(() => {
     fetch('data/eventCategoryData.json')
-      .then(response => response.json())
-      .then(result => setCategoryData(result));
+      .then(response => {
+        if (response.ok) {
+          response.json();
+        } else {
+          throw new Error('network error');
+        }
+      })
+      .then(result => setCategoryData(result))
+      .catch(error => console.log('Error: ', error));
   }, []);
 
   const dateFormat = userDate => {
